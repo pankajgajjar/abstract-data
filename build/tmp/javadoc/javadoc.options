@@ -1,0 +1,6 @@
+-classpath 'D:\\pubworkspace\\AbstractDataLayer\\build\\classes\\main;D:\\pubworkspace\\AbstractDataLayer\\build\\resources\\main'
+-d 'D:\\pubworkspace\\AbstractDataLayer\\build\\docs\\javadoc'
+-doctitle 'AbstractDataLayer API'
+-quiet 
+-windowtitle 'AbstractDataLayer API'
+'D:\\pubworkspace\\AbstractDataLayer\\src\\main\\java\\Test.java'

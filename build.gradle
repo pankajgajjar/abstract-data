@@ -1,0 +1,32 @@
+def langs = ['java']
+langs.each {
+    apply plugin : it
+}
+apply plugin : 'war'
+apply plugin : 'idea'
+apply plugin : 'eclipse'
+apply plugin : 'jetty'
+
+group = 'org.amar.web.real.time.with.websockets.web'
+version = '1.0.0'
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+httpPort = 3000
+
+def encoding = {it.encoding = 'UTF-8'}
+
+repositories {
+    mavenCentral ()
+	maven { url "http://repo.springframework.org/milestone" }
+}
+
+dependencies {
+	compile "org.springframework:spring-webmvc:3.1.3.RELEASE"
+	compile 'org.springframework:spring-core:3.1.3.RELEASE'
+   	testCompile 'org.springframework:spring-test:3.1.3.RELEASE'
+    testCompile ('junit:junit-dep:4.10') {
+        exclude module : 'org.hamcrest:hamcrest-core'
+    }
+    testCompile 'org.hamcrest:hamcrest-library:1.2.1'
+}
+
