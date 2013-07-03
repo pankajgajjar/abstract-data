@@ -1,20 +1,10 @@
 package com.pub.data.abstraction.core;
 
 
-public class NosqlOperations {
+public interface NoSqlOperations {
 	
-	
-
-	public NosqlOperations() {
-
-	}
-
-	public <T> T findAll() {
-		return null;
-	}
-	public <T> T findOne(){
-		return null;
-		
-	}
+	public <T> T findAll();
+	public <T> T findOne();
+	public <T> String insert(T objectToInsert);
 
 }

@@ -1,0 +1,7 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<testsuite name="com.pub.data.abstraction.core.NoSqlMongoTemplateUnitTests" tests="1" failures="0" errors="0" timestamp="2013-07-03T10:56:40" hostname="CS11-PC" time="0.0">
+  <properties/>
+  <testcase name="itShouldFireSelectQueryOnMongoDB" classname="com.pub.data.abstraction.core.NoSqlMongoTemplateUnitTests" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
