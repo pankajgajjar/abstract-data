@@ -1,6 +1,8 @@
 package com.pub.data.abstraction.core;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable{
 	private String id;
 	private String name;
 	private String standard;

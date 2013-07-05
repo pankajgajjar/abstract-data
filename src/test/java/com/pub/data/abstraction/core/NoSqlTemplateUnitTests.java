@@ -19,9 +19,7 @@ public class NoSqlTemplateUnitTests {
 	@Autowired
 	private NoSqlOperations noSqlTemplate;
 	
-	private PubCrudRepository crudRepository;
-	private MongoOperations mongoTemplate;
-	private ConfigurableApplicationContext context;
+	
 	
 	@Before
 	public void setUp()
@@ -36,7 +34,7 @@ public class NoSqlTemplateUnitTests {
 		
 		//given
 		
-		Student amar=new Student("1", "Amar", "First");
+		Student amar=new Student("8", "Amar", "First");
 		
 		//when
 		
@@ -48,6 +46,22 @@ public class NoSqlTemplateUnitTests {
 		
 		
 		
+		
+	}
+	
+	@Test 
+	public void itShouldInsertObjectToRedis(){
+		//given
+		
+				Student amar=new Student("8", "Amar", "First");
+				
+				//when
+				
+				String id=noSqlTemplate.insert(amar);
+				
+				//then
+
+				Assert.assertNotNull(id);
 		
 	}
 

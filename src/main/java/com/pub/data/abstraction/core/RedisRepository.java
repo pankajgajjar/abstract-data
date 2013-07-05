@@ -1,14 +1,30 @@
 package com.pub.data.abstraction.core;
 
-public class RedisRepository implements PubCrudRepository{
-	
-	
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisOperations;
 
+public class RedisRepository implements PubCrudRepository {
+
+	@SuppressWarnings("rawtypes")
+	@Autowired
+	private RedisOperations redisTemplate;
+	
+	public RedisRepository(){
+		
+	}
+	public RedisRepository(@SuppressWarnings("rawtypes") RedisOperations redisTemplate){
+		this.redisTemplate=redisTemplate;
+	}
+
+	@SuppressWarnings("unchecked")
 	@Override
 	public <T> String insert(T objectToInsert) {
-		return null;
+		redisTemplate.opsForHash().put(objectToInsert.hashCode(),
+				objectToInsert.hashCode(), objectToInsert);
+
+		return "inserted";
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -23,8 +39,10 @@ public class RedisRepository implements PubCrudRepository{
 		return null;
 	}
 
-	
-	
-	
+	@Override
+	public <E, P> P getObjectByKey(E key, Class<P> type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

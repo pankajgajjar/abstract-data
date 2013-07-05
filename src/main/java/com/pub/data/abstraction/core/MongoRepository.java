@@ -40,6 +40,16 @@ public class MongoRepository implements PubCrudRepository{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
+	@Override
+	public <E, P> P getObjectByKey(E key, Class<P> type) {
+		// TODO Auto-generated method stub
+		
+		return mongoTemplate.findById(key, type);
+	}
+
 	
 
 }
