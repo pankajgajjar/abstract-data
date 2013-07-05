@@ -20,19 +20,21 @@ public class NoSqlTemplate implements NoSqlOperations {
 		return null;
 	}
 
-	@Override
-	public <T> T findOne() {
-		// TODO Auto-generated method stub
-		
-		
-		return null;
-	}
-
+	
 	@Override
 	public <T> String insert(T objectToInsert) {
 		// TODO Auto-generated method stub
 		String id= crudRepository.insert(objectToInsert);
 		return id;
+	}
+
+
+
+	@Override
+	public <E, P> P findOne(E key, Class<P> type) {
+		// TODO Auto-generated method stub
+		P object=crudRepository.getObjectByKey(key, type);
+		return object;
 	}
 	
 

@@ -46,5 +46,17 @@ public class RedisRepositoryTests {
 		
 		
 	}
+	
+	@Test
+	public void itShouldReturnAnObjectByKey()
+	{
+		//given
+		Student amar=new Student("2", "Esha", "First");
+		crudRepository.insert(amar);
+		//when
+		Student actualStudent=crudRepository.getObjectByKey(amar, Student.class);
+		//then
+		Assert.assertEquals(amar.getId(), actualStudent.getId());
+	}
 
 }

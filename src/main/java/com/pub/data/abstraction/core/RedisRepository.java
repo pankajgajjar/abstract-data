@@ -1,6 +1,7 @@
 package com.pub.data.abstraction.core;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisOperations;
 
 public class RedisRepository implements PubCrudRepository {
@@ -42,7 +43,9 @@ public class RedisRepository implements PubCrudRepository {
 	@Override
 	public <E, P> P getObjectByKey(E key, Class<P> type) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		P object=(P)redisTemplate.opsForHash().get(key.hashCode(), key.hashCode());
+		return object;
 	}
 
 }

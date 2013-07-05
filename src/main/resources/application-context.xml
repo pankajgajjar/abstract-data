@@ -46,12 +46,12 @@
 
 <!-- Pub Abstract Data Layer Configuration -->
 	
-	<bean id="noSqlTemplateForMongo" class="com.pub.data.abstraction.core.NoSqlTemplate">
+	<bean id="noSqlTemplate" class="com.pub.data.abstraction.core.NoSqlTemplate">
 		<constructor-arg name="crudRepository" ref="crudRepository" />
 	</bean>
 	
 
-	<bean id="crudRepository" class="com.pub.data.abstraction.core.MongoRepository">
+	<bean id="crudRepository" class="com.pub.data.abstraction.core.RedisRepository">
 	
 	</bean>
 
