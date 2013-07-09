@@ -6,6 +6,4 @@ public interface PubCrudRepository {
 	<T> T select(T query);
 	<T> T delete(T objectToDelete);
 	<E,P> P getObjectByKey(E key, Class<P> type);
-	
-
 }

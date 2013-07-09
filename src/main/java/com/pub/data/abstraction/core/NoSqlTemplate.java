@@ -2,6 +2,7 @@ package com.pub.data.abstraction.core;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 public class NoSqlTemplate implements NoSqlOperations {
 	
 	private PubCrudRepository crudRepository;

@@ -5,14 +5,14 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisOperations;
 
 public class RedisRepository implements PubCrudRepository {
-
-	@SuppressWarnings("rawtypes")
-	@Autowired
+	
 	private RedisOperations redisTemplate;
 	
 	public RedisRepository(){
 		
 	}
+	
+	@Autowired
 	public RedisRepository(@SuppressWarnings("rawtypes") RedisOperations redisTemplate){
 		this.redisTemplate=redisTemplate;
 	}

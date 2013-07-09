@@ -9,6 +9,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.mongodb.core.MongoOperations;
 
+import com.pub.data.abstraction.core.MongoRepository;
+import com.pub.data.abstraction.core.PubCrudRepository;
+import com.pub.data.abstraction.core.orm.entities.Student;
+
 public class MongoRepositoryUnitTests {
 	
 	private PubCrudRepository crudRepository;

@@ -6,13 +6,10 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 
 public class MongoRepository implements PubCrudRepository {
 
-	@Autowired
+	
 	public MongoOperations mongoTemplate;
 
-	public MongoRepository() {
-
-	}
-
+	@Autowired
 	public MongoRepository(MongoOperations mongoTemplate) {
 		this.mongoTemplate = mongoTemplate;
 	}

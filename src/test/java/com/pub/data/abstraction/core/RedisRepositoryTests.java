@@ -15,6 +15,10 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.pub.data.abstraction.core.PubCrudRepository;
+import com.pub.data.abstraction.core.RedisRepository;
+import com.pub.data.abstraction.core.orm.entities.Student;
+
 
 public class RedisRepositoryTests {
 	

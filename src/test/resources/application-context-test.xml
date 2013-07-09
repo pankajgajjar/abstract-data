@@ -21,8 +21,8 @@
 	<context:annotation-config />
 
 	<context:component-scan base-package="com.pub.data.abstraction.core" />
-	
-	<!-- Spring Data MongoDB Configuration-->
+
+	<!-- Spring Data MongoDB Configuration -->
 
 	<mongo:mongo host="localhost" port="27017" />
 
@@ -32,36 +32,38 @@
 		db-factory-ref="mongoDbFactory" />
 
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-		<constructor-arg name="mongo" ref="mongo"/>
-    	<constructor-arg name="databaseName" value="test"/>
+		<constructor-arg name="mongo" ref="mongo" />
+		<constructor-arg name="databaseName" value="test" />
 	</bean>
 
-<!-- Spring Data Redis Configuration -->
+	<!-- Spring Data Redis Configuration -->
 	<bean id="jedisConnectionFactory"
 		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
 		p:host-name="127.0.0.1" p:port="6379" />
 
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
-	p:connection-factory-ref="jedisConnectionFactory" />
+		p:connection-factory-ref="jedisConnectionFactory" />
 
-<!-- Pub Abstract Data Layer Configuration -->
-	
+	<!-- Pub Abstract Data Layer Configuration -->
+
 	<bean id="noSqlTemplateForMongo" class="com.pub.data.abstraction.core.NoSqlTemplate">
 		<constructor-arg name="crudRepository" ref="crudRepository" />
 	</bean>
-	
 
-	<bean id="crudRepository" class="com.pub.data.abstraction.core.MongoRepository">
-	
+
+	<bean id="crudRepository"
+		class="com.pub.data.abstraction.core.MongoRepository">
+
 	</bean>
-	
+
 	<bean id="noSqlTemplateForRedis" class="com.pub.data.abstraction.core.NoSqlTemplate">
 		<constructor-arg name="crudRepositoryR" ref="crudRepository" />
 	</bean>
-	
 
-	<bean id="crudRepositoryR" class="com.pub.data.abstraction.core.RedisRepository">
-	
+
+	<bean id="crudRepositoryR"
+		class="com.pub.data.abstraction.core.RedisRepository">
+
 	</bean>
 
 
