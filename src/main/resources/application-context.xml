@@ -51,7 +51,7 @@
 	</bean>
 	
 
-	<bean id="crudRepository" class="com.pub.data.abstraction.core.repository.RedisRepository">
+	<bean id="crudRepository" class="com.pub.data.abstraction.core.RedisRepository">
 	
 	</bean>
 

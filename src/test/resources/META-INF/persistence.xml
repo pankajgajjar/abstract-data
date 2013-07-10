@@ -1,9 +1,9 @@
-<persistence xmlns="http://java.sun.com/xml/ns/persistence"
-	version="1.0">
-
-	<persistence-unit name="AbstractDataLayer"
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+	<persistence-unit name="hibernate"
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>com.pub.data.abstraction.core.orm.entities.Student</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
@@ -11,9 +11,14 @@
 		</properties>
 	</persistence-unit>
 
-	<persistence-unit name="persistenceEclipseLink"
-		transaction-type="RESOURCE_LOCAL">
-		<exclude-unlisted-classes>false</exclude-unlisted-classes>
-		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-	</persistence-unit>
+	<persistence-unit name="eclipselink" transaction-type="RESOURCE_LOCAL">
+	<class>com.pub.data.abstraction.core.orm.entities.Student</class>
+       <properties>
+          <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+          <property name="javax.persistence.jdbc.url"    value="jdbc:h2:mem:test" />
+          <property name="javax.persistence.jdbc.user"   value="sa" />
+          <property name="eclipselink.ddl-generation"    value="create-tables"/>
+          <property name="eclipselink.logging.level"     value="fine"/>
+      </properties>
+   </persistence-unit>
 </persistence>
