@@ -1,0 +1,8 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<testsuite name="com.cs.data.core.nosql.redis.RedisRepositoryUnitTests" tests="2" failures="0" errors="0" timestamp="2013-07-17T12:58:02" hostname="CS11-PC" time="0.163">
+  <properties/>
+  <testcase name="itShouldInsertAnObjectToRedis" classname="com.cs.data.core.nosql.redis.RedisRepositoryUnitTests" time="0.09"/>
+  <testcase name="itShouldReturnAnObjectByKey" classname="com.cs.data.core.nosql.redis.RedisRepositoryUnitTests" time="0.073"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

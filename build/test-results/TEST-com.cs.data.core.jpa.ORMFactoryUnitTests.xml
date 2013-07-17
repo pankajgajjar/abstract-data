@@ -1,0 +1,11 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<testsuite name="com.cs.data.core.jpa.ORMFactoryUnitTests" tests="3" failures="0" errors="0" timestamp="1970-01-01T00:00:00" hostname="CS11-PC" time="1.374065882069E9">
+  <properties/>
+  <testcase name="itShouldSaveStudentObjectToDataBaseWithHibernate" classname="com.cs.data.core.jpa.ORMFactoryUnitTests" time="0.722"/>
+  <testcase name="itShouldSaveStudentObjectToDataBaseWithEclipseLink" classname="com.cs.data.core.jpa.ORMFactoryUnitTests" time="0.129"/>
+  <testcase name="itShouldGetEntityManagerFactoryForHibernate" classname="com.cs.data.core.jpa.ORMFactoryUnitTests" time="0.025"/>
+  <system-out><![CDATA[1
+2
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
