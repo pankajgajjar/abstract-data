@@ -20,7 +20,7 @@ public class ORMServiceUnitTests {
 		// when
 
 		ormService = new ORMService("hibernate");
-		ormService.save(student);
+		ormService.insert(student);
 		Student studentActual = (Student) ormService.findBy(Student.class,
 				student.getId());
 		// then
@@ -40,7 +40,7 @@ public class ORMServiceUnitTests {
 		// when
 
 		ormService = new ORMService("eclipselink");
-		ormService.save(student);
+		ormService.insert(student);
 		Student studentActual = (Student) ormService.findBy(Student.class,
 				student.getId());
 		// then

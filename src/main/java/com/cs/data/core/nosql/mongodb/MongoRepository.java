@@ -2,10 +2,14 @@ package com.cs.data.core.nosql.mongodb;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.stereotype.Component;
 
+import com.cs.data.core.GenericDomain;
 import com.cs.data.core.IRepository;
+import com.cs.data.core.nosql.NoSqlOperations;
 
-public class MongoRepository implements IRepository {
+@Component
+public class MongoRepository implements NoSqlOperations {
 
 	public MongoOperations mongoTemplate;
 
@@ -15,7 +19,7 @@ public class MongoRepository implements IRepository {
 	}
 
 	@Override
-	public <T> String insert(T objectToInsert) {
+	public String insert(GenericDomain objectToInsert) {
 		mongoTemplate.insert(objectToInsert);
 
 		return "inserted";
@@ -34,8 +38,8 @@ public class MongoRepository implements IRepository {
 	}
 
 	@Override
-	public <E, P> P getObjectByKey(E key, Class<P> type) {
-		return mongoTemplate.findById(key, type);
+	public <P> P getObjectByKey(GenericDomain key, Class<P> type) {
+		return mongoTemplate.findById(key.getKey(), type);
 	}
 
 }

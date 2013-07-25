@@ -11,11 +11,12 @@ import org.springframework.data.mongodb.core.MongoOperations;
 
 import com.cs.data.core.IRepository;
 import com.cs.data.core.jpa.entities.Student;
+import com.cs.data.core.nosql.NoSqlOperations;
 import com.cs.data.core.nosql.mongodb.MongoRepository;
 
 public class MongoRepositoryUnitTests {
 	
-	private IRepository crudRepository;
+	private NoSqlOperations crudRepository;
 	private MongoOperations mongoTemplate;
 	private ConfigurableApplicationContext context;
 	
@@ -50,7 +51,7 @@ public class MongoRepositoryUnitTests {
 		Student expectedAmar=new Student("1", "Amar", "First");
 		//when
 		
-		Student actualAmar= crudRepository.getObjectByKey(id,type);
+		Student actualAmar= crudRepository.getObjectByKey(expectedAmar,type);
 		//then
 		Assert.assertEquals(expectedAmar.getId(), actualAmar.getId());
 		

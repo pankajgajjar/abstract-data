@@ -46,25 +46,17 @@
 
 	<!-- Pub Abstract Data Layer Configuration -->
 
-	<bean id="noSqlTemplateForMongo" class="com.cs.data.core.nosql.NoSqlTemplate">
-		<constructor-arg name="crudRepository" ref="crudRepository" />
-	</bean>
-
-
-	<bean id="crudRepository"
-		class="com.cs.data.core.nosql.mongodb.MongoRepository">
+	<bean id="noSqlTemplateForMongo" class="com.cs.data.core.nosql.mongodb.MongoRepository">
 
 	</bean>
 
-	<bean id="noSqlTemplateForRedis" class="com.cs.data.core.nosql.NoSqlTemplate">
-		<constructor-arg name="crudRepositoryR" ref="crudRepository" />
+
+	<bean id="noSqlTemplateForRedis" class="com.cs.data.core.nosql.redis.RedisRepository">
+		
 	</bean>
 
 
-	<bean id="crudRepositoryR"
-		class="com.cs.data.core.nosql.redis.RedisRepository">
-
-	</bean>
+	
 
 
 </beans>

@@ -10,11 +10,12 @@ import org.springframework.data.redis.core.RedisOperations;
 
 import com.cs.data.core.IRepository;
 import com.cs.data.core.jpa.entities.Student;
+import com.cs.data.core.nosql.NoSqlOperations;
 import com.cs.data.core.nosql.redis.RedisRepository;
 
 public class RedisRepositoryUnitTests {
 
-	private IRepository crudRepository;
+	private NoSqlOperations crudRepository;
 	private RedisOperations<?, ?> redisTemplate;
 	private ConfigurableApplicationContext context;
 
