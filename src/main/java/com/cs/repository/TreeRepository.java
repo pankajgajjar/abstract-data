@@ -2,8 +2,6 @@ package com.cs.repository;
 
 import java.util.Random;
 
-import org.json.simple.JSONObject;
-import org.springframework.data.mongodb.core.IndexOperations;
 
 import com.cs.data.core.IRepository;
 import com.cs.model.Tree;
@@ -19,18 +17,18 @@ public class TreeRepository {
 
 	}
 
-	public int createTree(Tree tree) {
+	public String createTree(Tree tree) {
 		// TODO Auto-generated method stub
 		int id = 100;
 		tree.getTreeData().put("id", id);
-		persist(tree);
-		return id;
+		
+		return persist(tree);
 
 	}
 
-	private void persist(Tree tree) {
+	private String persist(Tree tree) {
 		// TODO Auto-generated method stub
-		iRepository.insert(tree);
+		return iRepository.insert(tree);
 
 	}
 

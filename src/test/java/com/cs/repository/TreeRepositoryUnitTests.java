@@ -18,30 +18,29 @@ import com.cs.model.Tree;
 import com.cs.model.TreeNode;
 
 import static org.fest.assertions.Assertions.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:application-context-test.xml")
+@RunWith(MockitoJUnitRunner.class)
 public class TreeRepositoryUnitTests {
 
 	private TreeRepository treeRepository;
 
-	@Autowired
-	private IRepository noSqlTemplateForRedis;
-
+	@Mock
+	private RedisRepository noSqlTemplateForRedis;
 
 	private Tree tree;
-	
-	private TreeNode treeNode;
 
+	private TreeNode treeNode;
+	
 	@Test
 	public void itShouldCreateAJsonTreeForGivenJsonArray() {
 
 		// given
-		
+
 		String id = "10";
 		JSONObject inputJson = new JSONObject();
-		JSONArray children=new JSONArray();
+		JSONArray children = new JSONArray();
 		inputJson.put("Name", "Folder");
 		inputJson.put("children", children);
 		treeRepository = new TreeRepository(noSqlTemplateForRedis);
@@ -49,32 +48,35 @@ public class TreeRepositoryUnitTests {
 		tree = new Tree();
 		tree.setId(id);
 		tree.setTreeData(inputJson);
+		String expectedResult="true";
 
 		// when
 
-		int rootId = treeRepository.createTree(tree);
-		actual = noSqlTemplateForRedis.getObjectByKey(tree, Tree.class);
+		when(noSqlTemplateForRedis.insert(tree)).thenReturn(expectedResult);
+		String actualResult = treeRepository.createTree(tree);
+		
 
 		// then
-		System.out.println(actual);
-		assertThat(actual).isNotNull();
-		assertThat(actual.getTreeData().get("Name")).isEqualTo(inputJson.get("Name"));
+		
+		verify(noSqlTemplateForRedis).insert(tree);
+		assertThat(actualResult).isEqualTo(expectedResult);
+		
 	}
 
 	@Test
-	public void itShouldAddAnNewElement(){
-		
-		//given
+	public void itShouldAddAnNewElement() {
+
+		// given
 		int parentId;
-		String nodeName="Compaign";
-		treeRepository=new TreeRepository(noSqlTemplateForRedis);
-		JSONObject childToAdd=new JSONObject();
-		treeNode=new TreeNode();
+		String nodeName = "Compaign";
+		treeRepository = new TreeRepository(noSqlTemplateForRedis);
+		JSONObject childToAdd = new JSONObject();
+		treeNode = new TreeNode();
 		treeNode.setChilldren(new JSONArray());
 		treeNode.setId("101");
 		treeNode.setParentId("101");
-		//when
+		// when
 		treeRepository.addChild(treeNode);
-		
+
 	}
 }
