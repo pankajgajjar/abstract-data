@@ -1,28 +1,30 @@
 package com.cs.repository;
 
+import java.util.Iterator;
 import java.util.Random;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
-import com.cs.data.core.IRepository;
+import com.cs.data.core.nosql.NoSqlOperations;
+import com.cs.data.core.nosql.redis.RedisRepository;
 import com.cs.model.Tree;
-import com.cs.model.TreeNode;
 
 public class TreeRepository {
 
-	private IRepository iRepository;
+	private NoSqlOperations iRepository;
 
-	public TreeRepository(IRepository iRepository) {
+	public TreeRepository(NoSqlOperations noSqlOperationsForRedis) {
 		// TODO Auto-generated constructor stub
-		this.iRepository = iRepository;
+		this.iRepository = noSqlOperationsForRedis;
 
 	}
 
 	public String createTree(Tree tree) {
-		// TODO Auto-generated method stub
-		int id = 100;
-		tree.getTreeData().put("id", id);
 		
 		return persist(tree);
+		// TODO Auto-generated method stub
+		
 
 	}
 
@@ -42,11 +44,53 @@ public class TreeRepository {
 
 	}
 
-	public void addChild(TreeNode treeNode) {
-		
-		Tree tree=iRepository.getObjectByKey(new Tree(), Tree.class);
+	public void addChild(JSONObject objectToAdd,String parentId,Tree tree) {
 		
 		
+		JSONArray treeJson=tree.getTreeData();
+		JSONArray updated=updateAndModify(treeJson,parentId,objectToAdd);
+		tree.setId("11");
+		tree.setTreeData(updated);
+		persist(tree);
+		System.out.println(tree);
+		
+		
+	}
+
+	private JSONArray updateAndModify(JSONArray treeJson, String parentId,JSONObject objectToInsert) {
+		int i=0;
+		JSONObject jsonObject=new JSONObject();
+		Iterator<JSONObject> iterator=treeJson.iterator();
+		while(iterator.hasNext()){
+			Object object=treeJson.get(i);
+			System.out.println(object);
+			jsonObject=(JSONObject) object;
+			if(jsonObject.get("id").equals(parentId))
+			{
+				jsonObject.put("children", objectToInsert);
+				treeJson.add(jsonObject);
+				return treeJson;
+			}
+			
+			if(jsonObject.get("children")!=null){
+				JSONArray temp=new JSONArray();
+				temp.add(jsonObject.get("children"));
+				return updateAndModify(temp, parentId, objectToInsert);
+			}
+			
+			i++;
+			
+		}
+		return null;
+		
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Tree getTree(String key,String objectKey) {
+		Tree tree = iRepository.getObjectByKey(key,objectKey, Tree.class);
+		return tree;
+
 	}
 
 }

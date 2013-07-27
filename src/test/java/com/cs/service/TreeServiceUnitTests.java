@@ -8,7 +8,7 @@ import static org.fest.assertions.Assertions.*;
 public class TreeServiceUnitTests {
 
 	@Test
-	public void test() {
+	public void itShouldGet() {
 		fail("Not yet implemented");
 	}
 

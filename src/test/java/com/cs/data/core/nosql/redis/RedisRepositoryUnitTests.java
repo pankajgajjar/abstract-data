@@ -54,6 +54,9 @@ public class RedisRepositoryUnitTests {
 		// when
 		Student actualStudent = crudRepository.getObjectByKey(amar,
 				Student.class);
+
+		System.out.println(actualStudent);
+
 		// then
 		Assert.assertEquals(amar.getId(), actualStudent.getId());
 	}

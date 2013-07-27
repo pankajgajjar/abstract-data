@@ -2,6 +2,7 @@ package com.cs.model;
 
 import java.io.Serializable;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,7 @@ public class Tree implements GenericDomain,Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String id;
-	private JSONObject treeData;
+	private JSONArray treeData;
 
 
 	public String getId() {
@@ -23,11 +24,11 @@ public class Tree implements GenericDomain,Serializable {
 		this.id = id;
 	}
 
-	public JSONObject getTreeData() {
+	public JSONArray getTreeData() {
 		return treeData;
 	}
 
-	public void setTreeData(JSONObject treeData) {
+	public void setTreeData(JSONArray treeData) {
 		this.treeData = treeData;
 	}
 
@@ -38,7 +39,7 @@ public class Tree implements GenericDomain,Serializable {
 	
 	@Override
 	public String getObjectKey(){
-		return "Tree";
+		return "TREE";
 	}
 	
 	@Override

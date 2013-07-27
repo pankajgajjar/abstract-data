@@ -6,20 +6,22 @@ import org.springframework.stereotype.Component;
 
 import com.cs.data.core.GenericDomain;
 import com.cs.data.core.nosql.NoSqlOperations;
+import com.cs.model.Tree;
 
 @Component
 public class RedisRepository implements NoSqlOperations {
-	
+
 	@SuppressWarnings("rawtypes")
 	private RedisOperations redisTemplate;
-	
-	public RedisRepository(){
-		
+
+	public RedisRepository() {
+
 	}
-	
+
 	@Autowired
-	public RedisRepository(@SuppressWarnings("rawtypes") RedisOperations redisTemplate){
-		this.redisTemplate=redisTemplate;
+	public RedisRepository(
+			@SuppressWarnings("rawtypes") RedisOperations redisTemplate) {
+		this.redisTemplate = redisTemplate;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -49,10 +51,18 @@ public class RedisRepository implements NoSqlOperations {
 	@Override
 	public <P> P getObjectByKey(GenericDomain key, Class<P> type) {
 		// TODO Auto-generated method stub
-		
-		P object=(P)redisTemplate.opsForHash().get(key.getKey(), key.getObjectKey());
+
+		P object = (P) redisTemplate.opsForHash().get(key.getKey(),
+				key.getObjectKey());
+
 		return object;
 	}
-
 	
+	public <P> P getObjectByKey(String key, String objectkey,Class<P> type){
+		P object = (P) redisTemplate.opsForHash().get(key,
+				objectkey);
+		return object;
+		
+	}
+
 }

@@ -36,5 +36,6 @@ public class DimensionServiceUnitTests {
 		verify(fileUtils).getFileContents("dimensions.json");
 		assertThat(actualContent).isEqualTo(content);
 	}
+	
 
 }

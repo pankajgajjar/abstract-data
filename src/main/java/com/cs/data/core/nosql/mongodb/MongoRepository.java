@@ -42,4 +42,10 @@ public class MongoRepository implements NoSqlOperations {
 		return mongoTemplate.findById(key.getKey(), type);
 	}
 
+	@Override
+	public <P> P getObjectByKey(String key, String objectKey, Class<P> class1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

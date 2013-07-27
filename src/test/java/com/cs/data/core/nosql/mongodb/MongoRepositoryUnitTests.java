@@ -24,11 +24,12 @@ import com.cs.data.core.nosql.mongodb.MongoRepository;
 public class MongoRepositoryUnitTests {
 
 	private NoSqlOperations crudRepository;
-	@Mock
+	@Autowired
 	private MongoOperations mongoTemplate;
 
 	@Before
 	public void setUp() {
+		
 		crudRepository = new MongoRepository(mongoTemplate);
 	}
 

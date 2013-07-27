@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cs.utils.FileUtils;
-import com.cs.utils.Messages;
 
 @Controller
 public class TreeViewStructure {
@@ -32,7 +31,7 @@ public class TreeViewStructure {
 	@RequestMapping("/default")
 	public @ResponseBody String getDefault() throws IOException, URISyntaxException{
 		
-		return utils.getFileContents(Messages.getString("TreeViewStructure.2")); //$NON-NLS-1$
+		return utils.getFileContents("schema1.json"); //$NON-NLS-1$
 		
 	}
 
