@@ -36,10 +36,11 @@ public class TreeRepositoryIntegrationTests {
 		JSONObject firstElement = new JSONObject();
 		firstElement.put("id", "100");
 		firstElement.put("name", "c02");
-		firstElement.put("children", new JSONArray());
+		
 
 		JSONObject attr = new JSONObject();
 		attr.put("attr", firstElement);
+		attr.put("children", new JSONArray());
 		JSONArray treeData = new JSONArray();
 		treeData.add(attr);
 		Tree tree = new Tree();
@@ -66,7 +67,6 @@ public class TreeRepositoryIntegrationTests {
 		Tree actualtree = treeRepository.getTree("tree01", "TREE");
 
 		// then
-		System.out.println(actualtree);
 		assertThat(actualtree).isNotNull();
 	}
 
@@ -77,10 +77,11 @@ public class TreeRepositoryIntegrationTests {
 		JSONObject firstElement = new JSONObject();
 		firstElement.put("id", "101");
 		firstElement.put("name", "mp012");
-		firstElement.put("children", new JSONArray());
+		
 
 		JSONObject attr = new JSONObject();
 		attr.put("attr", firstElement);
+		attr.put("children", new JSONArray());
 		Tree tree = treeRepository.getTree("tree01", "TREE");
 		// when
 		treeRepository.addChild(attr, "100", tree);
@@ -88,17 +89,21 @@ public class TreeRepositoryIntegrationTests {
 		// then
 	}
 	
-/*	@Test
+	@Test
 	public void itShouldAddChildToExistingNested() {
 
 		// given
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("id", "12");
-		jsonObject.put("name", "publication01");
-		jsonObject.put("children", new JSONArray());
+		JSONObject firstElement = new JSONObject();
+		firstElement.put("id", "102");
+		firstElement.put("name", "mp0112");
+		
+
+		JSONObject attr = new JSONObject();
+		attr.put("attr", firstElement);
+		attr.put("children", new JSONArray());
 		Tree tree = treeRepository.getTree("tree01", "TREE");
 		// when
-		treeRepository.addChild(jsonObject, "11", tree);
+		treeRepository.addChild(attr, "101", tree);
 
 		// then
 		
@@ -111,18 +116,22 @@ public class TreeRepositoryIntegrationTests {
 	public void itShouldAddChildToExistingNestedSecondLevel() {
 
 		// given
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("id", "13");
-		jsonObject.put("name", "page01");
-		jsonObject.put("children", new JSONArray());
+		JSONObject firstElement = new JSONObject();
+		firstElement.put("id", "103");
+		firstElement.put("name", "mp013");
+		
+
+		JSONObject attr = new JSONObject();
+		attr.put("attr", firstElement);
+		attr.put("children", new JSONArray());
 		Tree tree = treeRepository.getTree("tree01", "TREE");
 		// when
-		treeRepository.addChild(jsonObject, "12", tree);
+		treeRepository.addChild(attr, "102", tree);
 
 		// then
 		
 		
 		
 		
-	}*/
+	}
 }

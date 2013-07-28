@@ -37,7 +37,7 @@ public class TreeRepository {
 
 	}
 
-	public  int getRandomKey() {
+	public int getRandomKey() {
 		// TODO Auto-generated method stub
 		return new Random().nextInt(10000);
 	}
@@ -52,6 +52,7 @@ public class TreeRepository {
 		JSONArray treeJson = tree.getTreeData();
 		JSONArray updated = updateAndModify(treeJson, parentId, objectToAdd);
 		tree.setTreeData(updated);
+		System.out.println(updated);
 		return persist(tree);
 
 	}
@@ -60,27 +61,38 @@ public class TreeRepository {
 			JSONObject objectToInsert) {
 		JSONObject jsonObject = new JSONObject();
 		Iterator<JSONObject> iterator = treeJson.iterator();
-		for(Object object : treeJson) {
-			System.out.println("Test");
-			//Object object = treeJson.get(i++);
-			
-				jsonObject = (JSONObject) object;
-				jsonObject=(JSONObject) jsonObject.get("attr");
-				System.out.println(jsonObject);
-				if (jsonObject.get("id").equals(parentId)) {
-					jsonObject.put("children", objectToInsert);
-					System.out.println(treeJson);
-					return treeJson;
-				}
-		
 
-				else if (!jsonObject.get("children").equals(new JSONArray())) {
-				JSONArray temp = new JSONArray();
-				temp.add(jsonObject.get("children"));
-				updateAndModify(temp, parentId, objectToInsert);
+		if (((JSONObject) objectToInsert.get("attr")).get("parentId").equals(
+				"-1")) {
+			treeJson.add(objectToInsert);
+			return treeJson;
+		}
+
+		for (Object object : treeJson) {
+			// Object object = treeJson.get(i++);
+
+			jsonObject = (JSONObject) object;
+			JSONObject attrJson = (JSONObject) jsonObject.get("attr");
+			if (attrJson.get("id").equals(parentId)) {
+
+				Object children = jsonObject.get("children");
+				JSONArray tempArray = null;
+				if (children == null) {
+					tempArray = new JSONArray();
+				} else {
+					tempArray = (JSONArray) children;
+				}
+				tempArray.add(objectToInsert);
+				jsonObject.put("children", tempArray);
+				return treeJson;
 			}
 
-			
+			else if (jsonObject.get("children") != null) {
+				// JSONArray temp = new JSONArray();
+				// temp.add(jsonObject.get("children"));
+				updateAndModify((JSONArray) jsonObject.get("children"),
+						parentId, objectToInsert);
+			}
 
 		}
 		return treeJson;
@@ -90,7 +102,8 @@ public class TreeRepository {
 	}
 
 	public Tree getTree(String key, String objectKey) {
-		Tree tree = noSqlTemplateForRedis.getObjectByKey(key, objectKey, Tree.class);
+		Tree tree = noSqlTemplateForRedis.getObjectByKey(key, objectKey,
+				Tree.class);
 		return tree;
 
 	}

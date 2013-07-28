@@ -12,20 +12,27 @@ var ElementSelector=function(){
                     var darkTree = ElementFactory.getTree(data);
                     darkTree.createTree(treeObj);
                 });*/
+                var treeData;
+                
                 $(document).bind("schemaLoaded", function onSchemaLoadedHandler(e){
                     //This is to create folder as per first element of the current schema
-                    var data = {
+                    treeData = {
 	                        "attr" : { "id" : "-1" ,"type": 'root'},
 	                        "data" : getFirstDimension(),
 	                        children:[]
-                    };
+                	};
+					
+					$(document).bind("treeDataLoaded", function onSchemaLoadedHandler(e){
+						treeData.children = eval('(' + e.treeData + ')');
+						var treeObj = dom.getElementBy(element.id);
+	                	var darkTree = ElementFactory.getTree(treeData);
+	                	darkTree.createTree(treeObj); 
+					});
+					getCreatedTree();
+					
+                    
+            	});
 
-                    var treeObj = dom.getElementBy(element.id);
-                    var darkTree = ElementFactory.getTree(data);
-                    darkTree.createTree(treeObj);
-                });
-
-                getServerData(element.type);
                 break;
             }
 

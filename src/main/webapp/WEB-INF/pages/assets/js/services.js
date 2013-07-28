@@ -27,8 +27,8 @@ function onSchemaSuccess(data){
     });
 }
 
-function getTree(){
-   // APIFactory.callToServer(configTempArray[2].templateUrl,onTreeSuccess);
+function getCreatedTree(){
+   APIFactory.callToServer("/abstract-data/get",onTreeSuccess);
 }
 
 function onTreeSuccess(data){
@@ -36,10 +36,6 @@ function onTreeSuccess(data){
         type: "treeDataLoaded",
         treeData: data
     });
-    if(currentOpenedNodePath && currentOpenedNodeName) {
-        getFolderContent(currentOpenedNodeName,currentOpenedNodePath,true);
-    }
-
 }
 
 var str="";

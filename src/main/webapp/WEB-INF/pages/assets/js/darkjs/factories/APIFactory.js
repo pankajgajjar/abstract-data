@@ -10,7 +10,7 @@ APIFactory.callToServer = function(url,callback){
 
 APIFactory.callToServers = function(url,callbacks){
     $.ajax({url:url,async:false,success:function(result){
-        
+         callbacks(result);
     }});
 }
 APIFactory.callToServerWithParams = function(url,path,type,callback){

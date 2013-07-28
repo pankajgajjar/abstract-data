@@ -1,6 +1,6 @@
 var getServerData=function(type){
     if(type === 'tree'){
-       getTree()
+      // getTree()
     }
     if(type === 'tabs'){
 

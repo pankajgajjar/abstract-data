@@ -1,8 +1,9 @@
 var newNodeId;
+var newNode;
 
 var DarkJSTree = function(data){
+
     this.customMenu = function(node) {
-    var self = this;
         var possibleDim = getPossibleChild(node.attr("type"))
         if(possibleDim != null){
             var items;
@@ -11,15 +12,12 @@ var DarkJSTree = function(data){
                     "label" : "Create "+ possibleDim,
                     "action" : function (obj){
                         var name=openPopUp(possibleDim);
-                        newNode = createNodeJSON(possibleDim,node.attr("id"),name);
-                        
-                        APIFactory.callToServers(configTempArray[2].templateUrl,function(data){
+                        APIFactory.callToServers("/abstract-data/create/"+possibleDim+"/name/"+name+"/parentId/"+node.attr("id"),function(data){
                         	newNodeId = data;
-                        	alert(1)
+                        	newNode = createNodeJSON(newNodeId,possibleDim,node.attr("id"),name);
+                        	name = newNode;
                         });
-                        alert(2)
-                         return {createItem: this.create(node,-1,name,false,true)};
-                        //Now create a json and send to the backend api
+                        return {createItem: this.create(node,-1,name,false,true)};
                     }
                 }
             }
@@ -28,10 +26,11 @@ var DarkJSTree = function(data){
     }
 
     this.createTree = function(treeObj){
-
+		alert(JSON.stringify(data))
         //treeObj.innerHTML="";
         $(treeObj).jstree({
             "plugins" : ["themes", "json_data", "ui", "crrm", "contextmenu"],
+            "state" : "open",
             "json_data" : {
                 "data" : data
             },
@@ -48,9 +47,9 @@ var DarkJSTree = function(data){
 
 }
 
-function createNodeJSON(type,parentId,displayName){
+function createNodeJSON(id,type,parentId,displayName){
 	  var data = {
-                    "attr" : { "id" : "" ,"type": type,"parentId": parentId},
+                    "attr" : { "id" : id ,"type": type,"parentId": parentId},
                     "data" : displayName
                  };		
       return data;
