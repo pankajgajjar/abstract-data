@@ -14,10 +14,6 @@ ElementFactory.getTabs = function(tabObj){
     return new DarkTabs(tabObj);
 }
 
-ElementFactory.getGrid = function(data,name){
-    return new DarkPqGrid(data,name);
-}
-
-ElementFactory.getTable = function(data){
-    return new DarkGrid(data);
+ElementFactory.getDropDown = function(data){
+    return new DropDownJS(data);
 }

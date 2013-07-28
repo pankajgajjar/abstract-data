@@ -7,20 +7,37 @@ function loadTemplate(templateUrl,containerElementID){
     //Loads the template
     readTemplateHTML(templateUrl, function(text){
         //Loads the template coming from server
-        if(text.html){
-            placeHolderElement.innerHTML = text.html;
+     temp=eval('(' + text + ')');
+
+		if(templateUrl != configTempArray[0].templateUrl){
+               makeLogoutVisible();
+        }
+        
+        if(temp.html){
+            placeHolderElement.innerHTML = temp.html;
         }
         //Loads the elements string object into array object
-        if(text.elements){
-            var jsonelElements=eval('(' + text.elements + ')');
+        
+        if(temp.elements){
+            var jsonelElements=eval('(' + temp.elements + ')');
             registerElements(jsonelElements);
         }
         //Loads the events string object into array object
-        if(text.events){
-            var jsonEvents=eval('(' + text.events + ')');
+       
+        if(temp.events){
+            var jsonEvents=eval('(' + temp.events + ')');
             registerEvents(jsonEvents);
         }
     });
+}
+
+function makeLogoutVisible(){
+    $(".logout").css( "visibility", "visible" );
+    $(".wrapper").css( "visibility", "visible" );
+    $(".profileLogo").css( "visibility", "visible" );
+    $(".logout").click(function(){
+        location.reload();
+    })
 }
 
 function readTemplateHTML(templateUrl, callback) {

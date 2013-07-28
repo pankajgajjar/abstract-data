@@ -9,6 +9,24 @@
    background-image: url("images/logo2.png");
 }
 
+.profileLogo {
+    margin:-65px 0 0 -100px;
+    float: right;
+    margin-top: 0px;
+}
+.wrapper {
+   float: right; height:50px; width:50px; border-radius:50px; border:4px solid white; overflow:visible ;margin-right: 60px ;
+    margin-top: -55px;
+    margin-bottom: 5px;
+    visibility: hidden;
+}
+
+.logout{
+    border:#fbb450;
+    float: right;
+    visibility: hidden;
+}
+
 body {
     margin:0;
     padding:0;

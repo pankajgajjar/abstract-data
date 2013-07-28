@@ -33,17 +33,18 @@ public class TreeRepositoryIntegrationTests {
 	@Test
 	public void itShouldCreateTree() {
 		// given
-		JSONArray array = new JSONArray();
+		JSONObject firstElement = new JSONObject();
+		firstElement.put("id", "100");
+		firstElement.put("name", "c02");
+		firstElement.put("children", new JSONArray());
 
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("id", "11");
-		jsonObject.put("name", "c01");
-		jsonObject.put("children", new JSONArray());
-		array.add(jsonObject);
+		JSONObject attr = new JSONObject();
+		attr.put("attr", firstElement);
+		JSONArray treeData = new JSONArray();
+		treeData.add(attr);
 		Tree tree = new Tree();
-		tree.setId("1011");
-
-		tree.setTreeData(array);
+		tree.setId("tree01");
+		tree.setTreeData(treeData);
 
 		// when
 
@@ -51,23 +52,7 @@ public class TreeRepositoryIntegrationTests {
 
 		// then
 
-		System.out.println(actualResult);
 		assertThat(actualResult).isNotNull();
-
-	}
-
-	@Test
-	public void itShouldAddAnNewElement() {
-
-		// given
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("id", "11");
-		jsonObject.put("name", "mp01");
-		jsonObject.put("children", new JSONArray());
-
-		Tree tree = treeRepository.getTree("1011", "TREE");
-		// when
-		treeRepository.addChild(jsonObject, "11", tree);
 
 	}
 
@@ -78,7 +63,7 @@ public class TreeRepositoryIntegrationTests {
 		Tree result = new Tree();
 		// when
 
-		Tree actualtree = treeRepository.getTree("10", "TREE");
+		Tree actualtree = treeRepository.getTree("tree01", "TREE");
 
 		// then
 		System.out.println(actualtree);
@@ -86,17 +71,58 @@ public class TreeRepositoryIntegrationTests {
 	}
 
 	@Test
-	public void itShouldAddChildToExistingTree() {
+	public void itShouldAddChildToExistingRoot() {
 
 		// given
-		JSONObject jsonObject=new JSONObject();
-		jsonObject.put("id", "11");
-		jsonObject.put("name", "mp01");
-		jsonObject.put("children", new JSONArray());
-		Tree tree=treeRepository.getTree("10", "TREE");
+		JSONObject firstElement = new JSONObject();
+		firstElement.put("id", "101");
+		firstElement.put("name", "mp012");
+		firstElement.put("children", new JSONArray());
+
+		JSONObject attr = new JSONObject();
+		attr.put("attr", firstElement);
+		Tree tree = treeRepository.getTree("tree01", "TREE");
 		// when
-		treeRepository.addChild(jsonObject,"10",tree);
-		
+		treeRepository.addChild(attr, "100", tree);
+
 		// then
 	}
+	
+/*	@Test
+	public void itShouldAddChildToExistingNested() {
+
+		// given
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("id", "12");
+		jsonObject.put("name", "publication01");
+		jsonObject.put("children", new JSONArray());
+		Tree tree = treeRepository.getTree("tree01", "TREE");
+		// when
+		treeRepository.addChild(jsonObject, "11", tree);
+
+		// then
+		
+		
+		
+		
+	}
+	
+	@Test
+	public void itShouldAddChildToExistingNestedSecondLevel() {
+
+		// given
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("id", "13");
+		jsonObject.put("name", "page01");
+		jsonObject.put("children", new JSONArray());
+		Tree tree = treeRepository.getTree("tree01", "TREE");
+		// when
+		treeRepository.addChild(jsonObject, "12", tree);
+
+		// then
+		
+		
+		
+		
+	}*/
 }

@@ -17,6 +17,7 @@ public class FileUtils {
 	public String getFileContents(String filePath) throws IOException, URISyntaxException {
 		// TODO Auto-generated method stub
 
+		System.out.println(filePath);
 		byte[] encoded = Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource(filePath).toURI()));
 		return Charset.defaultCharset().decode(ByteBuffer.wrap(encoded))
 				.toString();

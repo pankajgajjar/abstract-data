@@ -5,4 +5,7 @@ var getServerData=function(type){
     if(type === 'tabs'){
 
     }
+    if(type === 'dropdown'){
+        getAllSchema();
+    }
 }

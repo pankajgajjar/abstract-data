@@ -6,9 +6,31 @@ function getLogin(){
     loadTemplate(configTempArray[1].templateUrl);
 }
 
-function getTree(){
-    APIFactory.callToServer(configTempArray[2].templateUrl,onTreeSuccess);
+function createNode(){
+	
 }
+
+function getAllSchema(){
+	APIFactory.callToServer(configTempArray[2].templateUrl,onSchemaSuccess);
+}
+
+function onSchemaSuccess(data){
+  	data=eval('(' + data + ')');
+    var structure = getNodesFromSchema(data);
+    structure = structure.substring(0, structure.length - 1)
+    setCurrentSchema(structure);
+    setDimensionArray(keyArray);
+    $(document).trigger({
+        type: "schemaLoaded",
+        schemaData: data,
+        schema: structure
+    });
+}
+
+function getTree(){
+   // APIFactory.callToServer(configTempArray[2].templateUrl,onTreeSuccess);
+}
+
 function onTreeSuccess(data){
     $(document).trigger({
         type: "treeDataLoaded",
@@ -20,43 +42,18 @@ function onTreeSuccess(data){
 
 }
 
+var str="";
+var keyArray = [];
 
-function getFileContent(name,path){
-    APIFactory.callToServerWithParams(configTempArray[3].templateUrl,path,"get", function(data){
-        $(document).trigger({
-            type: "fileContentLoaded",
-            fileData: data,
-            currentNodePath: path,
-            currentNodeName: name
-        });
-    });
-}
-
-function getFolderContent(name,path,afterDelete){
-    afterDelete = typeof afterDelete !== 'undefined' ? afterDelete : false;
-    currentOpenedNodePath = path;
-    currentOpenedNodeName = name;
-    APIFactory.callToServerWithParams(configTempArray[4].templateUrl,path,"get", function(result){
-        var renderer = eval('(' + result.renderer + ')');
-        var obj = new Object();
-        obj.folderData= result.data;
-        obj.elementType = renderer[0].type;
-        obj.rendererInfo= renderer[0].columns;
-        obj.currentNodePath= path ;
-        obj.currentNodeName= name;
-        obj.deleted= afterDelete
-
-        $(document).trigger({
-            type: "folderContentLoaded",
-            obj : obj
-        });
-    });
-}
-
-function deleteSelectedFile(pathToDelete){
-    APIFactory.callToServerWithParams(configTempArray[5].templateUrl,pathToDelete,"get", function(data){
-        if(data[0].msg == "deleted"){
-            getTree();
+function getNodesFromSchema(schema){
+    var i=0
+    for (var key in schema){
+        //alert(key + "key")
+        str += key+"-";
+        keyArray.push(key);
+        if(schema[key] != 'leaf') {
+            getNodesFromSchema(schema[key]);
         }
-    });
+    }
+    return str;
 }

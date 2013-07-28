@@ -17,13 +17,13 @@ public class FileUtilsUnitTests {
 	public void itShouldReadTheJsonFile() throws IOException, URISyntaxException {
 		// given
 
-		String filePath = "dimensions.json";
+		String filePath = "home/events.json";
 		// when
 
 		fileUtils = new FileUtils();
 		String actualContents = fileUtils.getFileContents(filePath);
 		// then
-		assertThat(actualContents).contains("dimArray");
+		assertThat(actualContents).contains("id");
 
 	}
 

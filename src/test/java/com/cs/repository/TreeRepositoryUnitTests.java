@@ -7,14 +7,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.mockito.Mockito.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import com.cs.data.core.GenericDomain;
-import com.cs.data.core.IRepository;
-import com.cs.data.core.nosql.mongodb.MongoRepository;
 import com.cs.data.core.nosql.redis.RedisRepository;
 import com.cs.model.Tree;
 import com.cs.model.TreeNode;
@@ -68,20 +60,6 @@ public class TreeRepositoryUnitTests {
 
 	}
 
-	@Test
-	public void itShouldAddAnNewElement() {
-
-		// given
-		JSONObject jsonObject=new JSONObject();
-		jsonObject.put("id", "111");
-		jsonObject.put("name", "mp01");
-		jsonObject.put("children", new JSONArray());
-		
-		Tree tree=treeRepository.getTree("110", "TREE");
-		// when
-		treeRepository.addChild(jsonObject,"10",tree);
-
-	}
 
 	@Test
 	public void itShouldReturnTree() {

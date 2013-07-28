@@ -1,47 +1,42 @@
-var DarkJSTree = function(data){
+var newNodeId;
 
-    var data = data;
+var DarkJSTree = function(data){
+    this.customMenu = function(node) {
+    var self = this;
+        var possibleDim = getPossibleChild(node.attr("type"))
+        if(possibleDim != null){
+            var items;
+            items ={
+                "Create" : {
+                    "label" : "Create "+ possibleDim,
+                    "action" : function (obj){
+                        var name=openPopUp(possibleDim);
+                        newNode = createNodeJSON(possibleDim,node.attr("id"),name);
+                        
+                        APIFactory.callToServers(configTempArray[2].templateUrl,function(data){
+                        	newNodeId = data;
+                        	alert(1)
+                        });
+                        alert(2)
+                         return {createItem: this.create(node,-1,name,false,true)};
+                        //Now create a json and send to the backend api
+                    }
+                }
+            }
+            return items;
+        }
+    }
 
     this.createTree = function(treeObj){
 
-        treeObj.innerHTML="";
+        //treeObj.innerHTML="";
         $(treeObj).jstree({
             "plugins" : ["themes", "json_data", "ui", "crrm", "contextmenu"],
             "json_data" : {
-                "data" : [
-                    {
-                        "data" : "A node",
-                        "metadata" : {
-                            "path":"./TestDir/js",
-                            "name":"js",
-                            "type":"folder"
-                        },
-                        "children" : [ {
-                                            "data" : "A1 node",
-                                            "metadata" : {
-                                                "path":"./TestDir/js",
-                                                "name":"js",
-                                                "type":"folder"
-                                            },
-                                            "children" :[]
-                                        },
-                                        {
-                                            "data" : "A2 node",
-                                            "metadata" : {
-                                                "path":"./TestDir/js",
-                                                "name":"js",
-                                                "type":"folder"
-                                            },
-                                            "children" :[]
-                                        }
-                        ]
-                    }
-                ]
+                "data" : data
             },
             "contextmenu" : {
-                "items": function(node,data){
-                    alert(data)
-                }
+                "items": this.customMenu
             }
 
         }).bind("select_node.jstree", function(evt, data){
@@ -51,6 +46,12 @@ var DarkJSTree = function(data){
             })
     }
 
-
-
 }
+
+function createNodeJSON(type,parentId,displayName){
+	  var data = {
+                    "attr" : { "id" : "" ,"type": type,"parentId": parentId},
+                    "data" : displayName
+                 };		
+      return data;
+	}
