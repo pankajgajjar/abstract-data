@@ -1,8 +1,0 @@
-<?xml version="1.1" encoding="UTF-8"?>
-<testsuite name="com.cs.data.core.jpa.ORMServiceUnitTests" tests="2" failures="0" errors="0" timestamp="2013-07-26T16:30:37" hostname="CS11-PC" time="0.062">
-  <properties/>
-  <testcase name="itShouldSaveAndFindObjectUsingHibernate" classname="com.cs.data.core.jpa.ORMServiceUnitTests" time="0.031"/>
-  <testcase name="itShouldSaveAndFindObjectUsingEclipseLink" classname="com.cs.data.core.jpa.ORMServiceUnitTests" time="0.031"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
