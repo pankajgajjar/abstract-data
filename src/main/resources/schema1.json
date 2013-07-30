@@ -1,9 +1,9 @@
 {
-	"dim1":{
-			"dim2":{
-					"dim3":{
-								"dim4":"leaf"
-							}
-					}
-			}
+    "Campaign": {
+        "PublicationGroup": {
+            "MasterPublication": {
+                "Publication":"leaf"
+            }
+        }
+    }
 }

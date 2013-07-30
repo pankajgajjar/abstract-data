@@ -43,16 +43,15 @@ public class ContentTree {
 			@PathVariable("name") String name,
 			@PathVariable("parentId") String parentId)
 			throws InterruptedException {
-
 		String id = treeRepository.getRandomKey() + "";
 		JSONObject atrr = new JSONObject();
 		JSONObject innerObject = new JSONObject();
 		Tree tree = new Tree();
 
 		if (parentId.equals("-1")
-				&& treeRepository.getTree("tree001", "TREE") == null) {
+				&& treeRepository.getTree("treeDemo01", "TREE") == null) {
 
-			tree.setId("tree001");
+			tree.setId("treeDemo01");
 
 			innerObject.put("id", id);
 
@@ -74,12 +73,11 @@ public class ContentTree {
 			atrr.put("attr", innerObject);
 			atrr.put("data", name);
 			atrr.put("children", new JSONArray());
-			tree = treeRepository.getTree("tree001", "TREE");
+			tree = treeRepository.getTree("treeDemo01", "TREE");
 			treeRepository.addChild(atrr, parentId, tree);
 
 		}
-		return treeRepository.getTree("tree001", "TREE").getTreeData()
-				.toString();
+		return id;
 
 	}
 
@@ -90,7 +88,7 @@ public class ContentTree {
 		String key = "tree01";
 		String objectKey = "TREE";
 
-		return treeRepository.getTree("tree001", "TREE").getTreeData()
+		return treeRepository.getTree("treeDemo01", "TREE").getTreeData()
 				.toString();
 	}
 

@@ -11,7 +11,7 @@ group = 'org.amar.web.real.time.with.websockets.web'
 version = '1.0.0'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
-httpPort = 3000
+httpPort = 80
 
 def encoding = {it.encoding = 'UTF-8'}
 

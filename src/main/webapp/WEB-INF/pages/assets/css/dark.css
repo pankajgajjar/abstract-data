@@ -173,9 +173,9 @@ img {
     vertical-align: bottom;
     width:2%;
     left:6%;
-    height: 900px;
+    height: 550px;
     /*margin-top: -99999px;*/
-    background: #888;			/* (right column left and right padding) plus (left column left padding) */
+    background: #888;   /* (right column left and right padding) plus (left column left padding) */
 }
 .separator {
     display: inline-block;

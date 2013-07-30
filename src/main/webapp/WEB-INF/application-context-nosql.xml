@@ -24,7 +24,7 @@
 
 	<!-- Spring Data MongoDB Configuration -->
 
-	<mongo:mongo host="localhost" port="27017" />
+	<mongo:mongo host="192.168.135.234" port="27017" />
 
 	<mongo:db-factory dbname="test" />
 
@@ -52,11 +52,11 @@
 
 
 	<bean id="noSqlTemplateForRedis" class="com.cs.data.core.nosql.redis.RedisRepository">
-		
+
 	</bean>
 
 
-	
+
 
 
 </beans>

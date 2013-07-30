@@ -52,7 +52,6 @@ public class TreeRepository {
 		JSONArray treeJson = tree.getTreeData();
 		JSONArray updated = updateAndModify(treeJson, parentId, objectToAdd);
 		tree.setTreeData(updated);
-		System.out.println(updated);
 		return persist(tree);
 
 	}

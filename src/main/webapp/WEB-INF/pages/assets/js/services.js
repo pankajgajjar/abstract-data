@@ -28,14 +28,15 @@ function onSchemaSuccess(data){
 }
 
 function getCreatedTree(){
-   APIFactory.callToServer("/abstract-data/get",onTreeSuccess);
+   APIFactory.callToServer("/pub2.0/get",onTreeSuccess);
 }
 
 function onTreeSuccess(data){
-    $(document).trigger({
+$(document).trigger({
         type: "treeDataLoaded",
         treeData: data
     });
+    
 }
 
 var str="";

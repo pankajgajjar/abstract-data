@@ -23,7 +23,11 @@ var ElementSelector=function(){
                 	};
 					
 					$(document).bind("treeDataLoaded", function onSchemaLoadedHandler(e){
+					
+					if(e.treeData != "error"){
 						treeData.children = eval('(' + e.treeData + ')');
+					}
+						
 						var treeObj = dom.getElementBy(element.id);
 	                	var darkTree = ElementFactory.getTree(treeData);
 	                	darkTree.createTree(treeObj); 

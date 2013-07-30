@@ -5,7 +5,12 @@ function APIFactory(){
 APIFactory.callToServer = function(url,callback){
     $.ajax({url:url,success:function(result){
         callback(result);
-    }});
+    },
+     error: function (error) {
+     
+     	callback("error");
+              }
+    });
 }
 
 APIFactory.callToServers = function(url,callbacks){

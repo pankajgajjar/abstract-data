@@ -12,7 +12,7 @@ var DarkJSTree = function(data){
                     "label" : "Create "+ possibleDim,
                     "action" : function (obj){
                         var name=openPopUp(possibleDim);
-                        APIFactory.callToServers("/abstract-data/create/"+possibleDim+"/name/"+name+"/parentId/"+node.attr("id"),function(data){
+                        APIFactory.callToServers("/pub2.0/create/"+possibleDim+"/name/"+name+"/parentId/"+node.attr("id"),function(data){
                         	newNodeId = data;
                         	newNode = createNodeJSON(newNodeId,possibleDim,node.attr("id"),name);
                         	name = newNode;
@@ -26,7 +26,6 @@ var DarkJSTree = function(data){
     }
 
     this.createTree = function(treeObj){
-		alert(JSON.stringify(data))
         //treeObj.innerHTML="";
         $(treeObj).jstree({
             "plugins" : ["themes", "json_data", "ui", "crrm", "contextmenu"],
@@ -39,7 +38,6 @@ var DarkJSTree = function(data){
             }
 
         }).bind("select_node.jstree", function(evt, data){
-                alert(JSON.stringify(data.inst.get_json()));
                 //selected node object: data.inst.get_json()[0];
                 //selected node text: data.inst.get_json()[0].data
             })
