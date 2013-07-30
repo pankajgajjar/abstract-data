@@ -31,34 +31,38 @@ public class Client {
 		this.fileUtils = fileUtils;
 	}
 
-	@RequestMapping(value = { "/home" }, method = RequestMethod.GET,produces="application/json")
-	public @ResponseBody String getHome() throws IOException, URISyntaxException {
+	@RequestMapping(value = { "/home" }, method = RequestMethod.GET, produces = "application/json")
+	public @ResponseBody
+	CustomResponse getHome() throws IOException, URISyntaxException {
 		CustomResponse customResponse = new CustomResponse();
 		customResponse.setHtml(fileUtils.getFileContents("home.html"));
 		customResponse.setEvents(fileUtils.getFileContents("home/events.json"));
-		customResponse.setElements(fileUtils.getFileContents("home/elements.json"));
-		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+		customResponse.setElements(fileUtils
+				.getFileContents("home/elements.json"));
+		ObjectWriter ow = new ObjectMapper().writer()
+				.withDefaultPrettyPrinter();
 		String json = ow.writeValueAsString(customResponse);
-		return json;
+		return customResponse;
 
 	}
 
-	@RequestMapping(value = { "/login" }, method = RequestMethod.GET, produces="application/json")
-	public @ResponseBody String getLogin() throws IOException, URISyntaxException {
-		
+	@RequestMapping(value = { "/login" })
+	public @ResponseBody
+	CustomResponse getLogin() throws IOException, URISyntaxException {
+
 		CustomResponse customResponse = new CustomResponse();
 		customResponse.setHtml(fileUtils.getFileContents("login.html"));
-		customResponse.setEvents(fileUtils.getFileContents("login/events.json"));
-		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+		customResponse
+				.setEvents(fileUtils.getFileContents("login/events.json"));
+		ObjectWriter ow = new ObjectMapper().writer()
+				.withDefaultPrettyPrinter();
 		String json = ow.writeValueAsString(customResponse);
-		return json;
-
-
+		return customResponse;
 
 	}
 
-	@RequestMapping(value={"/test"})
-	public String getTest(){
+	@RequestMapping(value = { "/test" })
+	public String getTest() {
 		return "Test";
 	}
 }

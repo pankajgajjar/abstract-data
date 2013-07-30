@@ -17,16 +17,16 @@ import com.cs.utils.FileUtils;
 
 @Controller
 public class Dimension {
-	
+
 	private FileUtils utils;
-	
+
 	@Autowired
-	public Dimension(FileUtils utils){
-		this.utils=utils;
+	public Dimension(FileUtils utils) {
+		this.utils = utils;
 	}
 
-	@RequestMapping(value = "/{dimensionId}", method=RequestMethod.GET)
-	public Dimension get(@PathVariable (value="dimensionId") String dimensionId) {
+	@RequestMapping(value = "/{dimensionId}", method = RequestMethod.GET)
+	public Dimension get(@PathVariable(value = "dimensionId") String dimensionId) {
 		return null;
 
 	}
@@ -35,17 +35,17 @@ public class Dimension {
 
 	}
 
-	
 	public List<DimensionModel> list() {
 
 		return new ArrayList<DimensionModel>();
 	}
-	
-	@RequestMapping(value="/all")
-	public @ResponseBody String getAllAvailable() throws IOException, URISyntaxException{
-		
+
+	@RequestMapping(value = "/all")
+	public @ResponseBody
+	String getAllAvailable() throws IOException, URISyntaxException {
+
 		return utils.getFileContents("dimensions.json");
-		
+
 	}
 
 }

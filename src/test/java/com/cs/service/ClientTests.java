@@ -40,7 +40,7 @@ public class ClientTests {
 		contentObject.put("html", "test");
 		when(fileUtils.getFileContents("home.html")).thenReturn(contents);
 		// when
-		String actualContents = client.getHome();
+		CustomResponse actualContents = client.getHome();
 
 		// then
 

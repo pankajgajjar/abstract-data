@@ -30,14 +30,20 @@
 			<property name="useCacheControlNoStore" value="true" />
 		</bean>
 	</mvc:interceptors>
-	<bean id="jsonConverter"
-		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></bean>
 	<bean
 		class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
 		<property name="basePackage" value="com.cs.service" />
 	</bean>
-	<bean
+	
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+    <property name="messageConverters">
+        <list>
+            <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
+        </list>
+    </property>
+</bean>
+	<!-- <bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
-
+ -->
 
 </beans>

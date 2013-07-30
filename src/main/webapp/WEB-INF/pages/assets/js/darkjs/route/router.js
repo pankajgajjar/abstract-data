@@ -7,25 +7,24 @@ function loadTemplate(templateUrl,containerElementID){
     //Loads the template
     readTemplateHTML(templateUrl, function(text){
         //Loads the template coming from server
-     temp=eval('(' + text + ')');
 
 		if(templateUrl != configTempArray[0].templateUrl){
                makeLogoutVisible();
         }
         
-        if(temp.html){
-            placeHolderElement.innerHTML = temp.html;
+        if(text.html){
+            placeHolderElement.innerHTML = text.html;
         }
         //Loads the elements string object into array object
         
-        if(temp.elements){
-            var jsonelElements=eval('(' + temp.elements + ')');
+        if(text.elements){
+            var jsonelElements=eval('(' + text.elements + ')');
             registerElements(jsonelElements);
         }
         //Loads the events string object into array object
        
-        if(temp.events){
-            var jsonEvents=eval('(' + temp.events + ')');
+        if(text.events){
+            var jsonEvents=eval('(' + text.events + ')');
             registerEvents(jsonEvents);
         }
     });
