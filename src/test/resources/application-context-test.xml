@@ -52,11 +52,11 @@
 
 
 	<bean id="noSqlTemplateForRedis" class="com.cs.data.core.nosql.redis.RedisRepository">
-		
+
 	</bean>
 
 
-	
+
 
 
 </beans>

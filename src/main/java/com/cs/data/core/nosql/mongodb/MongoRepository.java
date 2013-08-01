@@ -1,11 +1,12 @@
 package com.cs.data.core.nosql.mongodb;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Component;
 
 import com.cs.data.core.GenericDomain;
-import com.cs.data.core.IRepository;
 import com.cs.data.core.nosql.NoSqlOperations;
 
 @Component
@@ -46,6 +47,12 @@ public class MongoRepository implements NoSqlOperations {
 	public <P> P getObjectByKey(String key, String objectKey, Class<P> class1) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public <T> List<T> findAll(Class<T> class1) {
+		// TODO Auto-generated method stub
+		return mongoTemplate.findAll(class1);
 	}
 
 }

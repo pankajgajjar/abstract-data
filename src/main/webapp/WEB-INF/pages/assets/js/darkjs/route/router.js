@@ -6,23 +6,46 @@ function loadTemplate(templateUrl,containerElementID){
 
     //Loads the template
     readTemplateHTML(templateUrl, function(text){
-        //Loads the template coming from server
 
-		if(templateUrl != configTempArray[0].templateUrl){
+        if(templateUrl != configTempArray[0].templateUrl){
                makeLogoutVisible();
         }
-        
+
+        //Loads the template coming from server
         if(text.html){
             placeHolderElement.innerHTML = text.html;
+
+            /*Manual Logic Added Here by Ravi Sharma, starts here */
+            if(templateUrl == "/pub2.0/client/home"){
+                $('#schemaDropDown').hide();
+
+                actualHeight = $('#mainAnimationContainer').height();
+
+                $('#selectLbl').click(function(){
+                    if(flag){
+                        $('#mainAnimationContainer').animate({height: "70px"}, 500, function(){
+                            $('#schemaDropDown').show();
+                            $("#txt").show();
+                        });
+                        $(this).text("Hide View");
+                        flag = false;
+                    }else{
+                        $('#schemaDropDown').hide();
+                        $('#mainAnimationContainer').animate({height: actualHeight}, 500);
+                        $(this).text("Select View");
+                        flag = true;
+                    }
+                });
+            }
+            /*Manual Logic Added Here by Ravi Sharma, ends here */
+
         }
         //Loads the elements string object into array object
-        
         if(text.elements){
             var jsonelElements=eval('(' + text.elements + ')');
             registerElements(jsonelElements);
         }
         //Loads the events string object into array object
-       
         if(text.events){
             var jsonEvents=eval('(' + text.events + ')');
             registerEvents(jsonEvents);
@@ -58,6 +81,8 @@ function registerEvents(eventArray){
     var registrarContextForEvents=ContextFactory.getContext();
     registrarContextForEvents.register(eventRegistrar,eventArray,domManipulator);
 }
+var flag = true;
+var actualHeight;
 
 window.onload = function(){
     var templateRegistrar= RegistrarFactory.getRegistrar("template");

@@ -1,34 +1,43 @@
 package com.cs.service;
 
-import javax.transaction.Synchronization;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
-import org.hibernate.annotations.Synchronize;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.serializer.JacksonJsonRedisSerializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.cs.data.core.IRepository;
-import com.cs.factory.IDFactory;
+import com.cs.model.DimensionGroup;
+import com.cs.model.DimensionModel;
 import com.cs.model.Tree;
+import com.cs.repository.CubeRepository;
+import com.cs.repository.DimensionGroupRepository;
 import com.cs.repository.TreeRepository;
+import com.cs.utils.FileUtils;
 
 @Controller
 public class ContentTree {
 
 	private TreeRepository treeRepository;
 
+	private DimensionGroupRepository groupRepository;
+
 	@Autowired
-	public ContentTree(TreeRepository treeRepository) {
+	public ContentTree(TreeRepository treeRepository,
+			DimensionGroupRepository groupRepository) {
 
 		this.treeRepository = treeRepository;
+		this.groupRepository = groupRepository;
 
 	}
 
@@ -37,12 +46,14 @@ public class ContentTree {
 		return "redirect:/pages/index.html";
 	}
 
-	@RequestMapping(value = { "/create/{type}/name/{name}/parentId/{parentId}" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/create/{type}/name/{name}/parentId/{parentId}/path/{path}" }, method = RequestMethod.GET)
 	public @ResponseBody
-	String create(@PathVariable("type") String type,
+	JSONObject create(@PathVariable("type") String type,
 			@PathVariable("name") String name,
+			@PathVariable("path") String path,
 			@PathVariable("parentId") String parentId)
-			throws InterruptedException {
+			throws InterruptedException, IOException, URISyntaxException,
+			ParseException {
 		String id = treeRepository.getRandomKey() + "";
 		JSONObject atrr = new JSONObject();
 		JSONObject innerObject = new JSONObject();
@@ -57,9 +68,11 @@ public class ContentTree {
 
 			innerObject.put("parentId", parentId);
 			innerObject.put("type", type);
+			innerObject.put("path", path);
 			atrr.put("attr", innerObject);
 			atrr.put("data", name);
 			atrr.put("children", new JSONArray());
+			atrr.put("path", path);
 			JSONArray array = new JSONArray();
 			array.add(atrr);
 			tree.setTreeData(array);
@@ -70,6 +83,7 @@ public class ContentTree {
 			innerObject.put("id", id);
 			innerObject.put("parentId", parentId);
 			innerObject.put("type", type);
+			innerObject.put("path", path);
 			atrr.put("attr", innerObject);
 			atrr.put("data", name);
 			atrr.put("children", new JSONArray());
@@ -77,19 +91,100 @@ public class ContentTree {
 			treeRepository.addChild(atrr, parentId, tree);
 
 		}
-		return id;
+		savePath(path);
+		JSONObject response = new JSONObject();
+		response.put("id", id);
+		response.put("path", path);
+
+		return response;
 
 	}
 
-	@RequestMapping(value = { "/get" }, method = RequestMethod.GET)
-	public @ResponseBody
-	String getTree() {
+	private void savePath(String path) throws IOException, URISyntaxException,
+			ParseException {
 		// TODO Auto-generated method stub
-		String key = "tree01";
-		String objectKey = "TREE";
 
-		return treeRepository.getTree("treeDemo01", "TREE").getTreeData()
-				.toString();
+		JSONObject view = getCurrentSchema();
+		String[] dimensions = path.split(",");
+		DimensionGroup group;
+
+		System.out.println(view.keySet());
+		// ArrayList<String> keys = getOrderedDimensions(view);
+
+		ArrayList<String> keys = new ArrayList<String>();
+		keys.add("Campaign");
+		keys.add("PublicationGroup");
+		keys.add("MasterPublication");
+		keys.add("Publication");
+
+		DimensionModel model;
+		int i = 0;
+		if (dimensions.length == keys.size()) {
+			ArrayList<DimensionModel> dim = new ArrayList<DimensionModel>();
+			String groupId = treeRepository.getRandomKey() + "";
+			group = new DimensionGroup();
+			group.setId(groupId);
+			group.setGroupName("group" + groupId);
+			for (String dimension : dimensions) {
+
+				String id = treeRepository.getRandomKey() + "";
+				model = new DimensionModel();
+
+				model.setId(dimension);
+				model.setName(dimension);
+				model.setType(keys.get(i));
+				dim.add(model);
+
+				i++;
+			}
+
+			group.setDimensions(dim);
+			groupRepository.save(group);
+		}
+
+	}
+
+	private ArrayList<String> getOrderedDimensions(JSONObject view)
+			throws IOException, URISyntaxException, ParseException {
+		ArrayList<String> keys = null;
+
+		/*
+		 * JSONObject object = getCurrentSchema(); while
+		 * (object.keySet().contains()) keys.addAll(object.keySet());
+		 */
+		return keys;
+
+	}
+
+	private JSONObject getCurrentSchema() throws ParseException, IOException,
+			URISyntaxException {
+		FileUtils fileUtils = new FileUtils();
+		String viewStructure = fileUtils.getFileContents("schema1.json");
+		return (JSONObject) new JSONParser().parse(viewStructure);
+	}
+
+	@RequestMapping(value = { "/get/{schema}" }, method = RequestMethod.GET)
+	public @ResponseBody
+	String getTree(@PathVariable String schema) throws ParseException,
+			IOException, URISyntaxException {
+		// TODO Auto-generated method stub
+
+		// JSONObject schema = getCurrentSchema();
+		String[] schemaKeys = schema.split("-");
+
+		System.out.println("SchemaKeys"+schemaKeys.toString());
+		ArrayList<String> keys = new ArrayList<String>();
+		for (String key : schemaKeys) {
+			System.out.println("key=================>"+key);
+			keys.add(key);
+		}
+
+		CubeRepository cube = new CubeRepository(groupRepository);
+		List<DimensionGroup> groups = cube.fetchAllGroups();
+		System.out.println("GROUPS"+groups);
+		cube.applyRule(keys, groups);
+
+		return cube.getTree().toJSONString();
 	}
 
 }

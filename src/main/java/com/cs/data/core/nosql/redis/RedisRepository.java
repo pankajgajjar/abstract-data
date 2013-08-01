@@ -1,5 +1,7 @@
 package com.cs.data.core.nosql.redis;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.stereotype.Component;
@@ -63,6 +65,12 @@ public class RedisRepository implements NoSqlOperations {
 				objectkey);
 		return object;
 		
+	}
+
+	@Override
+	public <T> List<T> findAll(Class<T> class1) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

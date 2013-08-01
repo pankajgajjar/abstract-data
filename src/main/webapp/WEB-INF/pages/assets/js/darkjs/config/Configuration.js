@@ -60,4 +60,7 @@ function openPopUp(dim){
         x= name;
         return x;
     }
+    else{
+    	return null
+    }
 }

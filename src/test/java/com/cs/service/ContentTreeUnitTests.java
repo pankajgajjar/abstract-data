@@ -1,7 +1,11 @@
 package com.cs.service;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.cs.model.Tree;
+import com.cs.repository.DimensionGroupRepository;
 import com.cs.repository.TreeRepository;
 import com.cs.service.ContentTree;
 
@@ -22,10 +27,16 @@ public class ContentTreeUnitTests {
 
 	@Mock
 	private TreeRepository treeRepository;
+	
+	@Mock 
+	DimensionGroupRepository groupRepository;
+	
+	@Mock
+	Tree testTree;
 
 	@Before
 	public void setUp() {
-		treeController = new ContentTree(treeRepository);
+		treeController = new ContentTree(treeRepository,groupRepository);
 	}
 
 	@Test
@@ -43,7 +54,7 @@ public class ContentTreeUnitTests {
 	}
 
 	@Test
-	public void itShouldCreateNewTree() throws InterruptedException {
+	public void itShouldCreateNewTree() throws InterruptedException, IOException, URISyntaxException, ParseException {
 
 		// given
 
@@ -61,27 +72,32 @@ public class ContentTreeUnitTests {
 		tree.setTreeData(treeData);
 
 		String testResult = "success";
-		String expected = "{'status':'OK'}";
+		JSONObject expected =new JSONObject();
+		expected.put("path", "100");
+		
 		// when
 		when(treeRepository.createTree(tree)).thenReturn(testResult);
-		String actualresult = treeController.create("dim1", "cp01", "100");
+		JSONObject actualresult = treeController.create("dim1", "cp01", "100","TEST");
 		// then
-		assertThat(actualresult).isEqualTo(expected);
+		assertThat(actualresult.get("path")).isEqualTo(expected.get("path"));
 
 	}
 
 	@Test
-	public void itShouldReturnTree() {
+	public void itShouldReturnTree() throws ParseException, IOException, URISyntaxException {
 		// given
-		Tree testTree = new Tree();
-		testTree.setId("tree01");
+	
+		JSONArray array=new JSONArray();
+		array.add("test");
 
 		// when
-		when(treeRepository.getTree("tree01", "TREE")).thenReturn(testTree);
-		String actualTree = treeController.getTree();
+		when(treeRepository.getTree("treeDemo01", "TREE")).thenReturn(testTree);
+		when(testTree.getTreeData()).thenReturn(array);
+		String actualTree = treeController.getTree("default");
 
 		// then
-		verify(treeRepository).getTree("tree01", "TREE");
+		//verify(treeRepository).getTree("treeDemo01", "TREE");
+		assertThat(actualTree).isEqualTo(array.toString());
 	}
 
 	@Test

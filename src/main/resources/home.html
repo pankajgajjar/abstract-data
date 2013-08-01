@@ -2,13 +2,43 @@
 <html>
 <head>
     <title>Home</title>
+
+    <script>
+
+        window.onload = function(){
+            alert('asdsad');
+        }
+        /*
+        var flag = true;
+        var actualHeight;
+
+        $(document).ready(function(){
+            console.log('ready');
+
+            $('#schemaDropDown').hide();
+            actualHeight = $('#mainAnimationContainer').height();
+
+            console.log($('#mainAnimationContainer'));
+
+
+          */
+
+              function handler(){
+                  alert('asdasdadasd')
+              }
+    </script>
+
 </head>
-<body>
+<body onload="handler()">
 
 <div class="colmask leftmenu">
 <div class="colleft">
 <div class="col1">
      <span id="rightPanel" class="span9">
+
+         <p id="txt" class="formatTxt"></p>
+
+
          <div>
 
              <ul id="rightTabs" class="nav nav-tabs marginBottom">
@@ -33,12 +63,16 @@
  </div>
 <div class="col2">
 <span id="leftPanel" class="span3">
-     <label id="schemaDropDown"> </label>
-     <!-- <select id="schemaDropDown">
-          <option value="Select View Structure">Select View Structure</option>
-          <option value="C-M-P">C-M-P</option>
-          <option value="MP-P-C">MP-P-C</option>
-      </select>-->
+     <!--<label id="schemaDropDown"> </label>-->
+
+
+    <div id="mainAnimationContainer" class="mainAnimationContainerCSS">
+        <p id="selectLbl" class="selectLblCSS">Select View</p>
+        <select id="schemaDropDown" class="customSelectCSS">
+        </select>
+    </div>
+
+    <br/>
 
     <div id="leftTree">
         <ul>

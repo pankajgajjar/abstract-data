@@ -13,7 +13,7 @@ APIFactory.callToServer = function(url,callback){
     });
 }
 
-APIFactory.callToServers = function(url,callbacks){
+APIFactory.callToServerWithPost = function(url,callbacks){
     $.ajax({url:url,async:false,success:function(result){
          callbacks(result);
     }});
