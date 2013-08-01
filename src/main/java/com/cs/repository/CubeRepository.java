@@ -53,7 +53,6 @@ public class CubeRepository {
 					jsonObject.put("id", model.getId());
 					jsonObject.put("name", model.getName());
 					jsonObject.put("type", model.getType());
-
 					attr.put("attr", jsonObject);
 					attr.put("id", model.getId());
 					attr.put("data", model.getName());
@@ -71,17 +70,13 @@ public class CubeRepository {
 
 	private JSONObject joinPath(JSONArray models) {
 
-		System.out.println("Models " + models);
 		JSONObject parent = null;
 		boolean check = true;
 		JSONObject child = null;
 		JSONObject root = null;
 		JSONObject nodePath = new JSONObject();
 
-		System.out.println("Final tree " + finalTree);
-
 		for (Object object : finalTree) {
-			System.out.println("in filetree for loop");
 			nodePath = (JSONObject) object;
 
 			check = check && checkWithCreatedpaths(models, nodePath);
@@ -94,15 +89,23 @@ public class CubeRepository {
 
 				child = (JSONObject) model;
 
-				if (root == null)
+				if (root == null) {
 					root = child;
-				if (parent == null)
+					root.put("path", root.get("data"));
+				}
+				if (parent == null) {
 					parent = child;
-				else {
+					JSONObject object = (JSONObject) child.get("attr");
+					object.put("path", child.get("data"));
+				} else {
 					JSONArray children = new JSONArray();
 					children.add(child);
+					JSONObject object = (JSONObject) child.get("attr");
+					object.put("path",
+							((JSONObject) parent.get("attr")).get("path") + ","
+									+ child.get("data"));
 					parent.put("children", children);
-					System.out.println();
+
 					children = (JSONArray) parent.get("children");
 					parent = (JSONObject) children.get(0);
 				}
@@ -116,15 +119,12 @@ public class CubeRepository {
 
 	private boolean checkWithCreatedpaths(JSONArray model, JSONObject nodePath) {
 		// TODO Auto-generated method stub
-		System.out.println("in checkcreationcreated");
 		JSONObject node = (JSONObject) model.get(0);
 		if (!node.get("id").equals(nodePath.get("id"))) {
-			System.out.println("similar node Not found" + nodePath.get("id"));
 			return true;
 		}
 
 		else {
-			System.out.println("similar node " + nodePath.get("id"));
 			addModelToCurrentThread(model, nodePath);
 			return false;
 			/*
@@ -146,55 +146,55 @@ public class CubeRepository {
 	}
 
 	private void addModelToCurrentThread(JSONArray model, JSONObject nodePath) {
-		System.out.println("in addModelToCureent");
 		JSONObject parent = null;
 
 		boolean flag = true;
 		for (Object object : model) {
 
-			if (flag) {
-				JSONObject jsonObject = (JSONObject) object;
-				System.out.println(jsonObject.get("data") + "=="
-						+ nodePath.get("data"));
-				if (jsonObject.get("id").equals(nodePath.get("id"))) {
-					parent = nodePath;
-					JSONArray tempArray = (JSONArray) nodePath.get("children");
-					nodePath = (JSONObject) tempArray.get(0);
-					System.out.println("continue if nodes are similar "
-							+ nodePath.get("id"));
-					continue;
-				} else {
-					System.out.println("nodes are NOT similar "
-							+ nodePath.get("id"));
-					JSONArray children = null;
-					if (parent.get("children") == null) {
-						children = new JSONArray();
+			JSONObject jsonObject = (JSONObject) object;
 
-					}
+			if (jsonObject.get("id").equals(nodePath.get("id")) && flag) {
+				parent = nodePath;
+				JSONArray tempArray = (JSONArray) nodePath.get("children");
+				nodePath = (JSONObject) tempArray.get(0);
 
-					else {
-						Object temp = parent.get("children");
-						children = (JSONArray) temp;
-					}
-
-					System.out.println("parent" + parent + "Node to add"
-							+ object);
-					children.add(object);
-					parent.put("children", children);
-					System.out.println("parent" + parent);
-					parent = (JSONObject) object;
-					flag = false;
-				}
-
+				continue;
 			} else {
-				JSONArray tempArray = null;
-				if (parent.get("children") == null)
-					tempArray = new JSONArray();
-				else {
-					tempArray = (JSONArray) parent.get("children");
+
+				boolean isEqual = true;
+				JSONArray children = null;
+				if (parent.get("children") == null) {
+					children = new JSONArray();
+
 				}
-				tempArray.add(object);
-				parent.put("children", tempArray);
+
+				else {
+					Object temp = parent.get("children");
+					children = (JSONArray) temp;
+					JSONObject tempo = (JSONObject) object;
+					for (Object tempobj : children) {
+						JSONObject jsonObj = (JSONObject) tempobj;
+						if (jsonObj.get("id").equals(tempo.get("id")))
+							isEqual = false;
+
+					}
+				}
+
+				if (isEqual) {
+					JSONObject path = ((JSONObject) ((JSONObject) object)
+							.get("attr"));
+					((JSONObject) object).put("path",
+							((JSONObject) parent.get("attr")).get("path") + ","
+									+ ((JSONObject) object).get("data"));
+					children.add(object);
+
+					parent.put("children", children);
+				}
+				parent = (JSONObject) object;
+
+				System.out.println("Parent is equal to" + parent);
+				flag = false;
+
 			}
 
 		}

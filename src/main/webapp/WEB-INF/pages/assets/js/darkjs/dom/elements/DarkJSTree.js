@@ -36,6 +36,7 @@ var DarkJSTree = function(data){
                         var name=openPopUp(possibleDim);
                         
                         if(name != null){
+                        alert(node.attr("path"))
                         	if(node.attr("type")!="root"){
                             	currentPath =  node.attr("path")+","+ name;
 	                        }

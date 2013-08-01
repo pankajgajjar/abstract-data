@@ -64,12 +64,10 @@ public class CubeRepositoryIntegrationTests {
 				"MP01");
 		DimensionModel model16 = new DimensionModel("115", "PublicationGroup",
 				"PG04");
-		
+
 		DimensionModel model17 = new DimensionModel("116", "Publication", "P01");
-		DimensionModel model18 = new DimensionModel("117", "Publication",
-				"P02");
-		DimensionModel model19 = new DimensionModel("118", "Publication",
-				"P03");
+		DimensionModel model18 = new DimensionModel("117", "Publication", "P02");
+		DimensionModel model19 = new DimensionModel("118", "Publication", "P03");
 
 		/*
 		 * DimensionModel model8 = new DimensionModel("107",
@@ -90,7 +88,7 @@ public class CubeRepositoryIntegrationTests {
 		list2.add(model2);
 		list2.add(model18);
 
-/*		ArrayList<DimensionModel> list3 = new ArrayList<DimensionModel>();
+		ArrayList<DimensionModel> list3 = new ArrayList<DimensionModel>();
 		list3.add(model8);
 		list3.add(model10);
 		list3.add(model9);
@@ -103,7 +101,7 @@ public class CubeRepositoryIntegrationTests {
 		ArrayList<DimensionModel> list5 = new ArrayList<DimensionModel>();
 		list5.add(model11);
 		list5.add(model13);
-		list5.add(model16);*/
+		list5.add(model16);
 
 		/*
 		 * ArrayList<DimensionModel> list3 = new ArrayList<DimensionModel>();
@@ -144,7 +142,7 @@ public class CubeRepositoryIntegrationTests {
 
 		// then
 
-		System.out.println("total"+dimensionGroups.size());
+		System.out.println("total" + dimensionGroups.size());
 		Assert.assertNotNull(dimensionGroups);
 	}
 
