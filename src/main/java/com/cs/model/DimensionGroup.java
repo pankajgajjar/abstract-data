@@ -18,6 +18,7 @@ public class DimensionGroup implements Serializable, GenericDomain {
 	private String groupName;
 
 	private List<DimensionModel> dimensions;
+	private boolean existence;
 
 	public DimensionGroup() {
 		// TODO Auto-generated constructor stub
@@ -75,6 +76,16 @@ public class DimensionGroup implements Serializable, GenericDomain {
 	public String getKey() {
 		// TODO Auto-generated method stub
 		return getId();
+	}
+
+	public boolean exists() {
+		// TODO Auto-generated method stub
+		return existence;
+	}
+
+	public void toggleExistence(boolean existence) {
+		this.existence = existence;
+
 	}
 
 }

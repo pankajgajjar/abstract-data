@@ -6,6 +6,17 @@ public class CustomResponse {
 	private String events;
 	private String elements;
 
+	public CustomResponse() {
+
+	}
+
+	public CustomResponse(String html, String events, String elements) {
+		super();
+		this.html = html;
+		this.events = events;
+		this.elements = elements;
+	}
+
 	public String getHtml() {
 		return html;
 	}

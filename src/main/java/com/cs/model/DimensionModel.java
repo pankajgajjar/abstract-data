@@ -1,8 +1,12 @@
 package com.cs.model;
 
 import java.io.Serializable;
+
+import org.springframework.stereotype.Component;
+
 import com.cs.data.core.GenericDomain;
 
+@Component
 public class DimensionModel implements Serializable, GenericDomain {
 
 	public DimensionModel(String id, String type, String name) {
@@ -43,7 +47,7 @@ public class DimensionModel implements Serializable, GenericDomain {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	@Override
 	public String getObjectKey() {
 		// TODO Auto-generated method stub
@@ -58,9 +62,7 @@ public class DimensionModel implements Serializable, GenericDomain {
 
 	@Override
 	public String toString() {
-		return "DM <id=" + id + ", type=" + type + ", name=" + name
-				+ ">";
+		return "DM <id=" + id + ", type=" + type + ", name=" + name + ">";
 	}
 
-	
 }
