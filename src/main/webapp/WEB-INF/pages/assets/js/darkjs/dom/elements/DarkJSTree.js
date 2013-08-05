@@ -8,20 +8,13 @@ var DarkJSTree = function(data){
         var possibleDim = getPossibleChild(node.attr("type"))
         if(possibleDim != null){
              var icontype;
-             switch(possibleDim)
-             {
-
+             switch(possibleDim){
                  case 'Campaign' : icontype="assets/css/images/dimension_campaign.png";
                  break;
-
-                 case 'PublicationGroup' : icontype="http://www.omnigroup.com/images/blog_images/OmniPlan-small-icon.png"
+                 case 'PublicationGroup' : icontype="assets/css/images/error_small.png"
                  break;
-
-
-                 case 'MasterPublication' :  icontype="http://www.wpclipart.com/transportation/car/icons_BW/small_bus_BW_icon.png";
+                 case 'MasterPublication' :  icontype="assets/css/images/eraser-small.png";
                  break;
-
-
                  case 'Publication' : icontype="assets/css/images/dimension_publication.png";
                  break;
              }
