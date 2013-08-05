@@ -1,8 +1,8 @@
 {
-    "Campaign": {
-        "PublicationGroup": {
-            "MasterPublication": {
-                "Publication":"leaf"
+    "PublicationGroup": {
+        "Campaign": {
+            "Publication": {
+                "MasterPublication": "leaf"
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.cs.service;
+package com.cs.controller;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -12,18 +12,18 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.cs.controller.ContentTreeController;
 import com.cs.model.Tree;
 import com.cs.repository.DimensionGroupRepository;
 import com.cs.repository.TreeRepository;
-import com.cs.service.ContentTree;
 
 import static org.fest.assertions.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ContentTreeUnitTests {
+public class ContentTreeControllerUnitTests {
 
-	private ContentTree treeController;
+	private ContentTreeController treeController;
 
 	@Mock
 	private TreeRepository treeRepository;
@@ -36,7 +36,7 @@ public class ContentTreeUnitTests {
 
 	@Before
 	public void setUp() {
-		treeController = new ContentTree(treeRepository,groupRepository);
+		treeController = new ContentTreeController(treeRepository,groupRepository);
 	}
 
 	@Test

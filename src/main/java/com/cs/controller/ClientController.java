@@ -1,4 +1,4 @@
-package com.cs.service;
+package com.cs.controller;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -21,12 +21,12 @@ import com.cs.model.CustomResponse;
 import com.cs.utils.FileUtils;
 
 @Controller
-public class Client {
+public class ClientController {
 
 	private FileUtils fileUtils;
 
 	@Autowired
-	public Client(FileUtils fileUtils) {
+	public ClientController(FileUtils fileUtils) {
 		// TODO Auto-generated constructor stub
 		this.fileUtils = fileUtils;
 	}

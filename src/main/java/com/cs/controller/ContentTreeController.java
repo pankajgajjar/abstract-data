@@ -1,4 +1,4 @@
-package com.cs.service;
+package com.cs.controller;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -26,14 +26,14 @@ import com.cs.repository.TreeRepository;
 import com.cs.utils.FileUtils;
 
 @Controller
-public class ContentTree {
+public class ContentTreeController {
 
 	private TreeRepository treeRepository;
 
 	private DimensionGroupRepository groupRepository;
 
 	@Autowired
-	public ContentTree(TreeRepository treeRepository,
+	public ContentTreeController(TreeRepository treeRepository,
 			DimensionGroupRepository groupRepository) {
 
 		this.treeRepository = treeRepository;
@@ -108,14 +108,13 @@ public class ContentTree {
 		String[] dimensions = path.split(",");
 		DimensionGroup group;
 
-		System.out.println(view.keySet());
 		// ArrayList<String> keys = getOrderedDimensions(view);
 
 		ArrayList<String> keys = new ArrayList<String>();
-		keys.add("Campaign");
 		keys.add("PublicationGroup");
-		keys.add("MasterPublication");
+		keys.add("Campaign");
 		keys.add("Publication");
+		keys.add("MasterPublication");
 
 		DimensionModel model;
 		int i = 0;
@@ -172,16 +171,16 @@ public class ContentTree {
 		// JSONObject schema = getCurrentSchema();
 		String[] schemaKeys = schema.split("-");
 
-		System.out.println("SchemaKeys"+schemaKeys.toString());
+		System.out.println(schemaKeys);
 		ArrayList<String> keys = new ArrayList<String>();
 		for (String key : schemaKeys) {
-			System.out.println("key=================>"+key);
 			keys.add(key);
+			System.out.println(key);
+			
 		}
 
 		CubeRepository cube = new CubeRepository(groupRepository);
 		List<DimensionGroup> groups = cube.fetchAllGroups();
-		System.out.println("GROUPS"+groups);
 		cube.applyRule(keys, groups);
 
 		return cube.getTree().toJSONString();

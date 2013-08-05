@@ -1,4 +1,4 @@
-package com.cs.service;
+package com.cs.controller;
 
 import static org.junit.Assert.*;
 
@@ -11,14 +11,15 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.cs.controller.DimensionController;
 import com.cs.utils.FileUtils;
 import static org.mockito.Mockito.*;
 
 import static org.fest.assertions.Assertions.*;
 @RunWith(MockitoJUnitRunner.class)
-public class DimensionServiceUnitTests {
+public class DimensionControllerUnitTests {
 
-	private Dimension dimension;
+	private DimensionController dimension;
 	@Mock
 	private FileUtils fileUtils;
 
@@ -26,7 +27,7 @@ public class DimensionServiceUnitTests {
 	public void itShouldGetAllAvailableDimensions() throws IOException,
 			URISyntaxException {
 		// given
-		dimension = new Dimension(fileUtils);
+		dimension = new DimensionController(fileUtils);
 		String content = "expected";
 		when(fileUtils.getFileContents("dimensions.json")).thenReturn(content);
 		// when

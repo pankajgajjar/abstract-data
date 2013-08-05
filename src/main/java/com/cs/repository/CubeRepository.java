@@ -33,6 +33,8 @@ public class CubeRepository {
 			List<DimensionGroup> dimensionGroups) {
 
 		JSONArray arrayOfAllIndividualPaths = new JSONArray();
+		System.out.println("No of dimensions=====>"
+				+ arrayOfAllIndividualPaths.size());
 		for (DimensionGroup group : dimensionGroups) {
 			arrayOfAllIndividualPaths.add(getSinglePath(rules, group));
 		}
@@ -42,7 +44,7 @@ public class CubeRepository {
 	private JSONObject getSinglePath(ArrayList<String> rules,
 			DimensionGroup group) {
 		JSONArray models = new JSONArray();
-		System.out.println("Rules " + rules);
+		System.out.println("Rules======> " + rules);
 		for (String rule : rules) {
 
 			for (DimensionModel model : group.getDimensions()) {
@@ -70,6 +72,7 @@ public class CubeRepository {
 
 	private JSONObject joinPath(JSONArray models) {
 
+		System.out.println("Joining path============");
 		JSONObject parent = null;
 		boolean check = true;
 		JSONObject child = null;
@@ -145,22 +148,34 @@ public class CubeRepository {
 
 	}
 
-	private void addModelToCurrentThread(JSONArray model, JSONObject nodePath) {
+	public void addModelToCurrentThread(JSONArray model, JSONObject nodePath) {
 		JSONObject parent = null;
 
 		boolean flag = true;
 		for (Object object : model) {
 
 			JSONObject jsonObject = (JSONObject) object;
-
-			if (jsonObject.get("id").equals(nodePath.get("id")) && flag) {
+			System.out.println("In function addModelToCurrentThread:=> Model= "
+					+ jsonObject + "=========>" + (nodePath.get("id")));
+			System.out
+					.println("In function addModelToCurrentThread:=> Condition for checking ids "
+							+ jsonObject.get("id")
+							+ "=========>"
+							+ (nodePath.get("id")));
+			if (jsonObject.get("id").equals(nodePath.get("id"))) {
 				parent = nodePath;
 				JSONArray tempArray = (JSONArray) nodePath.get("children");
-				nodePath = (JSONObject) tempArray.get(0);
+				if (tempArray != null)
+					nodePath = (JSONObject) tempArray.get(0);
 
 				continue;
 			} else {
 
+				System.out
+						.println("In function addModelToCurrentThread:=> ID Not matched= So Parent==>"
+								+ parent
+								+ "having children=========>"
+								+ parent.get("children"));
 				boolean isEqual = true;
 				JSONArray children = null;
 				if (parent.get("children") == null) {
@@ -172,28 +187,56 @@ public class CubeRepository {
 					Object temp = parent.get("children");
 					children = (JSONArray) temp;
 					JSONObject tempo = (JSONObject) object;
+
 					for (Object tempobj : children) {
 						JSONObject jsonObj = (JSONObject) tempobj;
-						if (jsonObj.get("id").equals(tempo.get("id")))
+						if (jsonObj.get("id").equals(tempo.get("id"))) {
+
+							System.out.println("True for " +jsonObj.get("id")+"======="+tempo.get("id") );
+							JSONArray childrenOfSameNode = (JSONArray) jsonObj
+									.get("children");
+							
+							//object=childrenOfSameNode.get(0);
+							
+							if(childrenOfSameNode!=null){
+								childrenOfSameNode.add(object);
+								jsonObj.put("children",childrenOfSameNode);
+							}
+							else{
+								JSONArray chillld=new JSONArray();
+								chillld.add(object);
+								jsonObj.put("children",chillld);
+							}
 							isEqual = false;
+						}
 
 					}
+
 				}
 
 				if (isEqual) {
-					JSONObject path = ((JSONObject) ((JSONObject) object)
-							.get("attr"));
-					((JSONObject) object).put("path",
-							((JSONObject) parent.get("attr")).get("path") + ","
-									+ ((JSONObject) object).get("data"));
 					children.add(object);
 
 					parent.put("children", children);
 				}
+
+				System.out
+						.println("In function addModelToCurrentThread:=> Parent After Adding Children==>"
+								+ parent
+								+ "having children=========>"
+								+ parent.get("children"));
 				parent = (JSONObject) object;
 
-				System.out.println("Parent is equal to" + parent);
-				flag = false;
+				// nodePath = (JSONObject) object;
+				System.out
+						.println("In function addModelToCurrentThread:=> Current Parent ==>"
+								+ parent);
+
+				System.out
+						.println("In function addModelToCurrentThread:=> ID Not matched= So Parent==>"
+								+ parent
+								+ "having children=========>"
+								+ parent.get("children"));
 
 			}
 

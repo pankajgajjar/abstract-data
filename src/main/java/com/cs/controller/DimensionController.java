@@ -1,4 +1,4 @@
-package com.cs.service;
+package com.cs.controller;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -16,17 +16,17 @@ import com.cs.model.DimensionModel;
 import com.cs.utils.FileUtils;
 
 @Controller
-public class Dimension {
+public class DimensionController {
 
 	private FileUtils utils;
 
 	@Autowired
-	public Dimension(FileUtils utils) {
+	public DimensionController(FileUtils utils) {
 		this.utils = utils;
 	}
 
 	@RequestMapping(value = "/{dimensionId}", method = RequestMethod.GET)
-	public Dimension get(@PathVariable(value = "dimensionId") String dimensionId) {
+	public DimensionController get(@PathVariable(value = "dimensionId") String dimensionId) {
 		return null;
 
 	}

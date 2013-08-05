@@ -1,4 +1,4 @@
-package com.cs.service;
+package com.cs.controller;
 
 import static org.junit.Assert.*;
 
@@ -11,15 +11,16 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.cs.controller.TreeViewStructureController;
 import com.cs.utils.FileUtils;
 import static org.mockito.Mockito.*;
 
 import static org.fest.assertions.Assertions.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TreeViewStructureUnitTests {
+public class TreeViewStructureControllerUnitTests {
 
-	private TreeViewStructure structure;
+	private TreeViewStructureController structure;
 	@Mock
 	private FileUtils fileUtils;
 
@@ -28,7 +29,7 @@ public class TreeViewStructureUnitTests {
 			URISyntaxException {
 		// given
 		String viewStructureId = "1";
-		structure = new TreeViewStructure(fileUtils);
+		structure = new TreeViewStructureController(fileUtils);
 		String content = "expected";
 		when(fileUtils.getFileContents("schema1.json")).thenReturn(content);
 		// when
@@ -43,7 +44,7 @@ public class TreeViewStructureUnitTests {
 	public void itShouldGetDefaultViewStructure() throws IOException,
 			URISyntaxException {
 		// given
-		structure = new TreeViewStructure(fileUtils);
+		structure = new TreeViewStructureController(fileUtils);
 		String content = "expected";
 		when(fileUtils.getFileContents("schema1.json")).thenReturn(content);
 		// when

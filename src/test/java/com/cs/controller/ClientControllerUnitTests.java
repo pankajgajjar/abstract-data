@@ -1,4 +1,4 @@
-package com.cs.service;
+package com.cs.controller;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.cs.controller.ClientController;
 import com.cs.model.CustomResponse;
 import com.cs.utils.FileUtils;
 
@@ -17,9 +18,9 @@ import static org.fest.assertions.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ClientTests {
+public class ClientControllerUnitTests {
 
-	private Client client;
+	private ClientController client;
 
 	@Mock
 	private FileUtils fileUtils;
@@ -27,7 +28,7 @@ public class ClientTests {
 	@Before
 	public void setUp() {
 
-		client = new Client(fileUtils);
+		client = new ClientController(fileUtils);
 	}
 
 	@Test

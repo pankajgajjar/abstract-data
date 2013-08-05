@@ -32,7 +32,7 @@
 	</mvc:interceptors>
 	<bean
 		class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
-		<property name="basePackage" value="com.cs.service" />
+		<property name="basePackage" value="com.cs.controller" />
 	</bean>
 	
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">

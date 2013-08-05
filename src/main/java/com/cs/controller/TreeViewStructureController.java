@@ -1,4 +1,4 @@
-package com.cs.service;
+package com.cs.controller;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cs.utils.FileUtils;
 
 @Controller
-public class TreeViewStructure {
+public class TreeViewStructureController {
 
 	private FileUtils utils;
 
 	@Autowired
-	public TreeViewStructure(FileUtils utils) {
+	public TreeViewStructureController(FileUtils utils) {
 		this.utils = utils;
 	}
 	
