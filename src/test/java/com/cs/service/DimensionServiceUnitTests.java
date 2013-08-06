@@ -22,9 +22,6 @@ public class DimensionServiceUnitTests {
 	private DimensionService dimensionService;
 
 	@Mock
-	private FileUtils fileUtils;
-
-	@Mock
 	DimensionModel dimensionModel;
 
 	@Mock
@@ -32,7 +29,7 @@ public class DimensionServiceUnitTests {
 
 	@Before
 	public void setUp() {
-		dimensionService = new DimensionService(fileUtils, dimensionRepository);
+		dimensionService = new DimensionService(dimensionRepository);
 	}
 
 	@Test
@@ -43,12 +40,12 @@ public class DimensionServiceUnitTests {
 		String expected = "testString";
 
 		// when
-		when(fileUtils.getFileContents("dimensions.json")).thenReturn(expected);
+		when(dimensionRepository.getAllDimensions()).thenReturn(expected);
 		String dimensions = dimensionService.getAllDimensions();
 
 		// then
 
-		verify(fileUtils).getFileContents("dimensions.json");
+		verify(dimensionRepository).getAllDimensions();
 		assertThat(dimensions).isEqualToIgnoringCase(expected);
 
 	}

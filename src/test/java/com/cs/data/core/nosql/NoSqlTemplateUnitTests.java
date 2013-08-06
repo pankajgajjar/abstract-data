@@ -35,7 +35,7 @@ public class NoSqlTemplateUnitTests {
 
 		// when
 
-		String id = noSqlTemplateForMongo.insert(studentInserted);
+		String id = noSqlTemplateForMongo.save(studentInserted);
 		Student studentRetrieved = noSqlTemplateForMongo.getObjectByKey(studentInserted, Student.class);
 
 		// then
@@ -56,7 +56,7 @@ public class NoSqlTemplateUnitTests {
 
 		// when
 
-		String id = noSqlTemplateForRedis.insert(studentInserted);
+		String id = noSqlTemplateForRedis.save(studentInserted);
 		Student studentRetrieved = noSqlTemplateForRedis.getObjectByKey(
 				studentInserted, Student.class);
 		// then
@@ -85,7 +85,7 @@ public class NoSqlTemplateUnitTests {
 	public void itShouldGetAnObjectFromRedis() {
 		// given
 		Student student = new Student("9", "Katrina", "First");
-		noSqlTemplateForRedis.insert(student);
+		noSqlTemplateForRedis.save(student);
 		// when
 		Student actualStudent = noSqlTemplateForRedis.getObjectByKey(student,
 				Student.class);

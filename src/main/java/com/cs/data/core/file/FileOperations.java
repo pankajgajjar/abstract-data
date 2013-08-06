@@ -7,7 +7,7 @@ import com.cs.data.core.IRepository;
 
 public interface FileOperations extends IRepository {
 
-	String insert(GenericDomain objectToInsert);
+	String save(GenericDomain objectToInsert);
 
 	<P> P getObjectByKey(GenericDomain key, Class<P> type);
 

@@ -2,6 +2,7 @@ package com.cs.data.core.nosql.mongodb;
 
 import java.util.List;
 
+import org.mockito.internal.matchers.Find;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Component;
@@ -20,8 +21,8 @@ public class MongoRepository implements NoSqlOperations {
 	}
 
 	@Override
-	public String insert(GenericDomain objectToInsert) {
-		mongoTemplate.insert(objectToInsert);
+	public String save(GenericDomain objectToInsert) {
+		mongoTemplate.save(objectToInsert);
 
 		return "inserted";
 
@@ -55,4 +56,9 @@ public class MongoRepository implements NoSqlOperations {
 		return mongoTemplate.findAll(class1);
 	}
 
+	public <T> T find(String key, Class<T> class1) {
+
+		return mongoTemplate.findById(key, class1);
+
+	}
 }

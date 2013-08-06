@@ -5,9 +5,13 @@ import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
 
 import com.cs.data.core.GenericDomain;
 
+@Document
+@Component
 public class DimensionGroup implements Serializable, GenericDomain {
 
 	/**

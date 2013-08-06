@@ -19,7 +19,7 @@ import com.cs.data.core.jpa.entities.Student;
 import com.cs.data.core.nosql.NoSqlOperations;
 import com.cs.data.core.nosql.mongodb.MongoRepository;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:application-context-test.xml")
 public class MongoRepositoryUnitTests {
 
@@ -29,7 +29,7 @@ public class MongoRepositoryUnitTests {
 
 	@Before
 	public void setUp() {
-		
+
 		crudRepository = new MongoRepository(mongoTemplate);
 	}
 
@@ -39,7 +39,7 @@ public class MongoRepositoryUnitTests {
 		// given
 		Student amar = new Student("2", "Amar", "First");
 		// when
-		crudRepository.insert(amar);
+		crudRepository.save(amar);
 		Student id = mongoTemplate.findById("2", Student.class);
 
 		// then

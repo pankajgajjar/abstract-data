@@ -19,7 +19,7 @@ public class FileTemplate implements FileOperations {
 	}
 
 	@Override
-	public String insert(GenericDomain objectToInsert) {
+	public String save(GenericDomain objectToInsert) {
 		// TODO Auto-generated method stub
 		return null;
 	}

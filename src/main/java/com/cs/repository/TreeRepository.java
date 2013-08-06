@@ -33,7 +33,7 @@ public class TreeRepository {
 
 	private String persist(Tree tree) {
 		// TODO Auto-generated method stub
-		return noSqlTemplateForRedis.insert(tree);
+		return noSqlTemplateForRedis.save(tree);
 
 	}
 

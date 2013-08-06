@@ -12,6 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,7 @@ import com.cs.service.DimensionService;
 import com.cs.utils.FileUtils;
 
 @Controller
+@Component
 public class DimensionController {
 
 	private DimensionService dimensionService;
@@ -55,6 +57,7 @@ public class DimensionController {
 		dimension.setId(name);
 		dimension.setName(name);
 		dimension.setType(type);
+		dimension.setPath(path);
 
 		return dimensionService.createDimension(dimension);
 

@@ -50,12 +50,12 @@ public class TreeRepositoryUnitTests {
 		String expectedResult = "result";
 		// when
 
-		when(noSqlTemplateForRedis.insert(tree)).thenReturn(expectedResult);
+		when(noSqlTemplateForRedis.save(tree)).thenReturn(expectedResult);
 		String actualResult = treeRepository.createTree(tree);
 
 		// then
 
-		verify(noSqlTemplateForRedis).insert(tree);
+		verify(noSqlTemplateForRedis).save(tree);
 		assertThat(actualResult).isEqualTo(expectedResult);
 
 	}

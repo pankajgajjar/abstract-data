@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.stereotype.Component;
 
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+
 import com.cs.data.core.GenericDomain;
 import com.cs.data.core.nosql.NoSqlOperations;
 import com.cs.model.Tree;
@@ -16,19 +19,14 @@ public class RedisRepository implements NoSqlOperations {
 	@SuppressWarnings("rawtypes")
 	private RedisOperations redisTemplate;
 
-	public RedisRepository() {
-
-	}
-
 	@Autowired
-	public RedisRepository(
-			@SuppressWarnings("rawtypes") RedisOperations redisTemplate) {
+	public RedisRepository(RedisOperations redisTemplate) {
 		this.redisTemplate = redisTemplate;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public String insert(GenericDomain objectToInsert) {
+	public String save(GenericDomain objectToInsert) {
 		redisTemplate.opsForHash().put(objectToInsert.getKey(),
 				objectToInsert.getObjectKey(), objectToInsert);
 
@@ -48,6 +46,11 @@ public class RedisRepository implements NoSqlOperations {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public void delete(String key) {
+		// TODO Auto-generated method stub
+		redisTemplate.delete(key);
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -59,18 +62,27 @@ public class RedisRepository implements NoSqlOperations {
 
 		return object;
 	}
-	
-	public <P> P getObjectByKey(String key, String objectkey,Class<P> type){
-		P object = (P) redisTemplate.opsForHash().get(key,
-				objectkey);
+
+	public <P> P getObjectByKey(String key, String objectkey, Class<P> type) {
+		P object = (P) redisTemplate.opsForHash().get(key, objectkey);
 		return object;
-		
+
 	}
 
 	@Override
 	public <T> List<T> findAll(Class<T> class1) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public String get(String key) {
+		// TODO Auto-generated method stub
+		return (String) redisTemplate.opsForValue().get(key);
+	}
+
+	public void set(String key, String value) {
+		// TODO Auto-generated method stub
+		redisTemplate.opsForValue().set(key, value);
 	}
 
 }

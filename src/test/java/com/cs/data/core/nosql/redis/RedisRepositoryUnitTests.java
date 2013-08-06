@@ -19,7 +19,7 @@ import com.cs.data.core.nosql.redis.RedisRepository;
 @ContextConfiguration("classpath:application-context-test.xml")
 public class RedisRepositoryUnitTests {
 
-	private NoSqlOperations crudRepository;
+	private RedisRepository crudRepository;
 
 	@Autowired
 	private RedisOperations<?, ?> redisTemplate;
@@ -39,7 +39,7 @@ public class RedisRepositoryUnitTests {
 
 		// When
 
-		String id = crudRepository.insert(amar);
+		String id = crudRepository.save(amar);
 
 		// then
 		Assert.assertNotNull(id);
@@ -50,7 +50,7 @@ public class RedisRepositoryUnitTests {
 	public void itShouldReturnAnObjectByKey() {
 		// given
 		Student amar = new Student("2", "Esha", "First");
-		crudRepository.insert(amar);
+		crudRepository.save(amar);
 		// when
 		Student actualStudent = crudRepository.getObjectByKey(amar,
 				Student.class);
@@ -59,6 +59,53 @@ public class RedisRepositoryUnitTests {
 
 		// then
 		Assert.assertEquals(amar.getId(), actualStudent.getId());
+	}
+	
+	@Test
+	public void itShouldSetKeyAsStringAndValueAsStringToRedis() {
+		// given
+		String key = "key";
+		String value = "value";
+		String finalResult = "success";
+		// when
+
+		crudRepository.set(key, value);
+
+	}
+
+	@Test
+	public void itShouldGetKeyAsStringAndValueAsStringToRedis() {
+		// given
+		String key = "key";
+		String value = "value";
+		String finalResult = "success";
+
+		// when
+		String actual = crudRepository.get(key);
+		// then
+
+		Assert.assertEquals(value, actual);
+	}
+	@Test
+	public void itShouldDeleteObjectfromRedis() {
+		// given
+		String key = "key";
+		
+
+		// when
+		crudRepository.delete(key);
+		// then
+
+	}
+	
+	@Test
+	public void testIfItReturnsNullWhenGivenWrongKey(){
+		//given 
+	String key="watever";
+	//when
+	String value=crudRepository.get(key);
+	
+	System.out.println(value);
 	}
 
 }
