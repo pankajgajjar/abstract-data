@@ -25,6 +25,7 @@ public class DimensionRepository {
 	private FileUtils fileUtils;
 	private DimensionGroupCache groupCache;
 	private MongoRepository noSqlTemplateforMongo;
+	private final String FIELDTOUPDATE = "groupIds";
 
 	@Autowired
 	public DimensionRepository(FileUtils fileUtils,
@@ -47,7 +48,7 @@ public class DimensionRepository {
 			groupId = UUID.randomUUID().toString();
 			groupCache.addNewGroup(dimension, groupId);
 
-			updateGroupIdForAllAncestor(dimension.getPath());
+			updateGroupIdForAllAncestor(dimension.getPath(), groupId);
 			dimension.addToGroupId(groupId);
 			dimension.setChildren(null);
 			noSqlTemplateforMongo.save(dimension);
@@ -56,9 +57,15 @@ public class DimensionRepository {
 		return dimension.getId();
 	}
 
-	private void updateGroupIdForAllAncestor(String path) {
+	private void updateGroupIdForAllAncestor(String path, String groupId) {
 
-		
+		String[] paths = path.split(",");
+
+		for (String singlePath : paths) {
+			noSqlTemplateforMongo.updateById(singlePath, FIELDTOUPDATE,
+					groupId, DimensionModel.class);
+		}
+
 	}
 
 	private DimensionGroup getDimensionGroup(String groupId) {

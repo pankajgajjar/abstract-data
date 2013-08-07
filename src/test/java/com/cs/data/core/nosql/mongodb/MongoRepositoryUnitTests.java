@@ -65,16 +65,15 @@ public class MongoRepositoryUnitTests {
 		Assert.assertEquals(expectedAmar.getId(), actualAmar.getId());
 
 	}
-@Test
+
+	@Test
 	public void itShouldAppendAListInADocument() {
 		// given
-		Student amar = new Student("2", "Amar", "First");
-		List<Student> students = new ArrayList<Student>();
-		Teacher teacher = new Teacher("01", students);
+		Student esha = new Student("0099", "esha", "First");
+		Teacher teacher = new Teacher("01", null);
 
 		// when
-		crudRepository.save(teacher);
-		crudRepository.updateById("01","students",Teacher.class);
-		//then
+		crudRepository.updateById("01", "students",esha, Teacher.class);
+		// then
 	}
 }

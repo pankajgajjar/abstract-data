@@ -5,6 +5,9 @@ import java.util.List;
 import org.mockito.internal.matchers.Find;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 
 import com.cs.data.core.GenericDomain;
@@ -50,7 +53,11 @@ public class MongoRepository implements NoSqlOperations {
 		return null;
 	}
 
-	public <T> void updateById(String id, String field, Class<T> type) {
+	public <T, P> void updateById(String id, String field, P valueToAdd,
+			Class<T> type) {
+
+		mongoTemplate.updateFirst(Query.query(Criteria.where("id").is(id)),
+				new Update().push(field, valueToAdd), type);
 
 	}
 
