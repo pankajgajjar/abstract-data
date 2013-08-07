@@ -39,14 +39,13 @@ public class DimensionGroupCacheTests {
 		// given
 
 		String expectedId = "group01";
+		String path = "testPath";
 		// when
 
-		when(redisRepository.get(dimensionModel.getPath())).thenReturn(
-				expectedId);
-		String actualGroupId = groupCache
-				.getDimensionGroupIdFor(dimensionModel);
+		when(redisRepository.get(path)).thenReturn(expectedId);
+		String actualGroupId = groupCache.getDimensionGroupIdFor(path);
 		// then
-		verify(redisRepository).get(dimensionModel.getPath());
+		verify(redisRepository).get(path);
 		assertThat(actualGroupId).isEqualTo(expectedId);
 	}
 
@@ -61,7 +60,9 @@ public class DimensionGroupCacheTests {
 
 		// then
 		verify(redisRepository).delete(dimensionModel.getPath());
-		verify(redisRepository).set(dimensionModel.getPath().concat(","+dimensionModel.getName()), groupId);
+		verify(redisRepository)
+				.set(dimensionModel.getPath().concat(
+						"," + dimensionModel.getName()), groupId);
 	}
 
 	@Test
@@ -75,8 +76,22 @@ public class DimensionGroupCacheTests {
 		groupCache.addNewGroup(dimensionModel, groupId);
 
 		// then
-		verify(redisRepository).set(dimensionModel.getPath().concat(","+dimensionModel.getName()), groupId);
+		verify(redisRepository).set(dimensionModel.getName(), groupId);
 
 	}
-	
+
+	@Test
+	public void itShouldReturnFalseIfGroupIdIsAbsentInCache() {
+		// given
+		String path = "testKey";
+
+		// when
+		when(redisRepository.get(path)).thenReturn(null);
+		boolean flag = groupCache.ifGroupIdExistsFor(path);
+
+		// then
+		verify(redisRepository).get(path);
+		assertThat(flag).isEqualTo(false);
+	}
+
 }

@@ -36,14 +36,11 @@ public class DimensionRepositoryUnitTests {
 	@Mock
 	private MongoRepository repository;
 
-	private DimensionGroup group;
-
 	@Before
 	public void setUp() {
 
 		dimensionRepository = new DimensionRepository(fileUtils, cache,
 				repository);
-		group = new DimensionGroup();
 
 	}
 
@@ -51,22 +48,22 @@ public class DimensionRepositoryUnitTests {
 	public void itShouldCreateADimension() {
 
 		// given
-		String expectedDimensionId = "test01";
-		List<DimensionModel> models = new ArrayList<DimensionModel>();
-		models.add(new DimensionModel("test", "test", "test", "test"));
-		group.setDimensions(models);
+		String dimensionId = "test";
+		String groupId = "group";
+		String path = "testPath";
+		DimensionModel dimension = new DimensionModel("c01", "campaign",
+				"co01", "testPath");
 		// when
-		when(cache.getDimensionGroupIdFor(dimensionModel)).thenReturn(
-				expectedDimensionId);
-		when(repository.find(expectedDimensionId, DimensionGroup.class))
-				.thenReturn(group);
-
-		String dimensionId = dimensionRepository
-				.createDimension(dimensionModel);
+		when(cache.ifGroupIdExistsFor(dimension.getPath())).thenReturn(true);
+		when(cache.getDimensionGroupIdFor(dimension.getPath())).thenReturn(
+				groupId);
+		String actualId = dimensionRepository.createDimension(dimension);
 
 		// then
-		verify(cache).getDimensionGroupIdFor(dimensionModel);
-		verify(repository).find(expectedDimensionId, DimensionGroup.class);
-		assertThat(dimensionId).isEqualTo(dimensionModel.getId());
+		verify(cache).ifGroupIdExistsFor(dimension.getPath());
+		verify(cache).updateCache(dimension, groupId);
+		assertThat(actualId).isEqualTo(dimension.getId());
+
 	}
+
 }

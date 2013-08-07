@@ -17,9 +17,9 @@ public class DimensionGroupCache {
 
 	}
 
-	public String getDimensionGroupIdFor(DimensionModel dimension) {
+	public String getDimensionGroupIdFor(String path) {
 		// TODO Auto-generated method stub
-		return noSqlTemplateForRedis.get(dimension.getPath());
+		return noSqlTemplateForRedis.get(path);
 	}
 
 	public void updateCache(DimensionModel dimension, String groupId) {
@@ -45,6 +45,11 @@ public class DimensionGroupCache {
 					dimension.getPath().concat("," + dimension.getName()),
 					groupId);
 		}
+
+	}
+
+	public boolean ifGroupIdExistsFor(String path) {
+		return getDimensionGroupIdFor(path) == null ? false : true;
 
 	}
 

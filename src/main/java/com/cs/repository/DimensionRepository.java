@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,31 +37,28 @@ public class DimensionRepository {
 	}
 
 	public String createDimension(DimensionModel dimension) {
-		List<DimensionModel> dimensions;
-
-		DimensionGroup dimensionGroup;
-		String groupId = getDimensionGroupId(dimension);
-		if (groupId == null) {
-
-			dimensionGroup = new DimensionGroup();
-			dimensionGroup.setId(new Date().toString());
-			dimensions = new ArrayList<DimensionModel>();
-			dimensions.add(dimension);
-			dimensionGroup.setDimensions(dimensions);
-			System.out.println(dimensionGroup);
-			noSqlTemplateforMongo.save(dimensionGroup);
-			groupCache.addNewGroup(dimension, dimensionGroup.getId());
-
-		} else {
-			dimensionGroup = getDimensionGroup(groupId);
-			dimensions = dimensionGroup.getDimensions();
-			dimensions.add(dimension);
-			dimensionGroup.setDimensions(dimensions);
-			System.out.println(dimensionGroup);
-			noSqlTemplateforMongo.save(dimensionGroup);
+		String groupId = getDimensionGroupId(dimension.getPath());
+		if (groupCache.ifGroupIdExistsFor(dimension.getPath())) {
+			dimension.setGroupId(groupId);
+			dimension.setChildren(null);
+			noSqlTemplateforMongo.save(dimension);
 			groupCache.updateCache(dimension, groupId);
+		} else {
+			groupId = UUID.randomUUID().toString();
+			groupCache.addNewGroup(dimension, groupId);
+
+			updateGroupIdForAllAncestor(dimension.getPath());
+			dimension.setGroupId(groupId);
+			dimension.setChildren(null);
+			noSqlTemplateforMongo.save(dimension);
 		}
+
 		return dimension.getId();
+	}
+
+	private void updateGroupIdForAllAncestor(String path) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private DimensionGroup getDimensionGroup(String groupId) {
@@ -68,9 +66,9 @@ public class DimensionRepository {
 		return noSqlTemplateforMongo.find(groupId, DimensionGroup.class);
 	}
 
-	private String getDimensionGroupId(DimensionModel dimension) {
+	private String getDimensionGroupId(String path) {
 
-		return groupCache.getDimensionGroupIdFor(dimension);
+		return groupCache.getDimensionGroupIdFor(path);
 	}
 
 	public String getAllDimensions() throws IOException, URISyntaxException {
