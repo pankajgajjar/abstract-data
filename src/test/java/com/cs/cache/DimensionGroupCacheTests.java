@@ -2,7 +2,6 @@ package com.cs.cache;
 
 import static org.junit.Assert.*;
 
-import javax.annotation.meta.When;
 
 import org.junit.Before;
 import org.junit.Test;

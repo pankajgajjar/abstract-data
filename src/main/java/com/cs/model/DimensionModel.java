@@ -1,6 +1,7 @@
 package com.cs.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -13,15 +14,15 @@ public class DimensionModel implements Serializable, GenericDomain {
 	private String type;
 	private String path;
 	private String name;
-	private List<String> groupId;
+	private List<String> groupIds;
 	private List<DimensionModel> children;
 
 	public List<String> getGroupId() {
-		return groupId;
+		return groupIds;
 	}
 
 	public void setGroupId(List<String> groupId) {
-		this.groupId = groupId;
+		this.groupIds = groupId;
 	}
 
 	public List<DimensionModel> getChildren() {
@@ -46,7 +47,7 @@ public class DimensionModel implements Serializable, GenericDomain {
 		this.type = type;
 		this.path = path;
 		this.name = name;
-		this.groupId = groupId;
+		this.groupIds = groupId;
 		this.children = children;
 	}
 
@@ -107,4 +108,14 @@ public class DimensionModel implements Serializable, GenericDomain {
 		return path == "-1" ? true : false;
 	}
 
+	public void addToGroupId(String groupId) {
+		if (groupIds == null) {
+			groupIds = new ArrayList<String>();
+			groupIds.add(groupId);
+		} else {
+
+			groupIds.add(groupId);
+		}
+
+	}
 }

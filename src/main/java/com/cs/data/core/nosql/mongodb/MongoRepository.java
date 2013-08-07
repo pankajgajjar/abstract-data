@@ -50,6 +50,10 @@ public class MongoRepository implements NoSqlOperations {
 		return null;
 	}
 
+	public <T> void updateById(String id, String field, Class<T> type) {
+
+	}
+
 	@Override
 	public <T> List<T> findAll(Class<T> class1) {
 		// TODO Auto-generated method stub

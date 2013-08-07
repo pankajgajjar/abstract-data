@@ -39,7 +39,7 @@ public class DimensionRepository {
 	public String createDimension(DimensionModel dimension) {
 		String groupId = getDimensionGroupId(dimension.getPath());
 		if (groupCache.ifGroupIdExistsFor(dimension.getPath())) {
-			dimension.setGroupId(groupId);
+			dimension.addToGroupId(groupId);
 			dimension.setChildren(null);
 			noSqlTemplateforMongo.save(dimension);
 			groupCache.updateCache(dimension, groupId);
@@ -48,7 +48,7 @@ public class DimensionRepository {
 			groupCache.addNewGroup(dimension, groupId);
 
 			updateGroupIdForAllAncestor(dimension.getPath());
-			dimension.setGroupId(groupId);
+			dimension.addToGroupId(groupId);
 			dimension.setChildren(null);
 			noSqlTemplateforMongo.save(dimension);
 		}
@@ -57,7 +57,7 @@ public class DimensionRepository {
 	}
 
 	private void updateGroupIdForAllAncestor(String path) {
-		// TODO Auto-generated method stub
+
 		
 	}
 
