@@ -43,30 +43,30 @@ public class DimensionIntegrationTests {
 
 		DimensionModel cp01 = new DimensionModel("cp01", "Campaign", "cp01",
 				"-1");
-		DimensionModel mp01 = new DimensionModel("mp01", "Campaign", "mp01",
-				"cp01");
-		DimensionModel mp012 = new DimensionModel("mp012", "Campaign", "mp012",
-				"cp01");
+		DimensionModel mp01 = new DimensionModel("mp01", "MasterPublication",
+				"mp01", "cp01");
+		DimensionModel mp012 = new DimensionModel("mp012", "MasterPublication",
+				"mp012", "cp01");
 		DimensionModel cp02 = new DimensionModel("cp02", "Campaign", "cp02",
 				"-1");
-		DimensionModel mp02 = new DimensionModel("mp02", "Campaign", "mp02",
-				"cp02");
-		DimensionModel pg02 = new DimensionModel("pg02", "Campaign", "pg02",
-				"cp02,mp02");
-		DimensionModel p02 = new DimensionModel("p02", "Campaign", "p02",
+		DimensionModel mp02 = new DimensionModel("mp02", "MasterPublication",
+				"mp02", "cp02");
+		DimensionModel pg02 = new DimensionModel("pg02", "PublicationGroup",
+				"pg02", "cp02,mp02");
+		DimensionModel p02 = new DimensionModel("p02", "Publication", "p02",
 				"cp02,mp02,pg02");
 		DimensionModel cp03 = new DimensionModel("cp03", "Campaign", "cp03",
 				"-1");
-		DimensionModel mp03 = new DimensionModel("mp03", "Campaign", "mp03",
-				"cp03");
-		DimensionModel pg03 = new DimensionModel("pg03", "Campaign", "pg03",
-				"cp03,mp03");
-		DimensionModel p03 = new DimensionModel("p03", "Campaign", "p03",
+		DimensionModel mp03 = new DimensionModel("mp03", "MasterPublication",
+				"mp03", "cp03");
+		DimensionModel pg03 = new DimensionModel("pg03", "PublicationGroup",
+				"pg03", "cp03,mp03");
+		DimensionModel p03 = new DimensionModel("p03", "Publication", "p03",
 				"cp03,mp03,pg03");
 		DimensionModel cp04 = new DimensionModel("cp04", "Campaign", "cp04",
 				"-1");
-		DimensionModel mp04 = new DimensionModel("mp04", "Campaign", "mp04",
-				"cp04");
+		DimensionModel mp04 = new DimensionModel("mp04", "MasterPublication",
+				"mp04", "cp04");
 
 		models.add(cp01);
 		models.add(mp01);
@@ -94,6 +94,8 @@ public class DimensionIntegrationTests {
 			dimensionRepository.createDimension(dimension);
 
 		}
+
+		System.out.println(noSqlTemplateForRedis.findAllKeys("*"));
 
 		System.out.println(noSqlTemplateForMongo.findAll(DimensionGroup.class));
 	}

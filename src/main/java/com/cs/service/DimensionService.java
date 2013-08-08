@@ -7,18 +7,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.cs.builder.TreeBuilder;
 import com.cs.model.DimensionModel;
 import com.cs.repository.DimensionRepository;
 
 @Component
 public class DimensionService {
 
+	private TreeBuilder treeBuilder;
 	private DimensionRepository dimensionRepository;
 
 	@Autowired
-	public DimensionService(DimensionRepository dimensionRepository) {
+	public DimensionService(DimensionRepository dimensionRepository,
+			TreeBuilder treeBuilder) {
 
 		this.dimensionRepository = dimensionRepository;
+		this.treeBuilder = treeBuilder;
 
 	}
 
@@ -35,8 +39,8 @@ public class DimensionService {
 
 	public List<DimensionModel> getDimensionsByStructure(String structure) {
 		// TODO Auto-generated method stub
-		List<DimensionModel> dimensions=dimensionRepository.getDimensions();
-		return null;
+
+		return treeBuilder.buildTree(structure);
 
 	}
 

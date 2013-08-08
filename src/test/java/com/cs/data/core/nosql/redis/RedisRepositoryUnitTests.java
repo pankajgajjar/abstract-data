@@ -1,5 +1,8 @@
 package com.cs.data.core.nosql.redis;
 
+import java.util.List;
+import java.util.Set;
+
 import junit.framework.Assert;
 
 import org.junit.Before;
@@ -60,7 +63,7 @@ public class RedisRepositoryUnitTests {
 		// then
 		Assert.assertEquals(amar.getId(), actualStudent.getId());
 	}
-	
+
 	@Test
 	public void itShouldSetKeyAsStringAndValueAsStringToRedis() {
 		// given
@@ -86,26 +89,48 @@ public class RedisRepositoryUnitTests {
 
 		Assert.assertEquals(value, actual);
 	}
+
 	@Test
 	public void itShouldDeleteObjectfromRedis() {
 		// given
 		String key = "key";
-		
 
 		// when
 		crudRepository.delete(key);
 		// then
 
 	}
-	
+
 	@Test
-	public void testIfItReturnsNullWhenGivenWrongKey(){
-		//given 
-	String key="watever";
-	//when
-	String value=crudRepository.get(key);
-	
-	System.out.println(value);
+	public void testIfItReturnsNullWhenGivenWrongKey() {
+		// given
+		String key = "watever";
+		// when
+		String value = crudRepository.get(key);
+
+	}
+
+	@Test
+	public void itShouldGetAllKeys() {
+		//
+		String pattern = "*";
+
+		// when
+
+		Set keys = crudRepository.findAllKeys(pattern);
+
+		System.out.println(keys);
+		// then
+		Assert.assertNotNull(keys);
+
+	}
+
+	@Test
+	public void itShouldGetAllValues() {
+		// when
+
+		List<String> values = crudRepository.findAllValues("*");
+		System.out.println(values);
 	}
 
 }

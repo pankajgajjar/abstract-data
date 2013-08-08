@@ -16,6 +16,7 @@ import com.cs.data.core.nosql.NoSqlOperations;
 import com.cs.data.core.nosql.mongodb.MongoRepository;
 import com.cs.model.DimensionGroup;
 import com.cs.model.DimensionModel;
+import com.cs.model.DimensionModelList;
 import com.cs.utils.FileUtils;
 import com.google.common.cache.Cache;
 
@@ -26,6 +27,7 @@ public class DimensionRepository {
 	private DimensionGroupCache groupCache;
 	private MongoRepository noSqlTemplateforMongo;
 	private final String FIELDTOUPDATE = "groupIds";
+	private final String TYPE="type";
 
 	@Autowired
 	public DimensionRepository(FileUtils fileUtils,
@@ -86,6 +88,11 @@ public class DimensionRepository {
 	public List<DimensionModel> getDimensions() {
 
 		return noSqlTemplateforMongo.findAll(DimensionModel.class);
+	}
+
+	public List<DimensionModel> getDimensionsOfType(String type) {
+		// TODO Auto-generated method stub
+		return noSqlTemplateforMongo.getObjectsBy(TYPE, type, DimensionModel.class);
 	}
 
 }

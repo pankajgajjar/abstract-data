@@ -1,6 +1,7 @@
 package com.cs.data.core.nosql.redis;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisOperations;
@@ -46,7 +47,7 @@ public class RedisRepository implements NoSqlOperations {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	public void delete(String key) {
 		// TODO Auto-generated method stub
 		redisTemplate.delete(key);
@@ -83,6 +84,18 @@ public class RedisRepository implements NoSqlOperations {
 	public void set(String key, String value) {
 		// TODO Auto-generated method stub
 		redisTemplate.opsForValue().set(key, value);
+	}
+
+	public Set findAllKeys(String pattern) {
+		// TODO Auto-generated method stub
+		return redisTemplate.keys(pattern);
+
+	}
+
+	public List<String> findAllValues(String keyPattern) {
+
+		return redisTemplate.opsForValue().multiGet(findAllKeys(keyPattern));
+
 	}
 
 }

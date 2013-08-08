@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.cs.builder.TreeBuilder;
 import com.cs.model.DimensionModel;
 import com.cs.repository.DimensionRepository;
 import com.cs.utils.FileUtils;
@@ -23,14 +24,18 @@ public class DimensionServiceUnitTests {
 	private DimensionService dimensionService;
 
 	@Mock
-	DimensionModel dimensionModel;
+	private DimensionModel dimensionModel;
 
 	@Mock
-	DimensionRepository dimensionRepository;
+	private TreeBuilder treeBuilder;
+
+	@Mock
+	private DimensionRepository dimensionRepository;
 
 	@Before
 	public void setUp() {
-		dimensionService = new DimensionService(dimensionRepository);
+		dimensionService = new DimensionService(dimensionRepository,
+				treeBuilder);
 	}
 
 	@Test
@@ -77,7 +82,7 @@ public class DimensionServiceUnitTests {
 				.getDimensionsByStructure(structure);
 
 		// then
-		verify(dimensionRepository).getDimensions();
+		verify(treeBuilder).buildTree(structure);
 	}
 
 }

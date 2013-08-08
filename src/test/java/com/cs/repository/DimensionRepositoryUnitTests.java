@@ -71,12 +71,28 @@ public class DimensionRepositoryUnitTests {
 
 		// given
 		List<DimensionModel> expectedModels = new ArrayList<DimensionModel>();
+		expectedModels.add(new DimensionModel());
 		// when
+		when(repository.findAll(DimensionModel.class)).thenReturn(
+				expectedModels);
 		List<DimensionModel> dimensions = dimensionRepository.getDimensions();
 		// then
 		verify(repository).findAll(DimensionModel.class);
+		assertThat(dimensions).isNotEmpty();
 		assertThat(dimensions).isEqualTo(expectedModels);
 
+	}
+
+	@Test
+	public void itShouldGetDimensionsByType() {
+		// given
+		String type = "Campaign";
+		// when
+
+		dimensionRepository.getDimensionsOfType(type);
+		// then
+		
+		verify(repository).getObjectsBy("type",type,DimensionModel.class);
 	}
 
 }

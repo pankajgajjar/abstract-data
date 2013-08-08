@@ -72,4 +72,11 @@ public class MongoRepository implements NoSqlOperations {
 		return mongoTemplate.findById(key, class1);
 
 	}
+
+	public <T> List<T> getObjectsBy(String field, String value, Class<T> type) {
+
+		return mongoTemplate.find(Query.query(Criteria.where(field).is(value)),
+				type);
+
+	}
 }

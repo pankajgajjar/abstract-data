@@ -1,5 +1,7 @@
 package com.cs.cache;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -51,6 +53,11 @@ public class DimensionGroupCache {
 	public boolean ifGroupIdExistsFor(String path) {
 		return getDimensionGroupIdFor(path) == null ? false : true;
 
+	}
+
+	public List<String> getAllGroups() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
