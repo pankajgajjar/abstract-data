@@ -2,6 +2,7 @@ package com.cs.service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -64,6 +65,19 @@ public class DimensionServiceUnitTests {
 		// then
 		assertThat(dimensionId).isEqualTo(expectedDimensionId);
 
+	}
+
+	@Test
+	public void itShouldGetDimensionsByStructure() {
+		// given
+
+		String structure = "C-MP-P";
+		// when
+		List<DimensionModel> models = dimensionService
+				.getDimensionsByStructure(structure);
+
+		// then
+		verify(dimensionRepository).getDimensions();
 	}
 
 }

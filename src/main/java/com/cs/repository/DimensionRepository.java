@@ -83,4 +83,9 @@ public class DimensionRepository {
 		return fileUtils.getFileContents("dimensions.json");
 	}
 
+	public List<DimensionModel> getDimensions() {
+
+		return noSqlTemplateforMongo.findAll(DimensionModel.class);
+	}
+
 }

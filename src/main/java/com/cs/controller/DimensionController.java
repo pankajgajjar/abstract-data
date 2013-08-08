@@ -70,13 +70,11 @@ public class DimensionController {
 
 	}
 
-	public void create() {
+	@RequestMapping(value = "/get/{structure}")
+	public List<DimensionModel> getDimensionsBy(
+			@PathVariable("structure") String structure) {
 
-	}
-
-	public List<DimensionModel> list() {
-
-		return new ArrayList<DimensionModel>();
+		return dimensionService.getDimensionsByStructure(structure);
 	}
 
 	@RequestMapping(value = "/all")

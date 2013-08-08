@@ -2,6 +2,8 @@ package com.cs.controller;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.simple.parser.ParseException;
 import org.junit.Before;
@@ -91,5 +93,23 @@ public class DimensionControllerUnitTests {
 		// then
 		verify(dimensionService).getAllDimensions();
 		assertThat(actualContent).isEqualTo(content);
+	}
+
+	@Test
+	public void itShouldAllGroupsAccordingToStructure() {
+		// given
+		List<DimensionModel> models = new ArrayList<DimensionModel>();
+		String structure = "C-MP-P";
+
+		// when
+		when(dimensionService.getDimensionsByStructure(structure)).thenReturn(
+				models);
+		List<DimensionModel> actualModels = treeController
+				.getDimensionsBy(structure);
+
+		// then
+		verify(dimensionService).getDimensionsByStructure(structure);
+		assertThat(actualModels).isEqualTo(models);
+
 	}
 }

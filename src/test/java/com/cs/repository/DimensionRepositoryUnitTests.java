@@ -66,4 +66,17 @@ public class DimensionRepositoryUnitTests {
 
 	}
 
+	@Test
+	public void itShouldGetAllDimensionInstances() {
+
+		// given
+		List<DimensionModel> expectedModels = new ArrayList<DimensionModel>();
+		// when
+		List<DimensionModel> dimensions = dimensionRepository.getDimensions();
+		// then
+		verify(repository).findAll(DimensionModel.class);
+		assertThat(dimensions).isEqualTo(expectedModels);
+
+	}
+
 }
