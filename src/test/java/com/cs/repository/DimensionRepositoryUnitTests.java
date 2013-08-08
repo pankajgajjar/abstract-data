@@ -91,8 +91,21 @@ public class DimensionRepositoryUnitTests {
 
 		dimensionRepository.getDimensionsOfType(type);
 		// then
-		
-		verify(repository).getObjectsBy("type",type,DimensionModel.class);
+
+		verify(repository).getObjectsBy("type", type, DimensionModel.class);
+	}
+
+	@Test
+	public void itShouldReturnAllDimensionsByGroupIdsAndType() {
+		// given
+
+		List<String> groupIds = null;
+		String type2 = null;
+		// when
+		dimensionRepository.getDimensionsBy(type2, groupIds);
+		// then
+		verify(repository).getObjectForAndCriteria("type", type2, "groupIds",
+				groupIds, DimensionModel.class);
 	}
 
 }

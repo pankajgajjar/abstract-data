@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.cs.data.core.GenericDomain;
 import com.cs.data.core.nosql.NoSqlOperations;
+import com.sun.org.apache.regexp.internal.recompile;
 
 @Component
 public class MongoRepository implements NoSqlOperations {
@@ -77,6 +78,16 @@ public class MongoRepository implements NoSqlOperations {
 
 		return mongoTemplate.find(Query.query(Criteria.where(field).is(value)),
 				type);
+
+	}
+
+	public <T, P, Q> List<Q> getObjectForAndCriteria(String secondField,
+			P secondFieldValue, String firstField, List<T> firstFieldValue,
+			Class<Q> type) {
+
+		return mongoTemplate.find(
+				Query.query(Criteria.where(firstField).in(firstFieldValue)
+						.and(secondField).is(secondFieldValue)), type);
 
 	}
 }

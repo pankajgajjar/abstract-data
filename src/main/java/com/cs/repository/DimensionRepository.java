@@ -27,7 +27,8 @@ public class DimensionRepository {
 	private DimensionGroupCache groupCache;
 	private MongoRepository noSqlTemplateforMongo;
 	private final String FIELDTOUPDATE = "groupIds";
-	private final String TYPE="type";
+	private final String TYPE = "type";
+	private final String GROUPIDS = "groupIds";
 
 	@Autowired
 	public DimensionRepository(FileUtils fileUtils,
@@ -92,7 +93,15 @@ public class DimensionRepository {
 
 	public List<DimensionModel> getDimensionsOfType(String type) {
 		// TODO Auto-generated method stub
-		return noSqlTemplateforMongo.getObjectsBy(TYPE, type, DimensionModel.class);
+		return noSqlTemplateforMongo.getObjectsBy(TYPE, type,
+				DimensionModel.class);
+	}
+
+	public List<DimensionModel> getDimensionsBy(String type2,
+			List<String> groupIds) {
+		return noSqlTemplateforMongo.getObjectForAndCriteria(TYPE, type2,
+				GROUPIDS, groupIds, DimensionModel.class);
+
 	}
 
 }

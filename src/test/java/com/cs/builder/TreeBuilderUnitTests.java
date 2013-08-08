@@ -63,4 +63,30 @@ public class TreeBuilderUnitTests {
 		verify(dimensionRepository).getDimensionsOfType(type);
 		assertThat(models).isEqualTo(result);
 	}
+
+	@Test
+	public void itShouldBuildTreeForGivenRoot() {
+		// given
+		DimensionModel dimensionModel = new DimensionModel("cp01", "Campaign",
+				"cp01", "-1");
+		String[] rules = { "Campaign", "MasterPublication", "PublicationGroup",
+				"Publication" };
+
+		// when
+		treeBuilder.buildTreeForRootNode(dimensionModel, rules);
+		// then
+	}
+
+	@Test
+	public void itShouldReturnAllDimensionsOfGivenGroupIdsAndType() {
+		// given
+		List<String> groupIds = new ArrayList<String>();
+		String type = "MasterPublication";
+
+		// when
+
+		treeBuilder.getAllChildrenOfCurrentRoot(groupIds, type);
+		// then
+		verify(dimensionRepository).getDimensionsBy(type, groupIds);
+	}
 }

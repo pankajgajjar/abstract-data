@@ -73,7 +73,22 @@ public class MongoRepositoryUnitTests {
 		Teacher teacher = new Teacher("01", null);
 
 		// when
-		crudRepository.updateById("01", "students",esha, Teacher.class);
+		crudRepository.updateById("01", "students", esha, Teacher.class);
 		// then
+	}
+
+	@Test
+	public void itShouldGetObjectsByAndCriteria() {
+		// when
+		String id = "01";
+		String name = "esha";
+		List<Student> students = new ArrayList<Student>();
+		students.add(new Student("0099", "esha", "First"));
+		List<Teacher> teacherWithGivenStudent = crudRepository
+				.getObjectForAndCriteria("id", id, "students", students,
+						Teacher.class);
+		// then
+		Assert.assertEquals(teacherWithGivenStudent.size(), 1);
+
 	}
 }
