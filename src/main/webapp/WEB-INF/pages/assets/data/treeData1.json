@@ -1,0 +1,141 @@
+[
+    {
+        "id": "PG1",
+        "title": "PG1",
+        "type": "PublicationGroup",
+        "path": "PG1",
+        "children": [
+            {
+                "id": "C01",
+                "title": "C01",
+                "type": "Campaign",
+                "path": "PG1,C01",
+                "children": [
+                    {
+                        "id": "P01",
+                        "title": "P01",
+                        "type": "Publication",
+                        "path": "PG1,C01,P01",
+                        "children": [
+                            {
+                                "id": "M01",
+                                "title": "M01",
+                                "type": "MasterPublication",
+                                "path": "PG1,C01,P01,M01",
+                                "children": []
+                            },
+                            {
+                                "id": "M02",
+                                "title": "M02",
+                                "type": "MasterPublication",
+                                "path": "PG1,C01,P01,M02",
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "id": "P02",
+                        "title": "P02",
+                        "type": "Publication",
+                        "path": "PG1,C01,P02",
+                        "children": []
+                    },
+                    {
+                        "id": "P03",
+                        "title": "P03",
+                        "type": "Publication",
+                        "path": "PG1,C01,P03",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "id": "C02",
+                "title": "C02",
+                "type": "Campaign",
+                "path": "PG1,C02",
+                "children": [
+                    {
+                        "id": "P04",
+                        "title": "P04",
+                        "type": "Publication",
+                        "path": "PG1,C02,P04",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "id": "C03",
+                "title": "C03",
+                "type": "Campaign",
+                "path": "PG1,C03",
+                "children": [
+                    {
+                        "id": "P05",
+                        "title": "P05",
+                        "type": "Publication",
+                        "path": "PG1,C03,P05",
+                        "children": []
+                    }
+                ]
+            }
+
+        ]
+    },
+    {
+        "id": "PG2",
+        "title": "PG2",
+        "type": "PublicationGroup",
+        "path": "PG2",
+        "children": [
+            {
+                "id": "C04",
+                "title": "C04",
+                "type": "Campaign",
+                "path": "PG2,C04",
+                "children": [
+                    {
+                        "id": "P06",
+                        "title": "P06",
+                        "type": "Publication",
+                        "path": "PG2,C04,P06",
+                        "children": []
+                    },
+                    {
+                        "id": "P07",
+                        "title": "P07",
+                        "type": "Publication",
+                        "path": "PG2,C04,P07",
+                        "children": [
+                            {
+                                "id": "M03",
+                                "title": "M03",
+                                "type": "MasterPublication",
+                                "path": "PG1,C01,P01,M03",
+                                "children": []
+                            }
+                        ]
+                    }
+
+                ]
+            },
+            {
+                "id": "C05",
+                "title": "C05",
+                "type": "Campaign",
+                "path": "PG2,C05",
+                "children": [
+                    {
+                        "id": "P08",
+                        "title": "P08",
+                        "type": "Publication",
+                        "path": "PG2,C05,P08",
+                        "children": []
+                    }
+                ]
+            }
+
+        ]
+    }
+
+]

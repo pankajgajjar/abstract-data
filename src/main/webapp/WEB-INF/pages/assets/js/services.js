@@ -1,14 +1,28 @@
+
+var tempStoreSchemaId = 1;
+
 function getLogin(){
     loadTemplate(configTempArray[1].templateUrl);
 }
 
 function getAllSchema(){
-	APIFactory.callToServer(configTempArray[2].templateUrl+"default",onSchemaSuccess);
+	//APIFactory.callToServer(configTempArray[2].templateUrl+"default",onSchemaSuccess);
+    APIFactory.callToServer(configTempArray[2].templateUrl,onSchemaSuccess);
 }
 
 function onSchemaSuccess(data){
   	data=eval('(' + data + ')');
-    var structure = getNodesFromSchema(data,0);
+    setSchemaArray(data);
+    setDefaultSchema();
+    setSchemaLabel();
+    $(document).trigger({
+        type: "schemaLoaded",
+        //schemaData: data,
+        schemaData: schemaArray,
+        schemaChanged: false
+    });
+
+   /* var structure = getNodesFromSchema(data,0);
     structure = structure.substring(0, structure.length - 1)
     setCurrentSchema(structure);
     setSchemaLabel();
@@ -18,42 +32,77 @@ function onSchemaSuccess(data){
         schemaData: data,
         schema: structure,
         schemaChanged: false
-    });
+    });*/
 }
 
 function setSchemaLabel(){
     $("#txt").show();
-    $("#txt").text(currentSchema);
+    $("#txt").text(currentSchema.name);
 }
 
 function onChangeSchemaSuccess(data){
     data=eval('(' + data + ')');
-    var structure = getNodesFromSchema(data,0);
-    structure = structure.substring(0, structure.length - 1)
-    setCurrentSchema(structure);
+    setCurrentSchema(data);
     setSchemaLabel();
-    setDimensionArray(keyArray);
     $(document).trigger({
         type: "schemaLoaded",
-        schemaData: data,
-        schema: structure ,
+        //schemaData: data,
+        schemaData: schemaArray,
         schemaChanged: true
     });
 }
 
 function getCreatedTree(){
-   APIFactory.callToServer(configTempArray[3].templateUrl+currentSchema,onTreeSuccess);
+
+  // APIFactory.callToServer(configTempArray[3].templateUrl+currentSchema,onTreeSuccess);
+
+    /*
+     * Comment the below code to stop data mockup, and work with actual server data
+     * Section starts here
+     */
+
+    if(currentSchema.id == "1"){
+        APIFactory.callToServer(configTempArray[5].templateUrl,onTreeSuccess);
+    }   else if(currentSchema.id == "2"){
+        APIFactory.callToServer(configTempArray[4].templateUrl,onTreeSuccess);
+    }
+    /*
+     * Section Ends here
+     */
 }
 
 function onTreeSuccess(data){
-$(document).trigger({
-        type: "treeDataLoaded",
-        treeData: data
+    data=eval('(' + data + ')');
+    $(document).trigger({
+            type: "treeDataLoaded",
+            treeData: data
     });
 }
 
 function changeSchema(schemaId){
-    APIFactory.callToServer(configTempArray[2].templateUrl+schemaId,onChangeSchemaSuccess);
+    //APIFactory.callToServer(configTempArray[2].templateUrl+schemaId,onChangeSchemaSuccess);
+
+    /*
+    * Comment the below code to stop data mockup, and work with actual server data
+    * Section starts here
+    */
+    tempStoreSchemaId = schemaId;
+    switch(schemaId)
+    {
+        case "1":
+        {
+            APIFactory.callToServer(configTempArray[6].templateUrl,onChangeSchemaSuccess);
+            break;
+        }
+        case "2":
+        {
+            APIFactory.callToServer(configTempArray[3].templateUrl,onChangeSchemaSuccess);
+            break;
+        }
+    }
+    /*
+     * Section Ends here
+     */
 }
 
 var str;

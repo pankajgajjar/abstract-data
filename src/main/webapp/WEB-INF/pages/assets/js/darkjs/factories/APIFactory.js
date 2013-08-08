@@ -3,13 +3,14 @@ function APIFactory(){
 }
 
 APIFactory.callToServer = function(url,callback){
-    $.ajax({url:url,success:function(result){
-        callback(result);
-    },
-     error: function (error) {
-     
-     	callback("error");
-              }
+    $.ajax({
+        url:url,
+        success:function(result){
+           callback(result);
+        },
+        error: function (error) {
+           callback("error");
+        }
     });
 }
 

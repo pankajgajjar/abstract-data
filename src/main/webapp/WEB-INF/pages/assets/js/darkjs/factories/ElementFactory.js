@@ -7,7 +7,7 @@ ElementFactory.getSelector = function(){
 }
 
 ElementFactory.getTree = function(data){
-    return new DarkJSTree(data);
+    return new DynaTree(data);
 }
 
 ElementFactory.getTabs = function(tabObj){

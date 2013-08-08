@@ -6,7 +6,6 @@ function loadTemplate(templateUrl,containerElementID){
 
     //Loads the template
     readTemplateHTML(templateUrl, function(text){
-
         if(templateUrl != configTempArray[0].templateUrl){
                makeLogoutVisible();
         }
