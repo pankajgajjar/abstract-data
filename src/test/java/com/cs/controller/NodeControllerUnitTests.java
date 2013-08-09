@@ -37,8 +37,7 @@ public class NodeControllerUnitTests {
 
 	@Before
 	public void setUp() {
-		treeController = new NodeController(dimensionService,
-				dimensionModel);
+		treeController = new NodeController(dimensionService);
 	}
 
 	@Test

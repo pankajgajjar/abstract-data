@@ -55,9 +55,8 @@ public class DimensionRepository {
 	}
 
 	private void updateGroupIdForAllAncestor(String path, String groupId) {
-
+		int count = 0;
 		String[] paths = path.split(",");
-
 		for (String singlePath : paths) {
 			noSqlTemplateforMongo.updateById(singlePath, FIELDTOUPDATE,
 					groupId, DimensionModel.class);

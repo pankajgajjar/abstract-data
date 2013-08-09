@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cs.model.CustomResponse;
 import com.cs.model.DimensionModel;
 import com.cs.service.DimensionService;
 
@@ -18,13 +17,10 @@ import com.cs.service.DimensionService;
 public class NodeController {
 
 	private DimensionService dimensionService;
-	private DimensionModel dimension;
 
 	@Autowired
-	public NodeController(DimensionService dimensionService,
-			DimensionModel dimension) {
+	public NodeController(DimensionService dimensionService) {
 		this.dimensionService = dimensionService;
-		this.dimension = dimension;
 
 	}
 
@@ -39,14 +35,14 @@ public class NodeController {
 			@PathVariable("name") String name,
 			@PathVariable("path") String path,
 			@PathVariable("folder") String isFolder) {
-
+		DimensionModel dimension = new DimensionModel();
 		dimension.setId(name);
 		dimension.setName(name);
 		dimension.setType(type);
 		dimension.setPath(path);
 		dimension.setTitle(name);
 		dimension.setIsFolder(isFolder);
-
+		System.out.println(dimension);
 		return dimensionService.createDimension(dimension);
 
 	}

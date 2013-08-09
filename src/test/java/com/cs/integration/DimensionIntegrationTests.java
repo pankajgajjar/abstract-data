@@ -41,46 +41,42 @@ public class DimensionIntegrationTests {
 	@Before
 	public void setUp() {
 
-		DimensionModel cp01 = new DimensionModel("cp01", "Campaign", "cp01","cp01",
-				"-1");
-		DimensionModel mp01 = new DimensionModel("mp01", "MasterPublication","mp01",
-				"mp01", "cp01");
-		DimensionModel mp012 = new DimensionModel("mp012", "MasterPublication","mp012",
-				"mp012", "cp01");
-		DimensionModel cp02 = new DimensionModel("cp02", "Campaign", "cp02","cp02",
-				"-1");
-		DimensionModel mp02 = new DimensionModel("mp02", "MasterPublication","mp02",
-				"mp02", "cp02");
-		DimensionModel pg02 = new DimensionModel("pg02", "PublicationGroup","pg02",
-				"pg02", "cp02,mp02");
-		DimensionModel p02 = new DimensionModel("p02", "Publication", "p02","p02",
-				"cp02,mp02,pg02");
-		DimensionModel cp03 = new DimensionModel("cp03", "Campaign", "cp03","cp03",
-				"-1");
-		DimensionModel mp03 = new DimensionModel("mp03", "MasterPublication","mp03",
-				"mp03", "cp03");
-		DimensionModel pg03 = new DimensionModel("pg03", "PublicationGroup","pg03",
-				"pg03", "cp03,mp03");
-		DimensionModel p03 = new DimensionModel("p03", "Publication", "p03","p03",
-				"cp03,mp03,pg03");
-		DimensionModel cp04 = new DimensionModel("cp04", "Campaign", "cp04","cp04",
-				"-1");
-		DimensionModel mp04 = new DimensionModel("mp04", "MasterPublication","mp04",
-				"mp04", "cp04");
+		DimensionModel mp01 = new DimensionModel("mp01", "MasterPublication",
+				"mp01", "mp01", "-1");
+		DimensionModel mp012 = new DimensionModel("mp012", "MasterPublication",
+				"mp012", "mp012", "-1");
+		DimensionModel cp01 = new DimensionModel("cp01", "Campaign", "cp01",
+				"cp01", "mp01");
+	/*	DimensionModel cp02 = new DimensionModel("cp02", "Campaign", "cp02",
+				"cp02", "-1");
+*/
+		/*
+		 * DimensionModel mp02 = new DimensionModel("mp02",
+		 * "MasterPublication","mp02", "mp02", "cp02"); DimensionModel pg02 =
+		 * new DimensionModel("pg02", "PublicationGroup","pg02", "pg02",
+		 * "cp02,mp02"); DimensionModel p02 = new DimensionModel("p02",
+		 * "Publication", "p02","p02", "cp02,mp02,pg02"); DimensionModel cp03 =
+		 * new DimensionModel("cp03", "Campaign", "cp03","cp03", "-1");
+		 * DimensionModel mp03 = new DimensionModel("mp03",
+		 * "MasterPublication","mp03", "mp03", "cp03"); DimensionModel pg03 =
+		 * new DimensionModel("pg03", "PublicationGroup","pg03", "pg03",
+		 * "cp03,mp03"); DimensionModel p03 = new DimensionModel("p03",
+		 * "Publication", "p03","p03", "cp03,mp03,pg03"); DimensionModel cp04 =
+		 * new DimensionModel("cp04", "Campaign", "cp04","cp04", "-1");
+		 * DimensionModel mp04 = new DimensionModel("mp04",
+		 * "MasterPublication","mp04", "mp04", "cp04");
+		 */
 
-		models.add(cp01);
 		models.add(mp01);
 		models.add(mp012);
-		models.add(cp02);
-		models.add(mp02);
-		models.add(pg02);
-		models.add(p02);
-		models.add(cp03);
-		models.add(mp03);
-		models.add(pg03);
-		models.add(p03);
-		models.add(cp04);
-		models.add(mp04);
+		models.add(cp01);
+	
+	/*	models.add(cp02);*/
+		/*
+		 * models.add(mp02); models.add(pg02); models.add(p02);
+		 * models.add(cp03); models.add(mp03); models.add(pg03);
+		 * models.add(p03); models.add(cp04); models.add(mp04);
+		 */
 
 	}
 

@@ -123,7 +123,7 @@ public class DimensionModel implements Serializable, GenericDomain {
 	@Override
 	public String toString() {
 		return "DimensionModel [id=" + id + ", type=" + type + ", path=" + path
-				+ ", name=" + name + ", groupIds=" + groupIds + ", children="
+				+ ", title=" + title + ", name=" + name + ", groupIds=" + groupIds + ", children="
 				+ children + "]";
 	}
 
