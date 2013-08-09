@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.cs.controller.DimensionController;
+import com.cs.controller.NodeController;
 import com.cs.model.CustomResponse;
 import com.cs.model.DimensionGroup;
 import com.cs.model.DimensionModel;
@@ -22,9 +22,9 @@ import static org.fest.assertions.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DimensionControllerUnitTests {
+public class NodeControllerUnitTests {
 
-	private DimensionController treeController;
+	private NodeController treeController;
 
 	@Mock
 	private DimensionService dimensionService;
@@ -37,7 +37,7 @@ public class DimensionControllerUnitTests {
 
 	@Before
 	public void setUp() {
-		treeController = new DimensionController(dimensionService,
+		treeController = new NodeController(dimensionService,
 				dimensionModel);
 	}
 

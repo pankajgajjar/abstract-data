@@ -28,11 +28,6 @@
                 "name": "Chapter",
                 "icon": "something",
                 "possibleChild": ["Chapter","Page"]
-            },
-            {
-                "name": "Page",
-                "icon": "something",
-                "possibleChild": []
             }
         ]
     },

@@ -1,9 +1,27 @@
 {
-    "PublicationGroup": {
-        "Campaign": {
-            "Publication": {
-                "MasterPublication": "leaf"
-            }
+    "id": "1",
+    "default": "false",
+    "name": "PublicationGroup-Campaign-Publication-MasterPublication",
+    "structure": [
+        {
+            "name": "PublicationGroup",
+            "icon": "something",
+            "possibleChild": ["Campaign"]
+        },
+        {
+            "name": "Campaign",
+            "icon": "something",
+            "possibleChild": ["Publication"]
+        },
+        {
+            "name": "Publication",
+            "icon": "something",
+            "possibleChild": ["MasterPublication"]
+        },
+        {
+            "name": "MasterPublication",
+            "icon": "something",
+            "possibleChild": []
         }
-    }
+    ]
 }

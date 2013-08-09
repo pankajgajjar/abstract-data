@@ -31,7 +31,7 @@ public class ClientController {
 		this.fileUtils = fileUtils;
 	}
 
-	@RequestMapping(value = { "/home" }, method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = { "/ home" }, method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody
 	CustomResponse getHome() throws IOException, URISyntaxException {
 		CustomResponse customResponse = new CustomResponse();

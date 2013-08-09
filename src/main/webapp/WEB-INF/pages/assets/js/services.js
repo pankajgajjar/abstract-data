@@ -41,6 +41,7 @@ function setSchemaLabel(){
 }
 
 function onChangeSchemaSuccess(data){
+    alert(JSON.stringify(data))
     data=eval('(' + data + ')');
     setCurrentSchema(data);
     setSchemaLabel();
@@ -53,40 +54,44 @@ function onChangeSchemaSuccess(data){
 }
 
 function getCreatedTree(){
-
-  // APIFactory.callToServer(configTempArray[3].templateUrl+currentSchema,onTreeSuccess);
+   APIFactory.callToServer(configTempArray[3].templateUrl+currentSchema.name,onTreeSuccess);
 
     /*
      * Comment the below code to stop data mockup, and work with actual server data
      * Section starts here
      */
 
-    if(currentSchema.id == "1"){
+    /*if(currentSchema.id == "1"){
         APIFactory.callToServer(configTempArray[5].templateUrl,onTreeSuccess);
     }   else if(currentSchema.id == "2"){
         APIFactory.callToServer(configTempArray[4].templateUrl,onTreeSuccess);
-    }
+    }*/
     /*
      * Section Ends here
      */
 }
 
 function onTreeSuccess(data){
-    data=eval('(' + data + ')');
     $(document).trigger({
             type: "treeDataLoaded",
             treeData: data
     });
 }
 
+var dummyCounter;
+function getDummyCounter(){
+    dummyCounter += 1;
+    return dummyCounter;
+}
+
 function changeSchema(schemaId){
-    //APIFactory.callToServer(configTempArray[2].templateUrl+schemaId,onChangeSchemaSuccess);
+    APIFactory.callToServer(configTempArray[4].templateUrl+schemaId,onChangeSchemaSuccess);
 
     /*
     * Comment the below code to stop data mockup, and work with actual server data
     * Section starts here
     */
-    tempStoreSchemaId = schemaId;
+    /*tempStoreSchemaId = schemaId;
     switch(schemaId)
     {
         case "1":
@@ -99,7 +104,7 @@ function changeSchema(schemaId){
             APIFactory.callToServer(configTempArray[3].templateUrl,onChangeSchemaSuccess);
             break;
         }
-    }
+    }*/
     /*
      * Section Ends here
      */

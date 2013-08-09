@@ -66,8 +66,6 @@ public class TreeBuilder {
 		List<DimensionModel> childrenOfCurrentLevel = getAllChildrenOfCurrentRoot(
 				groupIds, typesOfDimensions[0]);
 
-		System.out.println(groupIds + "====" + typesOfDimensions[0]);
-
 		currentRoot.setChildren(childrenOfCurrentLevel);
 		for (DimensionModel child : childrenOfCurrentLevel) {
 

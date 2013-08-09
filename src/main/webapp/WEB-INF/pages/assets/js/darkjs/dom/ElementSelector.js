@@ -13,6 +13,7 @@ var ElementSelector=function(){
                     treeData = {
 	                        "id" : "-1" ,"type": 'root',
 	                        "title" : getFirstDimension(),
+                            "isFolder" : "true",
 	                        children:[]
                 	};
 					$(document).bind("treeDataLoaded", function onSchemaLoadedHandler(e){

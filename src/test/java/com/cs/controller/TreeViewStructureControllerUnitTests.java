@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import org.eclipse.persistence.jpa.jpql.parser.WhenClause;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -24,20 +26,26 @@ public class TreeViewStructureControllerUnitTests {
 	@Mock
 	private FileUtils fileUtils;
 
+	@Mock
+	private JSONParser parser;
+
 	@Test
 	public void itShouldGetAllAvailableDimensions() throws IOException,
-			URISyntaxException {
+			URISyntaxException, ParseException {
 		// given
+		Object test = new Object();
 		String viewStructureId = "1";
 		structure = new TreeViewStructureController(fileUtils);
-		String content = "expected";
+		String content = "[{}]";
 		when(fileUtils.getFileContents("schema1.json")).thenReturn(content);
+		when(parser.parse(content)).thenReturn(test);
 		// when
 
-		String actualContent = structure.get(viewStructureId);
+		
+		Object actualObject=structure.get(viewStructureId);;
 		// then
+		assertThat(actualObject.toString()).isEqualTo(content);
 		verify(fileUtils).getFileContents("schema1.json");
-		assertThat(actualContent).isEqualTo(content);
 	}
 
 	@Test

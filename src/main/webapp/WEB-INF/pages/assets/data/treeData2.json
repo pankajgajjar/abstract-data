@@ -3,25 +3,29 @@
         "id": "M01",
         "title": "M01",
         "type": "MasterPublication",
-        "path": "M01",
+        "path": "root",
+        "isFolder": true,
         "children": [
             {
                 "id": "C01",
                 "title": "C01",
                 "type": "Campaign",
-                "path": "M01,C01",
+                "path": "root,M01",
+                "isFolder": true,
                 "children": [
                     {
                         "id": "PG1",
                         "title": "PG1",
                         "type": "PublicationGroup",
-                        "path": "M01,C01,PG1",
+                        "path": "root,M01,C01",
+                        "isFolder": true,
                         "children": [
                             {
                                 "id": "P01",
                                 "title": "P01",
                                 "type": "Publication",
-                                "path": "M01,C01,PG1,P01",
+                                "path": "root,M01,C01,PG1",
+                                "isFolder": true,
                                 "children": []
                             }
                         ]
@@ -34,25 +38,29 @@
         "id": "M02",
         "title": "M02",
         "type": "MasterPublication",
-        "path": "M02",
+        "path": "root",
+        "isFolder": true,
         "children": [
             {
                 "id": "C01",
                 "title": "C01",
                 "type": "Campaign",
-                "path": "M02,C01",
+                "path": "root,M02",
+                "isFolder": true,
                 "children": [
                     {
                         "id": "PG1",
                         "title": "PG1",
                         "type": "PublicationGroup",
-                        "path": "M02,C01,PG1",
+                        "path": "root,M02,C01",
+                        "isFolder": true,
                         "children": [
                             {
                                 "id": "P01",
                                 "title": "P01",
                                 "type": "Publication",
-                                "path": "M02,C01,PG1,P01",
+                                "path": "root,M02,C01,PG1",
+                                "isFolder": true,
                                 "children": []
                             }
                         ]
@@ -65,25 +73,29 @@
         "id": "M03",
         "title": "M03",
         "type": "MasterPublication",
-        "path": "M03",
+        "path": "root",
+        "isFolder": true,
         "children": [
             {
                 "id": "C04",
                 "title": "C04",
                 "type": "Campaign",
-                "path": "M03,C04",
+                "path": "root,M03",
+                "isFolder": true,
                 "children": [
                     {
                         "id": "PG2",
                         "title": "PG2",
                         "type": "PublicationGroup",
-                        "path": "M03,C04,PG2",
+                        "path": "root,M03,C04",
+                        "isFolder": true,
                         "children": [
                             {
                                 "id": "P07",
                                 "title": "P07",
                                 "type": "Publication",
-                                "path": "M03,C04,PG2,P07",
+                                "path": "root,M03,C04,PG2",
+                                "isFolder": true,
                                 "children": []
                             }
                         ]

@@ -14,6 +14,25 @@ public class DimensionModel implements Serializable, GenericDomain {
 	private String type;
 	private String path;
 	private String name;
+	private String title;
+	private String isFolder;
+
+	public String getIsFolder() {
+		return isFolder;
+	}
+
+	public void setIsFolder(String isFolder) {
+		this.isFolder = isFolder;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	private List<String> groupIds;
 	private List<DimensionModel> children;
 

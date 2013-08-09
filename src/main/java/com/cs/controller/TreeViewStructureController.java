@@ -3,6 +3,8 @@ package com.cs.controller;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,21 +22,30 @@ public class TreeViewStructureController {
 	public TreeViewStructureController(FileUtils utils) {
 		this.utils = utils;
 	}
-	
+
 	@RequestMapping("/{structureId}")
-	public @ResponseBody String get(@PathVariable String structureId) throws IOException, URISyntaxException{
+	public @ResponseBody
+	Object get(@PathVariable String structureId) throws IOException,
+			URISyntaxException, ParseException {
+
+		JSONParser parser=new JSONParser();
 		
-		return utils.getFileContents("schema"+structureId+".json"); //$NON-NLS-1$ //$NON-NLS-2$
-		
-	}
-	
-	@RequestMapping("/default")
-	public @ResponseBody String getDefault() throws IOException, URISyntaxException{
-		
-		return utils.getFileContents("schema1.json"); //$NON-NLS-1$
-		
+		return parser.parse(utils.getFileContents("schema" + structureId + ".json")); //$NON-NLS-1$ //$NON-NLS-2$
+
 	}
 
-	
+	@RequestMapping("/default")
+	public @ResponseBody
+	String getDefault() throws IOException, URISyntaxException {
+
+		return utils.getFileContents("schema1.json"); //$NON-NLS-1$
+
+	}
+
+	@RequestMapping("/all")
+	public @ResponseBody
+	String getAll() throws IOException, URISyntaxException {
+		return utils.getFileContents("allSchema.json");
+	}
 
 }

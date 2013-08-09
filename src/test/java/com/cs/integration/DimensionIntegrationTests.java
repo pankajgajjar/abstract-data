@@ -13,7 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.cs.cache.DimensionGroupCache;
-import com.cs.controller.DimensionController;
+import com.cs.controller.NodeController;
 import com.cs.data.core.nosql.mongodb.MongoRepository;
 import com.cs.data.core.nosql.redis.RedisRepository;
 import com.cs.model.DimensionGroup;

@@ -36,7 +36,7 @@ var DarkJSTree = function(data){
 	                            currentPath =  "";
 	                            currentPath += name;
 	                        }
-	                        APIFactory.callToServerWithPost("/pub2.0/create/"+possibleDim+"/name/"+name+"/parentId/"+node.attr("id")+"/path/"+currentPath,function(data){
+	                        APIFactory.callToServerWithPost("/pub2.0/create/"+possibleDim+"/name/"+name+"/path/"+currentPath,function(data){
 	                        	newNodeId = data.id;
 	                        	newNode = createNodeJSON(newNodeId,possibleDim,node.attr("id"),name,data.path);
 	                        	name = newNode;

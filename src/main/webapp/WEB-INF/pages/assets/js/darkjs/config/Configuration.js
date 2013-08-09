@@ -55,7 +55,9 @@ function getFirstDimension(){
 
 function getPossibleChild(dim){
     if(dim === 'root'){
-        return currentSchema.structure[0].name;
+        var arr = [];
+        arr.push(currentSchema.structure[0].name)
+        return arr;
     }
     else{
         for(var i=0; i< currentSchema.structure.length; i++){
