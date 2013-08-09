@@ -33,7 +33,7 @@ public class DimensionController {
 		return "redirect:/pages/index.html";
 	}
 
-	@RequestMapping(value = { "/create/{type}/name/{name}/parentId/{parentId}/path/{path}" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/create/{type}/name/{name}/path/{path}/parentId/{parentId}" }, method = RequestMethod.GET)
 	public @ResponseBody
 	String create(@PathVariable("type") String type,
 			@PathVariable("name") String name,
@@ -65,7 +65,7 @@ public class DimensionController {
 	@RequestMapping(value = "/all")
 	public @ResponseBody
 	String getAllAvailable() throws IOException, URISyntaxException {
-
+		System.out.println("In DimensionController");
 		return dimensionService.getAllDimensions();
 
 	}
