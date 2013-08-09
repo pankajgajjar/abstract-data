@@ -68,7 +68,7 @@ public class TreeBuilderUnitTests {
 	public void itShouldBuildTreeForGivenRoot() {
 		// given
 		DimensionModel dimensionModel = new DimensionModel("cp01", "Campaign",
-				"cp01", "-1");
+				"cp01", "cp01", "-1");
 		ArrayList<String> groupIds = new ArrayList<String>();
 		dimensionModel.setGroupId(groupIds);
 		String[] rules = { "Campaign", "MasterPublication", "PublicationGroup",

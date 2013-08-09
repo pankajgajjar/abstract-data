@@ -52,7 +52,7 @@ public class DimensionRepositoryUnitTests {
 		String groupId = "group";
 		String path = "testPath";
 		DimensionModel dimension = new DimensionModel("c01", "campaign",
-				"co01", "testPath");
+				"co01","co01", "testPath");
 		// when
 		when(cache.ifGroupIdExistsFor(dimension.getPath())).thenReturn(true);
 		when(cache.getDimensionGroupIdFor(dimension.getPath())).thenReturn(

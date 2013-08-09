@@ -31,7 +31,7 @@ public class DimensionGroupCacheTests {
 	public void setUp() {
 
 		groupCache = new DimensionGroupCache(redisRepository);
-		dimensionModel = new DimensionModel("test01", "campaign", "co01", "-1");
+		dimensionModel = new DimensionModel("test01", "campaign", "co01", "cp01","-1");
 	}
 
 	@Test

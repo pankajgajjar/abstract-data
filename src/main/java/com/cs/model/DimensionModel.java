@@ -52,10 +52,12 @@ public class DimensionModel implements Serializable, GenericDomain {
 		this.children = children;
 	}
 
-	public DimensionModel(String id, String type, String name, String path) {
+	public DimensionModel(String id, String type, String title, String name,
+			String path) {
 		this.id = id;
 		this.type = type;
 		this.name = name;
+		this.title = title;
 		this.path = path;
 	}
 
