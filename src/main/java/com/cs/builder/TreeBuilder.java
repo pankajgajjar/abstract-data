@@ -32,10 +32,10 @@ public class TreeBuilder {
 		List<DimensionModel> rootNodes = getAllSeparatedTrees(orderedTypes[0]);
 		for (DimensionModel dimension : rootNodes) {
 
-			buildTreeForRootNode(dimension, orderedTypes);
+			buildTreeForRootNode(dimension, orderedTypes, null);
 		}
 
-		return null;
+		return rootNodes;
 	}
 
 	protected String[] getTypes(String structure) {
@@ -48,34 +48,53 @@ public class TreeBuilder {
 
 	}
 
-	protected void buildTreeForRootNode(DimensionModel root, String[] orderTypes) {
-
-		List<DimensionModel> childrenOfCurrentLevel = null;
+	protected void buildTreeForRootNode(DimensionModel root,
+			String[] orderTypes,
+			List<String> groupIdsRequiredForCurrentIteration) {
 		List<String> groupIds = null;
 		DimensionModel currentRoot = root;
-		String[] typesOfDimensions = skipFirstOrderType(orderTypes);
-		groupIds = currentRoot.getGroupId();
-		for (String type : typesOfDimensions) {
-			childrenOfCurrentLevel = getAllChildrenOfCurrentRoot(groupIds, type);
-			currentRoot.setChildren(childrenOfCurrentLevel);
-			for (DimensionModel child : childrenOfCurrentLevel) {
-
-			}
+		if (groupIdsRequiredForCurrentIteration == null) {
+			groupIds = currentRoot.getGroupId();
+		} else {
+			groupIds = intersectGroupIds(currentRoot.getGroupId(),
+					groupIdsRequiredForCurrentIteration);
 
 		}
+		String[] typesOfDimensions = skipFirstOrderType(orderTypes);
+		if (typesOfDimensions.length <= 0)
+			return;
+		List<DimensionModel> childrenOfCurrentLevel = getAllChildrenOfCurrentRoot(
+				groupIds, typesOfDimensions[0]);
+
+		System.out.println(groupIds + "====" + typesOfDimensions[0]);
+
+		currentRoot.setChildren(childrenOfCurrentLevel);
+		for (DimensionModel child : childrenOfCurrentLevel) {
+
+			buildTreeForRootNode(child, typesOfDimensions, groupIds);
+
+		}
+
 	}
 
 	protected List<DimensionModel> getAllChildrenOfCurrentRoot(
 			List<String> groupIds, String type) {
-		// TODO Auto-generated method stub
 		return repository.getDimensionsBy(type, groupIds);
 	}
 
 	private String[] skipFirstOrderType(String[] orderTypes) {
-		// TODO Auto-generated method stub
 		utils = new ArrayUtils();
 		orderTypes = utils.skip(orderTypes, 1);
 		return orderTypes;
+	}
+
+	private List<String> intersectGroupIds(List<String> groupIds,
+			List<String> groupIdsRequiredForCurrentIteration) {
+		utils = new ArrayUtils();
+
+		return utils
+				.intersection(groupIds, groupIdsRequiredForCurrentIteration);
+
 	}
 
 }

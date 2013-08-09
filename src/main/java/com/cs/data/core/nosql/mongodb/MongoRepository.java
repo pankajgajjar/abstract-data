@@ -1,8 +1,8 @@
 package com.cs.data.core.nosql.mongodb;
 
+import java.util.Collection;
 import java.util.List;
 
-import org.mockito.internal.matchers.Find;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -12,9 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.cs.data.core.GenericDomain;
 import com.cs.data.core.nosql.NoSqlOperations;
-import com.sun.org.apache.regexp.internal.recompile;
 
-@Component
 public class MongoRepository implements NoSqlOperations {
 
 	public MongoOperations mongoTemplate;
@@ -82,8 +80,8 @@ public class MongoRepository implements NoSqlOperations {
 	}
 
 	public <T, P, Q> List<Q> getObjectForAndCriteria(String secondField,
-			P secondFieldValue, String firstField, List<T> firstFieldValue,
-			Class<Q> type) {
+			P secondFieldValue, String firstField,
+			Collection<T> firstFieldValue, Class<Q> type) {
 
 		return mongoTemplate.find(
 				Query.query(Criteria.where(firstField).in(firstFieldValue)

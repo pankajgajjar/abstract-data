@@ -17,7 +17,7 @@ public class FileUtilsUnitTests {
 	public void itShouldReadTheJsonFile() throws IOException, URISyntaxException {
 		// given
 
-		String filePath = "home/events.json";
+		String filePath = "home/elements.json";
 		// when
 
 		fileUtils = new FileUtils();

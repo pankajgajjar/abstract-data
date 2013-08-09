@@ -101,7 +101,9 @@ public class DimensionModel implements Serializable, GenericDomain {
 
 	@Override
 	public String toString() {
-		return "DM <id=" + id + ", type=" + type + ", name=" + name + ">";
+		return "DimensionModel [id=" + id + ", type=" + type + ", path=" + path
+				+ ", name=" + name + ", groupIds=" + groupIds + ", children="
+				+ children + "]";
 	}
 
 	public boolean isRoot() {

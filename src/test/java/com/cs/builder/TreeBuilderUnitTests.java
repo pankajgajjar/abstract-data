@@ -69,12 +69,16 @@ public class TreeBuilderUnitTests {
 		// given
 		DimensionModel dimensionModel = new DimensionModel("cp01", "Campaign",
 				"cp01", "-1");
+		ArrayList<String> groupIds = new ArrayList<String>();
+		dimensionModel.setGroupId(groupIds);
 		String[] rules = { "Campaign", "MasterPublication", "PublicationGroup",
 				"Publication" };
 
 		// when
-		treeBuilder.buildTreeForRootNode(dimensionModel, rules);
+		treeBuilder.buildTreeForRootNode(dimensionModel, rules, null);
 		// then
+		verify(dimensionRepository, times(1)).getDimensionsBy(rules[1],
+				groupIds);
 	}
 
 	@Test
@@ -87,6 +91,7 @@ public class TreeBuilderUnitTests {
 
 		treeBuilder.getAllChildrenOfCurrentRoot(groupIds, type);
 		// then
-		verify(dimensionRepository).getDimensionsBy(type, groupIds);
+		verify(dimensionRepository, times(1)).getDimensionsBy(type, groupIds);
 	}
+
 }

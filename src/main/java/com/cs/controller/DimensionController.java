@@ -2,17 +2,8 @@ package com.cs.controller;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,15 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cs.model.CustomResponse;
-import com.cs.model.DimensionGroup;
 import com.cs.model.DimensionModel;
-import com.cs.model.Tree;
-import com.cs.repository.TreeRepository;
 import com.cs.service.DimensionService;
-import com.cs.utils.FileUtils;
 
 @Controller
-@Component
 public class DimensionController {
 
 	private DimensionService dimensionService;
@@ -71,9 +57,8 @@ public class DimensionController {
 	}
 
 	@RequestMapping(value = "/get/{structure}")
-	public List<DimensionModel> getDimensionsBy(
-			@PathVariable("structure") String structure) {
-
+	public @ResponseBody
+	List<DimensionModel> getDimensionsBy(@PathVariable String structure) {
 		return dimensionService.getDimensionsByStructure(structure);
 	}
 

@@ -2,8 +2,6 @@ package com.cs.repository;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,14 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.cs.cache.DimensionGroupCache;
-import com.cs.data.core.IRepository;
-import com.cs.data.core.nosql.NoSqlOperations;
 import com.cs.data.core.nosql.mongodb.MongoRepository;
 import com.cs.model.DimensionGroup;
 import com.cs.model.DimensionModel;
-import com.cs.model.DimensionModelList;
 import com.cs.utils.FileUtils;
-import com.google.common.cache.Cache;
 
 @Component
 public class DimensionRepository {
