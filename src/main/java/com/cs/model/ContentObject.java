@@ -7,9 +7,13 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.cs.data.core.GenericDomain;
+import com.sun.org.apache.regexp.internal.recompile;
 
 @Component
 public class ContentObject implements Serializable, GenericDomain {
+
+	private final String PAGE = "page";
+
 	private String id;
 	private String type;
 	private String path;
@@ -20,7 +24,7 @@ public class ContentObject implements Serializable, GenericDomain {
 	public ContentObject() {
 		// TODO Auto-generated constructor stub
 	}
-		
+
 	public String getIsFolder() {
 		return isFolder;
 	}
@@ -81,7 +85,7 @@ public class ContentObject implements Serializable, GenericDomain {
 		this.name = name;
 		this.title = name;
 		this.type = type;
-		this.path=path;
+		this.path = path;
 		this.isFolder = isFolder;
 
 	}
@@ -148,6 +152,25 @@ public class ContentObject implements Serializable, GenericDomain {
 		} else {
 
 			groupIds.add(groupId);
+		}
+
+	}
+
+	public boolean hasChildren() {
+		return children == null ? false : true;
+	}
+
+	public boolean isPage() {
+		return type == PAGE ? true : false;
+	}
+
+	public void addchild(ContentObject contentObject) {
+		if (children == null) {
+			List<ContentObject> children = new ArrayList<ContentObject>();
+			children.add(contentObject);
+
+		} else {
+			children.add(contentObject);
 		}
 
 	}

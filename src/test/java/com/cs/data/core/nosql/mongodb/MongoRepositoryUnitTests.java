@@ -91,4 +91,19 @@ public class MongoRepositoryUnitTests {
 		Assert.assertEquals(teacherWithGivenStudent.size(), 1);
 
 	}
+
+	@Test
+	public void itShouldGetObjectByKeyAndType() {
+
+		// given
+		String id = "1";
+		// when
+
+		Student student = crudRepository.getObjectByKey(id, Student.class);
+
+		// then
+		Assert.assertEquals("Amar", student.getName());
+		Assert.assertNotNull(student);
+
+	}
 }

@@ -89,4 +89,10 @@ public class MongoRepository implements NoSqlOperations {
 						.and(secondField).is(secondFieldValue)), type);
 
 	}
+
+	public <T> T getObjectByKey(String id, Class<T> type) {
+		// TODO Auto-generated method stub
+		return mongoTemplate.findById(id, type);
+
+	}
 }

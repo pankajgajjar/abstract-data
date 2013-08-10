@@ -63,9 +63,10 @@ var DynaTree = function(data){
                         }
                         
                         var flag = isFolder(action);
-                        APIFactory.callToServerWithPost("/pub2.0/dimension/create/"+possibleDim+"/name/"+name+"/path/"+currentPath+"/folder/"+flag,function(data){
+                        APIFactory.callToServerWithPost("/pub2.0/dimension/create/"+action+"/name/"+name+"/path/"+currentPath+"/folder/"+flag,function(data){
                             var newNode = createNode(name,action,currentPath,flag);
                             parentNode.addChild(newNode);
+                            parentNode.data.children.push(newNode);
                         });
                     }
                 }
