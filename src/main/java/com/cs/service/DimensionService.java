@@ -12,7 +12,7 @@ import com.cs.model.DimensionModel;
 import com.cs.repository.DimensionRepository;
 
 @Component
-public class DimensionService {
+public class DimensionService implements IService {
 
 	private TreeBuilder treeBuilder;
 	private DimensionRepository dimensionRepository;
@@ -26,18 +26,36 @@ public class DimensionService {
 
 	}
 
-	public String getAllDimensions() throws IOException, URISyntaxException {
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.cs.service.IService#getAll()
+	 */
+	@Override
+	public String getAll() throws IOException, URISyntaxException {
 		// TODO Auto-generated method stub
 
 		return dimensionRepository.getAllDimensions();
 	}
 
-	public String createDimension(DimensionModel dimension) {
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.cs.service.IService#create(com.cs.model.DimensionModel)
+	 */
+	@Override
+	public String create(DimensionModel dimension) {
 
 		return dimensionRepository.createDimension(dimension);
 	}
 
-	public List<DimensionModel> getDimensionsByStructure(String structure) {
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.cs.service.IService#getAllBy(java.lang.String)
+	 */
+	@Override
+	public List<DimensionModel> getAllBy(String structure) {
 		// TODO Auto-generated method stub
 
 		return treeBuilder.buildTree(structure);

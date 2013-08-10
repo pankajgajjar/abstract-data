@@ -19,7 +19,7 @@ import com.cs.data.core.nosql.redis.RedisRepository;
 import com.cs.model.DimensionGroup;
 import com.cs.model.DimensionModel;
 import com.cs.repository.DimensionRepository;
-import com.cs.service.DimensionService;
+import com.cs.service.IService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:application-context-test.xml")
@@ -33,7 +33,7 @@ public class DimensionIntegrationTests {
 	private DimensionGroupCache cache;
 	private DimensionRepository dimensionRepository;
 
-	private DimensionService dimensionService;
+	private IService dimensionService;
 
 	@Autowired
 	private RedisRepository noSqlTemplateForRedis;

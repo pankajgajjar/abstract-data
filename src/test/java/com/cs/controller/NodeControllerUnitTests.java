@@ -68,13 +68,13 @@ public class NodeControllerUnitTests {
 
 		// when
 
-		when(dimensionService.createDimension(dimensionModel)).thenReturn(
+		when(dimensionService.create(dimensionModel)).thenReturn(
 				expectedDimensionId);
 
 		String actualResponse = treeController.create(type, name, path,
 				parentId);
 		// then
-		verify(dimensionService).createDimension(dimensionModel);
+		verify(dimensionService).create(dimensionModel);
 		assertThat(actualResponse).isEqualTo(expectedDimensionId);
 
 	}
@@ -85,12 +85,12 @@ public class NodeControllerUnitTests {
 		// given
 
 		String content = "expected";
-		when(dimensionService.getAllDimensions()).thenReturn(content);
+		when(dimensionService.getAll()).thenReturn(content);
 		// when
 
 		String actualContent = treeController.getAllAvailable();
 		// then
-		verify(dimensionService).getAllDimensions();
+		verify(dimensionService).getAll();
 		assertThat(actualContent).isEqualTo(content);
 	}
 
@@ -101,13 +101,13 @@ public class NodeControllerUnitTests {
 		String structure = "C-MP-P";
 
 		// when
-		when(dimensionService.getDimensionsByStructure(structure)).thenReturn(
+		when(dimensionService.getAllBy(structure)).thenReturn(
 				models);
 		List<DimensionModel> actualModels = treeController
 				.getDimensionsBy(structure);
 
 		// then
-		verify(dimensionService).getDimensionsByStructure(structure);
+		verify(dimensionService).getAllBy(structure);
 		assertThat(actualModels).isEqualTo(models);
 
 	}

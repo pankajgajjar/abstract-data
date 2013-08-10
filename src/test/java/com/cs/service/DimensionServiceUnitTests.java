@@ -21,7 +21,7 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class DimensionServiceUnitTests {
 
-	private DimensionService dimensionService;
+	private IService dimensionService;
 
 	@Mock
 	private DimensionModel dimensionModel;
@@ -47,7 +47,7 @@ public class DimensionServiceUnitTests {
 
 		// when
 		when(dimensionRepository.getAllDimensions()).thenReturn(expected);
-		String dimensions = dimensionService.getAllDimensions();
+		String dimensions = dimensionService.getAll();
 
 		// then
 
@@ -65,7 +65,7 @@ public class DimensionServiceUnitTests {
 
 		when(dimensionRepository.createDimension(dimensionModel)).thenReturn(
 				expectedDimensionId);
-		String dimensionId = dimensionService.createDimension(dimensionModel);
+		String dimensionId = dimensionService.create(dimensionModel);
 
 		// then
 		assertThat(dimensionId).isEqualTo(expectedDimensionId);
@@ -79,7 +79,7 @@ public class DimensionServiceUnitTests {
 		String structure = "C-MP-P";
 		// when
 		List<DimensionModel> models = dimensionService
-				.getDimensionsByStructure(structure);
+				.getAllBy(structure);
 
 		// then
 		verify(treeBuilder).buildTree(structure);

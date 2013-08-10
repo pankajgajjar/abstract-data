@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cs.model.DimensionModel;
-import com.cs.service.DimensionService;
+import com.cs.service.IService;
 
 @Controller
 public class NodeController {
 
-	private DimensionService dimensionService;
+	private IService dimensionService;
 
 	@Autowired
-	public NodeController(DimensionService dimensionService) {
+	public NodeController(IService dimensionService) {
 		this.dimensionService = dimensionService;
 
 	}
@@ -43,7 +43,7 @@ public class NodeController {
 		dimension.setTitle(name);
 		dimension.setIsFolder(isFolder);
 		System.out.println(dimension);
-		return dimensionService.createDimension(dimension);
+		return dimensionService.create(dimension);
 
 	}
 
@@ -64,13 +64,13 @@ public class NodeController {
 	@RequestMapping(value = "/dimension/get/{structure}")
 	public @ResponseBody
 	List<DimensionModel> getDimensionsBy(@PathVariable String structure) {
-		return dimensionService.getDimensionsByStructure(structure);
+		return dimensionService.getAllBy(structure);
 	}
 
 	@RequestMapping(value = "/dimension/alldimensions")
 	public @ResponseBody
 	String getAllAvailable() throws IOException, URISyntaxException {
-		return dimensionService.getAllDimensions();
+		return dimensionService.getAll();
 
 	}
 
