@@ -11,11 +11,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.cs.controller.NodeController;
+import com.cs.factory.DomainFactory;
 import com.cs.model.CustomResponse;
 import com.cs.model.DimensionGroup;
-import com.cs.model.DimensionModel;
+import com.cs.model.ContentObject;
 import com.cs.service.DimensionService;
 
 import static org.fest.assertions.Assertions.*;
@@ -30,14 +32,14 @@ public class NodeControllerUnitTests {
 	private DimensionService dimensionService;
 
 	@Mock
-	private DimensionModel dimensionModel;
+	private ContentObject dimensionModel;
 
 	@Mock
-	private DimensionGroup dimensionGroup;
+	private DomainFactory domainFactory;
 
 	@Before
 	public void setUp() {
-		treeController = new NodeController(dimensionService);
+		treeController = new NodeController(dimensionService, domainFactory);
 	}
 
 	@Test
@@ -68,6 +70,8 @@ public class NodeControllerUnitTests {
 
 		// when
 
+		when(domainFactory.getDomainObject("ContentObject")).thenReturn(
+				dimensionModel);
 		when(dimensionService.create(dimensionModel)).thenReturn(
 				expectedDimensionId);
 
@@ -97,13 +101,12 @@ public class NodeControllerUnitTests {
 	@Test
 	public void itShouldAllGroupsAccordingToStructure() {
 		// given
-		List<DimensionModel> models = new ArrayList<DimensionModel>();
+		List<ContentObject> models = new ArrayList<ContentObject>();
 		String structure = "C-MP-P";
 
 		// when
-		when(dimensionService.getAllBy(structure)).thenReturn(
-				models);
-		List<DimensionModel> actualModels = treeController
+		when(dimensionService.getAllBy(structure)).thenReturn(models);
+		List<ContentObject> actualModels = treeController
 				.getDimensionsBy(structure);
 
 		// then

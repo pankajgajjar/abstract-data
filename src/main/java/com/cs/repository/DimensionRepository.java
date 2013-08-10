@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.cs.cache.DimensionGroupCache;
 import com.cs.data.core.nosql.mongodb.MongoRepository;
 import com.cs.model.DimensionGroup;
-import com.cs.model.DimensionModel;
+import com.cs.model.ContentObject;
 import com.cs.utils.FileUtils;
 
 @Component
@@ -34,7 +34,7 @@ public class DimensionRepository {
 		this.noSqlTemplateforMongo = noSqlTemplateforMongo;
 	}
 
-	public String createDimension(DimensionModel dimension) {
+	public String createDimension(ContentObject dimension) {
 		String groupId = getDimensionGroupId(dimension.getPath());
 		if (groupCache.ifGroupIdExistsFor(dimension.getPath())) {
 			dimension.addToGroupId(groupId);
@@ -59,7 +59,7 @@ public class DimensionRepository {
 		String[] paths = path.split(",");
 		for (String singlePath : paths) {
 			noSqlTemplateforMongo.updateById(singlePath, FIELDTOUPDATE,
-					groupId, DimensionModel.class);
+					groupId, ContentObject.class);
 		}
 
 	}
@@ -79,21 +79,21 @@ public class DimensionRepository {
 		return fileUtils.getFileContents("dimensions.json");
 	}
 
-	public List<DimensionModel> getDimensions() {
+	public List<ContentObject> getDimensions() {
 
-		return noSqlTemplateforMongo.findAll(DimensionModel.class);
+		return noSqlTemplateforMongo.findAll(ContentObject.class);
 	}
 
-	public List<DimensionModel> getDimensionsOfType(String type) {
+	public List<ContentObject> getDimensionsOfType(String type) {
 		// TODO Auto-generated method stub
 		return noSqlTemplateforMongo.getObjectsBy(TYPE, type,
-				DimensionModel.class);
+				ContentObject.class);
 	}
 
-	public List<DimensionModel> getDimensionsBy(String type2,
+	public List<ContentObject> getDimensionsBy(String type2,
 			List<String> groupIds) {
 		return noSqlTemplateforMongo.getObjectForAndCriteria(TYPE, type2,
-				GROUPIDS, groupIds, DimensionModel.class);
+				GROUPIDS, groupIds, ContentObject.class);
 
 	}
 

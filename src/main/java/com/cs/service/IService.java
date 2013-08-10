@@ -4,14 +4,15 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import com.cs.model.DimensionModel;
+import com.cs.data.core.GenericDomain;
+import com.cs.model.ContentObject;
 
 public interface IService {
 
 	public String getAll() throws IOException, URISyntaxException;
 
-	public <T> String create(T domainObject);
+	public String create(ContentObject domainObject);
 
-	public List<DimensionModel> getAllBy(String structure);
+	public List<ContentObject> getAllBy(String structure);
 
 }

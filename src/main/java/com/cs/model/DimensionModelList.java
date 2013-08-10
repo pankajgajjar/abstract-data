@@ -4,17 +4,17 @@ import java.util.List;
 
 public class DimensionModelList {
 
-	private List<DimensionModel> dimensions;
+	private List<ContentObject> dimensions;
 
 	public DimensionModelList() {
 
 	}
 
-	public List<DimensionModel> getDimensions() {
+	public List<ContentObject> getDimensions() {
 		return dimensions;
 	}
 
-	public void setDimensions(List<DimensionModel> dimensions) {
+	public void setDimensions(List<ContentObject> dimensions) {
 		this.dimensions = dimensions;
 	}
 

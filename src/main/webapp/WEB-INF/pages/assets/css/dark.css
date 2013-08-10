@@ -2,11 +2,15 @@
     border-bottom-color: #040404;
 }
 
+.span9 {
+    width: 93%;
+}
+
 .logo{
     padding: 25px 0 0 0;
     overflow: hidden;
 
-   background-image: url("images/logo2.png");
+   background-image: url("images/cs_logo.png");
 }
 
 .profileLogo {
@@ -32,6 +36,7 @@ body {
     padding:0;
     border:0;			/* This removes the border around the viewport in old versions of IE */
     width:100%;
+    height: 100px;
     color: #333333;
     background-color: #ececec;
     min-width:600px;    	/* Minimum width of layout - remove line if not required */
@@ -67,14 +72,9 @@ img {
     clear:both;
     float:left;
     width:100%;
-
-}
-#header {
     border-bottom:1px solid #000;
 }
-#leftPanel{
-    left: -20px;
-}
+
 /*#header p,
 #header h1,
 #header h2 {
@@ -133,27 +133,39 @@ img {
 /* column container */
 .colmask {
     position:relative;	/* This fixes the IE7 overflow hidden bug */
-    clear:both;
+    /*clear:both;*/
     float:left;
     width:100%;			/* width of whole page */
-    overflow:hidden;		/* This chops off any overhanging divs */
+    height: 100%;
+    /*overflow:hidden;		*//* This chops off any overhanging divs */
 }
+
 /* common column settings */
-.colright,
-.colmid,
 .colleft {
     float:left;
-    width:100%;
+    width:20%;
+    height: 100%;
     position:relative;
+    margin-left: 0px;
 }
-.col1,
-.col2,
-.col3 {
+
+.colmid{
     float:left;
+    margin-left: 25px;
     position:relative;
-    padding:0 0 1em 0;
-    overflow:hidden;
+    height:580px;
+    width: 10px;
+    background-color: #515151;
 }
+
+.colright{
+    float:left;
+    position: relative;
+    width: 80%;
+    height: 100%;
+}
+
+
 /* 2 Column (left menu) settings */
 .leftmenu {
     background:#fff;		/* right column background colour */
@@ -220,19 +232,351 @@ Top Bar Animation Section starts
 .mainAnimationContainerCSS{
     text-align: center;
     background-color: #777777;
-    position: relative;
     left: -30px;
     right: 0px;
     height: 30px;
 }
 
 .formatTxt{
-    width: 100%;
+    width: 50%;
     background-color: #777777;
     text-align: center;
-    font-weight: bold;
-    color:#ffffff;
+    font-size: 13px;
+    font-weight: lighter;
+    font-family: sans-serif;
+    color:white;
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    margin:0 auto;
+    margin-top: -10px;
 }
 /*
 Top Bar Animation Section Ends
   */
+
+/*
+    * CSS designed for index.html
+    * Created by Ravi Sharma.
+    * User: cs6
+    * Date: 25/07/13
+    * Time: 1:30 PM
+*/
+
+
+
+.holder{
+    min-height: 100%;
+    position:relative;
+}
+
+p{
+    font-family: arial;
+    font-size: 14pt;
+}
+
+.logo{
+    padding: 15px 20px 10px 10px;
+}
+
+.logoutBtnCSS{
+    border:#fbb450;
+    float: right;
+    margin: 15px 10px 0px 0px;
+}
+
+
+/*
+Top Bar Animation Section starts
+  */
+.selectLblCSS{
+    text-align: left;
+    padding-left: 5px;
+    padding-top: 5px;
+    font-size: 12px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+.customSelectCSS{
+    position: relative;
+    width: 95%;
+}
+.mainAnimationContainerCSS{
+    text-align: center;
+    background-color: #777777;
+    position: relative;
+    left: 0px;
+    right: 0px;
+    height: 30px;
+}
+/* Top Bar Animation Section Ends  */
+
+
+
+
+
+
+
+.header{
+
+    clear:both;
+    float:left;
+    border-bottom: #0e0e0e double thin;
+    width:100%;
+    /*
+        border: #0e0e0e double thin;
+        background-color: #00FF00;
+    */
+}
+
+.loginViewContainerCSS{
+    padding: 15px 20px 10px 10px;
+}
+
+.legendCSS{
+    padding: 0px 0px 0px 0px;
+}
+
+.mainContainer{
+    width: 100%;
+    border-bottom: #0e0e0e double thin;
+    padding-bottom: 100px;
+    background-color: #999999;
+    float: left;
+    bottom: 20px;
+    top: 55px;
+    position: absolute;
+}
+
+.UIContainer{
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position:absolute;
+    background-color: #999999;
+}
+
+.leftPanel{
+    width:20%;
+    height: 100%;
+    float:left;
+    background-color: #999999;
+    border-right: #0e0e0e solid thin;
+}
+#rightPanel{
+    height: 100%;
+    float:left;
+    margin-left: 20px;
+    background-color: #999999;
+    border-right: #0e0e0e solid thin;
+}
+
+#rightPanelView
+{
+    height: 100%;
+    width: 100%;
+    float:left;
+    position: relative;
+}
+
+.footer{
+    /*float: left;*/
+    font-family: "verdana";
+    font-size: 11px;
+    text-align: center;
+    height: 20px;
+    width:100%;
+    border-top: #0e0e0e double thin;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.notificationCSS{
+
+    font-family: "verdana";
+    font-size: 10px;
+    text-align: center;
+    height: 20px;
+
+    border: #0e0e0e solid thin;
+    /*
+    border-right: #0e0e0e solid thin;
+    border-bottom: #0e0e0e solid thin;
+      */
+    position: fixed;
+
+    left: 45%;
+    margin-left: -150px;
+    top: 40px;
+    background-color: #bfbfbf;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.notificationTxtCSS{
+    font-size: 12px;
+}
+
+/* Right hand side Panel viewHolderCSS */
+
+.viewHolderCSS{
+    position: relative;
+    float: left;
+    background-color:antiquewhite;
+    width: 100%;
+    height: 500px;
+   /* bottom: 20px;*/
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+
+/* Tile, List and Detail View Item Renderer CSS Section Starts */
+.tileImgCSS{
+    position: absolute;
+    top:5px;
+    left:15px;
+    height:110px;
+    width: 110px;
+}
+
+.listImgCSS{
+    position: absolute;
+    top:-2px;
+    left:5px;
+    height: 30px;
+    width: 30px;
+}
+
+.detailImgCSS{
+    position:relative;
+    top: -10px;
+    margin-left:5px;
+    float: left;
+    height:70px;
+    width: 70px;
+}
+
+.tileListViewImgTxtCSS{
+    position: absolute;
+    bottom:0px;
+    font-size: 16px;
+    text-align: center;
+    left:45px;
+}
+
+.tileViewImgTxtCSS{
+    position: absolute;
+    bottom:0px;
+    font-size: 12px;
+    text-align: center;
+    left:15px;
+}
+
+
+.detailTitleTxtCSS{
+    position: relative;
+    margin-top:5px;
+    margin-left:20px;
+    float: left;
+    height:auto;
+    width:auto;
+}
+
+.detailContentTxtCSS{
+    position: relative;
+    margin-top:10px;
+    margin-left:20px;
+    width:auto;
+    height:auto;
+    float: left;
+    height: auto;
+}
+
+.detailTitleContent{
+    position: relative;
+    margin-top:5px;
+    margin-left:20px;
+    float: left;
+    height:auto;
+    width: auto;
+
+
+}
+
+.tileDivCSS{
+    position: relative;
+    background-color:lightcyan;
+    float: left;
+    height : 160px; width : 128px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.listDivCSS{
+    position: relative;
+    background-color:lightcyan;
+    float: left;
+    height : 35px;
+    width : 95%;
+    padding: 5px;
+    margin: 5px;
+    border-top: 1px solid skyblue;
+    border-left: 1px solid skyblue;
+    border-right: 1px solid skyblue;
+    border-bottom: 1px solid skyblue;
+}
+
+.detailDivCSS{
+    position: relative;
+    background-color:lightcyan;
+    float: left;
+    height : auto;
+    width : 95%;
+    padding: 5px;
+    margin: 5px;
+    border-top: 1px solid skyblue;
+    border-left: 1px solid skyblue;
+    border-right: 1px solid skyblue;
+    border-bottom: 1px solid skyblue;
+}
+
+.viewOptionCSS{
+    position: relative;
+    background-color:#777777;
+    float: left;
+    height : 22px;
+    width : 100%;
+    text-align: center;
+}
+
+.tileBtnCSS{
+    background:url(images/icons/tile.png);
+    background-repeat: no-repeat;
+    border:0px;
+    width: 28px;
+    height: 22px;
+}
+
+.listBtnCSS{
+    background:url(images/icons/list.png);
+    background-repeat: no-repeat;
+    border:0px;
+    width: 28px;
+    height: 22px;
+}
+
+.detailBtnCSS{
+    background:url(images/icons/detail.png);
+    background-repeat: no-repeat;
+    border:0px;
+    width: 28px;
+    height: 22px;
+}
+/* Tile, List and Detail View Item Renderer CSS Section Ends */

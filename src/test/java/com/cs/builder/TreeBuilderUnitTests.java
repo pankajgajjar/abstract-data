@@ -10,7 +10,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.cs.cache.DimensionGroupCache;
-import com.cs.model.DimensionModel;
+import com.cs.model.ContentObject;
 import com.cs.model.DimensionModelList;
 import com.cs.repository.DimensionRepository;
 
@@ -53,12 +53,12 @@ public class TreeBuilderUnitTests {
 
 		// given
 		String type = "Campaign";
-		List<DimensionModel> result = new ArrayList<DimensionModel>();
+		List<ContentObject> result = new ArrayList<ContentObject>();
 
 		// when
 
 		when(dimensionRepository.getDimensionsOfType(type)).thenReturn(result);
-		List<DimensionModel> models = treeBuilder.getAllSeparatedTrees(type);
+		List<ContentObject> models = treeBuilder.getAllSeparatedTrees(type);
 		// then
 		verify(dimensionRepository).getDimensionsOfType(type);
 		assertThat(models).isEqualTo(result);
@@ -67,7 +67,7 @@ public class TreeBuilderUnitTests {
 	@Test
 	public void itShouldBuildTreeForGivenRoot() {
 		// given
-		DimensionModel dimensionModel = new DimensionModel("cp01", "Campaign",
+		ContentObject dimensionModel = new ContentObject("cp01", "Campaign",
 				"cp01", "cp01", "-1");
 		ArrayList<String> groupIds = new ArrayList<String>();
 		dimensionModel.setGroupId(groupIds);

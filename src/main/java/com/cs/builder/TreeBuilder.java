@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.cs.cache.DimensionGroupCache;
-import com.cs.model.DimensionModel;
+import com.cs.model.ContentObject;
 import com.cs.model.DimensionModelList;
 import com.cs.repository.DimensionRepository;
 import com.cs.utils.ArrayUtils;
@@ -27,10 +27,10 @@ public class TreeBuilder {
 		this.repository = repository;
 	}
 
-	public List<DimensionModel> buildTree(String structure) {
+	public List<ContentObject> buildTree(String structure) {
 		String[] orderedTypes = getTypes(structure);
-		List<DimensionModel> rootNodes = getAllSeparatedTrees(orderedTypes[0]);
-		for (DimensionModel dimension : rootNodes) {
+		List<ContentObject> rootNodes = getAllSeparatedTrees(orderedTypes[0]);
+		for (ContentObject dimension : rootNodes) {
 
 			buildTreeForRootNode(dimension, orderedTypes, null);
 		}
@@ -43,16 +43,16 @@ public class TreeBuilder {
 		return structure.split(DELIMETER);
 	}
 
-	protected List<DimensionModel> getAllSeparatedTrees(String type) {
+	protected List<ContentObject> getAllSeparatedTrees(String type) {
 		return repository.getDimensionsOfType(type);
 
 	}
 
-	protected void buildTreeForRootNode(DimensionModel root,
+	protected void buildTreeForRootNode(ContentObject root,
 			String[] orderTypes,
 			List<String> groupIdsRequiredForCurrentIteration) {
 		List<String> groupIds = null;
-		DimensionModel currentRoot = root;
+		ContentObject currentRoot = root;
 		if (groupIdsRequiredForCurrentIteration == null) {
 			groupIds = currentRoot.getGroupId();
 		} else {
@@ -63,11 +63,11 @@ public class TreeBuilder {
 		String[] typesOfDimensions = skipFirstOrderType(orderTypes);
 		if (typesOfDimensions.length <= 0)
 			return;
-		List<DimensionModel> childrenOfCurrentLevel = getAllChildrenOfCurrentRoot(
+		List<ContentObject> childrenOfCurrentLevel = getAllChildrenOfCurrentRoot(
 				groupIds, typesOfDimensions[0]);
 
 		currentRoot.setChildren(childrenOfCurrentLevel);
-		for (DimensionModel child : childrenOfCurrentLevel) {
+		for (ContentObject child : childrenOfCurrentLevel) {
 
 			buildTreeForRootNode(child, typesOfDimensions, groupIds);
 
@@ -75,7 +75,7 @@ public class TreeBuilder {
 
 	}
 
-	protected List<DimensionModel> getAllChildrenOfCurrentRoot(
+	protected List<ContentObject> getAllChildrenOfCurrentRoot(
 			List<String> groupIds, String type) {
 		return repository.getDimensionsBy(type, groupIds);
 	}

@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 import com.cs.cache.DimensionGroupCache;
 import com.cs.data.core.nosql.mongodb.MongoRepository;
 import com.cs.model.DimensionGroup;
-import com.cs.model.DimensionModel;
+import com.cs.model.ContentObject;
 import com.cs.utils.FileUtils;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -25,7 +25,7 @@ public class DimensionRepositoryUnitTests {
 	private DimensionRepository dimensionRepository;
 
 	@Mock
-	private DimensionModel dimensionModel;
+	private ContentObject dimensionModel;
 
 	@Mock
 	private FileUtils fileUtils;
@@ -51,7 +51,7 @@ public class DimensionRepositoryUnitTests {
 		String dimensionId = "test";
 		String groupId = "group";
 		String path = "testPath";
-		DimensionModel dimension = new DimensionModel("c01", "campaign",
+		ContentObject dimension = new ContentObject("c01", "campaign",
 				"co01","co01", "testPath");
 		// when
 		when(cache.ifGroupIdExistsFor(dimension.getPath())).thenReturn(true);
@@ -70,14 +70,14 @@ public class DimensionRepositoryUnitTests {
 	public void itShouldGetAllDimensionInstances() {
 
 		// given
-		List<DimensionModel> expectedModels = new ArrayList<DimensionModel>();
-		expectedModels.add(new DimensionModel());
+		List<ContentObject> expectedModels = new ArrayList<ContentObject>();
+		expectedModels.add(new ContentObject());
 		// when
-		when(repository.findAll(DimensionModel.class)).thenReturn(
+		when(repository.findAll(ContentObject.class)).thenReturn(
 				expectedModels);
-		List<DimensionModel> dimensions = dimensionRepository.getDimensions();
+		List<ContentObject> dimensions = dimensionRepository.getDimensions();
 		// then
-		verify(repository).findAll(DimensionModel.class);
+		verify(repository).findAll(ContentObject.class);
 		assertThat(dimensions).isNotEmpty();
 		assertThat(dimensions).isEqualTo(expectedModels);
 
@@ -92,7 +92,7 @@ public class DimensionRepositoryUnitTests {
 		dimensionRepository.getDimensionsOfType(type);
 		// then
 
-		verify(repository).getObjectsBy("type", type, DimensionModel.class);
+		verify(repository).getObjectsBy("type", type, ContentObject.class);
 	}
 
 	@Test
@@ -105,7 +105,7 @@ public class DimensionRepositoryUnitTests {
 		dimensionRepository.getDimensionsBy(type2, groupIds);
 		// then
 		verify(repository).getObjectForAndCriteria("type", type2, "groupIds",
-				groupIds, DimensionModel.class);
+				groupIds, ContentObject.class);
 	}
 
 }

@@ -50,23 +50,16 @@ var DynaTree = function(data){
                 var name=prompt("Please enter "+action+" name","");
                 if(name != null){
                     if(name != ""){
-                    
                         var parentNode = $.ui.dynatree.getNode(el);
                         if(parentNode.data.type == "root"){
-                            currentPath = "-1";
-                            
+                            currentPath =  parentNode.data.type;
                         }
                         else{
-                        	currentPath = parentNode.data.path+","+ parentNode.data.title;
-                            if(currentPath.indexOf("-1")!=-1)
-                            currentPath = currentPath.match(/([^,]*),(.*)/)[2];   //To remove -1 root folder
+                            currentPath = parentNode.data.path+","+ parentNode.data.title;
                         }
-                        
-                        var flag = isFolder(action);
-                        APIFactory.callToServerWithPost("/pub2.0/dimension/create/"+possibleDim+"/name/"+name+"/path/"+currentPath+"/folder/"+flag,function(data){
-                            var newNode = createNode(name,action,currentPath,flag);
-                            parentNode.addChild(newNode);
-                        });
+                        alert(currentPath)
+                        var newNode = createNode(name,action,currentPath);
+                        parentNode.addChild(newNode);
                     }
                 }
             });
@@ -74,8 +67,9 @@ var DynaTree = function(data){
         }
     }
 
-    function createNode(name,type,path,flag){
-         var newNode = {
+    function createNode(name,type,path){
+        var flag = isFolder(type);
+        var newNode = {
                         "id": "P01",
                         "title": name,
                         "type": type,

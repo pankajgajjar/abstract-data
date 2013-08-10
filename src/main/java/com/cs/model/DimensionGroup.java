@@ -21,7 +21,7 @@ public class DimensionGroup implements Serializable, GenericDomain {
 	private String id;
 	private String groupName;
 
-	private List<DimensionModel> dimensions;
+	private List<ContentObject> dimensions;
 	private boolean existence;
 
 	public DimensionGroup() {
@@ -35,17 +35,17 @@ public class DimensionGroup implements Serializable, GenericDomain {
 	}
 
 	public DimensionGroup(String id, String groupName,
-			List<DimensionModel> dimensions) {
+			List<ContentObject> dimensions) {
 		this.id = id;
 		this.groupName = groupName;
 		this.dimensions = dimensions;
 	}
 
-	public List<DimensionModel> getDimensions() {
+	public List<ContentObject> getDimensions() {
 		return dimensions;
 	}
 
-	public void setDimensions(List<DimensionModel> dimensions) {
+	public void setDimensions(List<ContentObject> dimensions) {
 		this.dimensions = dimensions;
 	}
 

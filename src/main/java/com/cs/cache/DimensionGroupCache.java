@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.cs.data.core.nosql.redis.RedisRepository;
-import com.cs.model.DimensionModel;
+import com.cs.model.ContentObject;
 
 @Component
 public class DimensionGroupCache {
@@ -24,21 +24,21 @@ public class DimensionGroupCache {
 		return noSqlTemplateForRedis.get(path);
 	}
 
-	public void updateCache(DimensionModel dimension, String groupId) {
+	public void updateCache(ContentObject dimension, String groupId) {
 
 		delete(dimension);
 		noSqlTemplateForRedis.set(
 				dimension.getPath().concat("," + dimension.getName()), groupId);
 	}
 
-	private void delete(DimensionModel dimension) {
+	private void delete(ContentObject dimension) {
 		// TODO Auto-generated method stub
 
 		noSqlTemplateForRedis.delete(dimension.getPath());
 
 	}
 
-	public void addNewGroup(DimensionModel dimension, String groupId) {
+	public void addNewGroup(ContentObject dimension, String groupId) {
 		// TODO Auto-generated method stub
 		if (dimension.isRoot()) {
 			noSqlTemplateForRedis.set(dimension.getName(), groupId);

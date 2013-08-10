@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import com.cs.data.core.GenericDomain;
 
 @Component
-public class DimensionModel implements Serializable, GenericDomain {
+public class ContentObject implements Serializable, GenericDomain {
 	private String id;
 	private String type;
 	private String path;
@@ -17,6 +17,10 @@ public class DimensionModel implements Serializable, GenericDomain {
 	private String title;
 	private String isFolder;
 
+	public ContentObject() {
+		// TODO Auto-generated constructor stub
+	}
+		
 	public String getIsFolder() {
 		return isFolder;
 	}
@@ -34,25 +38,13 @@ public class DimensionModel implements Serializable, GenericDomain {
 	}
 
 	private List<String> groupIds;
-	private List<DimensionModel> children;
+	private List<ContentObject> children;
 
 	public List<String> getGroupId() {
 		return groupIds;
 	}
 
-	public void setGroupId(List<String> groupId) {
-		this.groupIds = groupId;
-	}
-
-	public List<DimensionModel> getChildren() {
-		return children;
-	}
-
-	public void setChildren(List<DimensionModel> children) {
-		this.children = children;
-	}
-
-	public DimensionModel(String id, String type, String title, String name,
+	public ContentObject(String id, String type, String title, String name,
 			String path) {
 		this.id = id;
 		this.type = type;
@@ -61,8 +53,8 @@ public class DimensionModel implements Serializable, GenericDomain {
 		this.path = path;
 	}
 
-	public DimensionModel(String id, String type, String path, String name,
-			List<String> groupId, List<DimensionModel> children) {
+	public ContentObject(String id, String type, String path, String name,
+			List<String> groupId, List<ContentObject> children) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -72,8 +64,26 @@ public class DimensionModel implements Serializable, GenericDomain {
 		this.children = children;
 	}
 
-	public DimensionModel() {
-		// TODO Auto-generated constructor stub
+	public void setGroupId(List<String> groupId) {
+		this.groupIds = groupId;
+	}
+
+	public List<ContentObject> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<ContentObject> children) {
+		this.children = children;
+	}
+
+	public ContentObject(String name, String type, String path, String isFolder) {
+		this.id = name;
+		this.name = name;
+		this.title = name;
+		this.type = type;
+		this.path=path;
+		this.isFolder = isFolder;
+
 	}
 
 	public String getPath() {
@@ -123,8 +133,8 @@ public class DimensionModel implements Serializable, GenericDomain {
 	@Override
 	public String toString() {
 		return "DimensionModel [id=" + id + ", type=" + type + ", path=" + path
-				+ ", title=" + title + ", name=" + name + ", groupIds=" + groupIds + ", children="
-				+ children + "]";
+				+ ", title=" + title + ", name=" + name + ", groupIds="
+				+ groupIds + ", children=" + children + "]";
 	}
 
 	public boolean isRoot() {

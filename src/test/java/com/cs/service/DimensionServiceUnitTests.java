@@ -11,7 +11,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.cs.builder.TreeBuilder;
-import com.cs.model.DimensionModel;
+import com.cs.model.ContentObject;
 import com.cs.repository.DimensionRepository;
 import com.cs.utils.FileUtils;
 
@@ -24,7 +24,7 @@ public class DimensionServiceUnitTests {
 	private IService dimensionService;
 
 	@Mock
-	private DimensionModel dimensionModel;
+	private ContentObject dimensionModel;
 
 	@Mock
 	private TreeBuilder treeBuilder;
@@ -78,7 +78,7 @@ public class DimensionServiceUnitTests {
 
 		String structure = "C-MP-P";
 		// when
-		List<DimensionModel> models = dimensionService
+		List<ContentObject> models = dimensionService
 				.getAllBy(structure);
 
 		// then

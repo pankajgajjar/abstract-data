@@ -41,7 +41,7 @@ function setSchemaLabel(){
 }
 
 function onChangeSchemaSuccess(data){
-    //data=eval('(' + data + ')');
+    data=eval('(' + data + ')');
     setCurrentSchema(data);
     setSchemaLabel();
     $(document).trigger({
@@ -85,13 +85,13 @@ function getDummyCounter(){
 }
 
 function changeSchema(schemaId){
-    APIFactory.callToServer(configTempArray[4].templateUrl+schemaId,onChangeSchemaSuccess);
+    //APIFactory.callToServer(configTempArray[2].templateUrl+schemaId,onChangeSchemaSuccess);
 
     /*
     * Comment the below code to stop data mockup, and work with actual server data
     * Section starts here
     */
-    /*tempStoreSchemaId = schemaId;
+    tempStoreSchemaId = schemaId;
     switch(schemaId)
     {
         case "1":
@@ -104,7 +104,7 @@ function changeSchema(schemaId){
             APIFactory.callToServer(configTempArray[3].templateUrl,onChangeSchemaSuccess);
             break;
         }
-    }*/
+    }
     /*
      * Section Ends here
      */

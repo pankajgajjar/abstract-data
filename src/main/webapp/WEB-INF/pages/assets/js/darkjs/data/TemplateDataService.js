@@ -6,7 +6,7 @@ var TemplateDataService=function()
                           {'templateUrl':'/pub2.0/client/home','containerId':''},
                           {'templateUrl':'/pub2.0/all','containerId':''},
                           {'templateUrl':'/pub2.0/dimension/get/','containerId':''},
-                          {'templateUrl':'/pub2.0/','containerId':''}];
+                          {'templateUrl':'/pub2.0/treeviewstructure/','containerId':''}];
         return dataElements;
 
        /* var dataElements=[

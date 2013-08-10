@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.cs.builder.TreeBuilder;
-import com.cs.model.DimensionModel;
+import com.cs.model.ContentObject;
 import com.cs.repository.DimensionRepository;
 
 @Component
@@ -44,7 +44,7 @@ public class DimensionService implements IService {
 	 * @see com.cs.service.IService#create(com.cs.model.DimensionModel)
 	 */
 	@Override
-	public String create(DimensionModel dimension) {
+	public String create(ContentObject dimension) {
 
 		return dimensionRepository.createDimension(dimension);
 	}
@@ -55,7 +55,7 @@ public class DimensionService implements IService {
 	 * @see com.cs.service.IService#getAllBy(java.lang.String)
 	 */
 	@Override
-	public List<DimensionModel> getAllBy(String structure) {
+	public List<ContentObject> getAllBy(String structure) {
 		// TODO Auto-generated method stub
 
 		return treeBuilder.buildTree(structure);

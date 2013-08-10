@@ -10,17 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cs.model.DimensionModel;
+import com.cs.data.core.GenericDomain;
+import com.cs.factory.DomainFactory;
+import com.cs.model.ContentObject;
 import com.cs.service.IService;
 
 @Controller
 public class NodeController {
 
 	private IService dimensionService;
+	private DomainFactory factory;
+	private final String CONTENTOBJECT = "ContentObject";
 
 	@Autowired
-	public NodeController(IService dimensionService) {
+	public NodeController(IService dimensionService, DomainFactory factory) {
 		this.dimensionService = dimensionService;
+		this.factory = factory;
 
 	}
 
@@ -35,23 +40,26 @@ public class NodeController {
 			@PathVariable("name") String name,
 			@PathVariable("path") String path,
 			@PathVariable("folder") String isFolder) {
-		DimensionModel dimension = new DimensionModel();
-		dimension.setId(name);
-		dimension.setName(name);
-		dimension.setType(type);
-		dimension.setPath(path);
-		dimension.setTitle(name);
-		dimension.setIsFolder(isFolder);
-		System.out.println(dimension);
+
+		ContentObject dimension = (ContentObject) factory
+				.getDomainObject(CONTENTOBJECT);
+		
+
+		setDimensionAttributes(dimension,type,name,path,isFolder);
 		return dimensionService.create(dimension);
 
 	}
 
-	@RequestMapping(value = { "/createTest" })
-	public @ResponseBody
-	String createTest() {
-		return "test";
+	protected void setDimensionAttributes(ContentObject dimension, String type, String name, String path,
+			String isFolder) {
 
+		dimension.setId(name);
+		dimension.setTitle(name);
+		dimension.setIsFolder(isFolder);
+		dimension.setPath(path);
+		dimension.setName(name);
+		dimension.setType(type);
+		
 	}
 
 	@RequestMapping(value = "/{dimensionId}", method = RequestMethod.GET)
@@ -63,7 +71,7 @@ public class NodeController {
 
 	@RequestMapping(value = "/dimension/get/{structure}")
 	public @ResponseBody
-	List<DimensionModel> getDimensionsBy(@PathVariable String structure) {
+	List<ContentObject> getDimensionsBy(@PathVariable String structure) {
 		return dimensionService.getAllBy(structure);
 	}
 

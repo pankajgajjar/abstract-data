@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.cs.data.core.GenericDomain;
 import com.cs.data.core.nosql.NoSqlOperations;
-import com.cs.model.DimensionModel;
+import com.cs.model.ContentObject;
 
 public class MongoRepository implements NoSqlOperations {
 
