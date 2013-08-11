@@ -55,4 +55,24 @@ public class ChapterControllerUnitTests {
 
 	}
 
+	@Test
+	public void itShouldChapterServiceToMoveAnObjectToGivenLocation() {
+
+		// given
+		String currentPath = "A-B-C";
+		String newPath = "A-B-D";
+		String name = "test";
+		String path = "A,B";
+		String type = "spread";
+		String isFolder = "true";
+
+		ContentObject chapter = new ContentObject(name, type, path, isFolder);
+
+		// when
+		when(factory.getDomainObject("ContentObject")).thenReturn(chapter);
+		chapterController.move(type, name, path, isFolder, newPath);
+
+		// then
+		verify(chapterService).move(chapter, path);
+	}
 }

@@ -12,13 +12,13 @@ import com.cs.repository.ChapterRepository;
 
 @Component
 public class ChapterService implements IService {
-	
+
 	private ChapterRepository chapterRepository;
 
 	@Autowired
 	public ChapterService(ChapterRepository chapterRepository) {
 		// TODO Auto-generated constructor stub
-		this.chapterRepository=chapterRepository;
+		this.chapterRepository = chapterRepository;
 	}
 
 	@Override
@@ -29,14 +29,27 @@ public class ChapterService implements IService {
 
 	@Override
 	public String create(ContentObject chapter) {
-		// TODO Auto-generated method stub
 		return chapterRepository.save(chapter);
 	}
 
 	@Override
 	public List<ContentObject> getAllBy(String structure) {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void move(ContentObject chapter, String path) {
+
+		delete(chapter, path);
+		create(chapter);
+
+	}
+
+	@Override
+	public void delete(ContentObject chapter, String path) {
+
+		chapterRepository.delete(chapter, path);
+
 	}
 
 }

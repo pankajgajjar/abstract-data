@@ -42,4 +42,19 @@ public class ChapterServiceUnitTests {
 
 	}
 
+	@Test
+	public void itShouldDeleteAChapter() {
+		// given
+		String result = "success";
+		String oldPath = "testpath";
+		ContentObject object = new ContentObject();
+		when(chapterRepository.delete(object, oldPath)).thenReturn(result);
+		// when
+		service.delete(object, oldPath);
+
+		// then
+		verify(chapterRepository).delete(object, oldPath);
+
+	}
+
 }

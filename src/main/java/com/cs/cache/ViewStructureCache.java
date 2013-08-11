@@ -1,9 +1,11 @@
 package com.cs.cache;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.cs.data.core.nosql.redis.RedisRepository;
 
+@Component
 public class ViewStructureCache {
 
 	private RedisRepository noSqlTemplateForRedis;

@@ -63,7 +63,6 @@ public class MongoRepository implements NoSqlOperations {
 
 	@Override
 	public <T> List<T> findAll(Class<T> class1) {
-		// TODO Auto-generated method stub
 		return mongoTemplate.findAll(class1);
 	}
 

@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import com.cs.cache.ViewStructureCache;
 import com.cs.controller.NodeController;
 import com.cs.factory.DomainFactory;
 import com.cs.model.CustomResponse;
@@ -36,10 +37,13 @@ public class NodeControllerUnitTests {
 
 	@Mock
 	private DomainFactory domainFactory;
+	
+	@Mock
+	private ViewStructureCache cache;
 
 	@Before
 	public void setUp() {
-		treeController = new NodeController(dimensionService, domainFactory);
+		treeController = new NodeController(dimensionService, domainFactory,cache);
 	}
 
 	@Test
@@ -99,7 +103,7 @@ public class NodeControllerUnitTests {
 	}
 
 	@Test
-	public void itShouldAllGroupsAccordingToStructure() {
+	public void itShouldGetAllDimensionsAccordingToStructure() {
 		// given
 		List<ContentObject> models = new ArrayList<ContentObject>();
 		String structure = "C-MP-P";
@@ -111,7 +115,22 @@ public class NodeControllerUnitTests {
 
 		// then
 		verify(dimensionService).getAllBy(structure);
+		verify(cache).setCurrentViewStructure("view", structure);
 		assertThat(actualModels).isEqualTo(models);
 
 	}
+
+	@Test
+	public void itShouldSaveCurrentViewStructureToCache() {
+		// given
+		String currentViewStructure = "C-M-P-D";
+		// when
+
+		treeController.setCurrentViewStructure(currentViewStructure);
+
+		// then
+		verify(cache).setCurrentViewStructure("view", currentViewStructure);
+	}
+	
+	
 }

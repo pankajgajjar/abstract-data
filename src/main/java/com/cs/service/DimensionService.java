@@ -62,4 +62,16 @@ public class DimensionService implements IService {
 
 	}
 
+	@Override
+	public void move(ContentObject chapter, String path) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void delete(ContentObject chapter, String path) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

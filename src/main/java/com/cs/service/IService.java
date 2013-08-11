@@ -15,4 +15,8 @@ public interface IService {
 
 	public List<ContentObject> getAllBy(String structure);
 
+	void move(ContentObject chapter, String path);
+
+	void delete(ContentObject chapter, String path);
+
 }
