@@ -23,6 +23,9 @@ import com.cs.repository.ChapterRepository;
 import com.cs.repository.DimensionRepository;
 import com.cs.service.IService;
 
+import static org.fest.assertions.Assertions.*;
+import static org.mockito.Mockito.*;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:application-context-test.xml")
 public class ChapterIntegrationTests {
@@ -60,26 +63,29 @@ public class ChapterIntegrationTests {
 
 	}
 
-	/*
-	 * @Test public void itShouldCreateMultipleDimensionGroupsForGivenModels() {
-	 * 
-	 * cache = new ViewStructureCache(noSqlTemplateForRedis); for (ContentObject
-	 * dimension : models) { chapterRepository = new
-	 * ChapterRepository(noSqlTemplateForMongo, cache);
-	 * chapterRepository.save(dimension);
-	 * 
-	 * }
-	 * 
-	 * System.out.println(noSqlTemplateForRedis.findAllKeys("*"));
-	 * 
-	 * System.out.println(noSqlTemplateForMongo.findAll(ContentObject.class)); }
-	 */
+	@Test
+	public void itShouldCreateMultipleDimensionGroupsForGivenModels() {
+
+		cache = new ViewStructureCache(noSqlTemplateForRedis);
+		for (ContentObject dimension : models) {
+			chapterRepository = new ChapterRepository(noSqlTemplateForMongo,
+					cache);
+			String result = chapterRepository.save(dimension);
+
+			assertThat(result).isNotNull();
+			assertThat(result).isEqualTo(page01.getId());
+
+		}
+
+	}
 
 	@Test
 	public void itShouldRemoveAnObjectFromPublication() {
 		chapterRepository = new ChapterRepository(noSqlTemplateForMongo, cache);
 
-		chapterRepository.delete(page01, "mp02,pg02,c02,p02");
+		String result = chapterRepository.delete(page01, "mp02,pg02,c02,p02");
+
+		assertThat(result).isEqualTo(page01.getId());
 
 	}
 

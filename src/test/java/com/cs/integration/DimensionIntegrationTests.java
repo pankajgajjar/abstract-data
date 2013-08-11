@@ -21,6 +21,9 @@ import com.cs.model.ContentObject;
 import com.cs.repository.DimensionRepository;
 import com.cs.service.IService;
 
+import static org.fest.assertions.Assertions.*;
+import static org.mockito.Mockito.*;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:application-context-test.xml")
 public class DimensionIntegrationTests {
@@ -94,13 +97,11 @@ public class DimensionIntegrationTests {
 		for (ContentObject dimension : models) {
 			dimensionRepository = new DimensionRepository(null, cache,
 					noSqlTemplateForMongo);
-			dimensionRepository.createDimension(dimension);
+			String test = dimensionRepository.createDimension(dimension);
+			assertThat(test).isNotNull();
+			assertThat(test).isEqualTo(dimension.getId());
 
 		}
 
-		System.out.println(noSqlTemplateForRedis.findAllKeys("*"));
-
-		System.out.println(noSqlTemplateForMongo.findAll(DimensionGroup.class));
 	}
-
 }
