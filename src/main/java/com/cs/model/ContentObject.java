@@ -9,45 +9,101 @@ import org.springframework.stereotype.Component;
 import com.cs.data.core.GenericDomain;
 import com.sun.org.apache.regexp.internal.recompile;
 
+
+/**
+ * The Class ContentObject.
+ */
 @Component
 public class ContentObject implements Serializable, GenericDomain {
 
+	/** The page. */
 	private final String PAGE = "page";
 
+	/** The id. */
 	private String id;
+	
+	/** The type. */
 	private String type;
+	
+	/** The path. */
 	private String path;
+	
+	/** The name. */
 	private String name;
+	
+	/** The title. */
 	private String title;
+	
+	/** The is folder. */
 	private String isFolder;
 
+	/**
+	 * Instantiates a new content object.
+	 */
 	public ContentObject() {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Gets the checks if is folder.
+	 *
+	 * @return the checks if is folder
+	 */
 	public String getIsFolder() {
 		return isFolder;
 	}
 
+	/**
+	 * Sets the checks if is folder.
+	 *
+	 * @param isFolder the new checks if is folder
+	 */
 	public void setIsFolder(String isFolder) {
 		this.isFolder = isFolder;
 	}
 
+	/**
+	 * Gets the title.
+	 *
+	 * @return the title
+	 */
 	public String getTitle() {
 		return title;
 	}
 
+	/**
+	 * Sets the title.
+	 *
+	 * @param title the new title
+	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+	/** The group ids. */
 	private List<String> groupIds;
+	
+	/** The children. */
 	private List<ContentObject> children;
 
+	/**
+	 * Gets the group id.
+	 *
+	 * @return the group id
+	 */
 	public List<String> getGroupId() {
 		return groupIds;
 	}
 
+	/**
+	 * Instantiates a new content object.
+	 *
+	 * @param id the id
+	 * @param type the type
+	 * @param title the title
+	 * @param name the name
+	 * @param path the path
+	 */
 	public ContentObject(String id, String type, String title, String name,
 			String path) {
 		this.id = id;
@@ -57,6 +113,16 @@ public class ContentObject implements Serializable, GenericDomain {
 		this.path = path;
 	}
 
+	/**
+	 * Instantiates a new content object.
+	 *
+	 * @param id the id
+	 * @param type the type
+	 * @param path the path
+	 * @param name the name
+	 * @param groupId the group id
+	 * @param children the children
+	 */
 	public ContentObject(String id, String type, String path, String name,
 			List<String> groupId, List<ContentObject> children) {
 		super();
@@ -68,18 +134,41 @@ public class ContentObject implements Serializable, GenericDomain {
 		this.children = children;
 	}
 
+	/**
+	 * Sets the group id.
+	 *
+	 * @param groupId the new group id
+	 */
 	public void setGroupId(List<String> groupId) {
 		this.groupIds = groupId;
 	}
 
+	/**
+	 * Gets the children.
+	 *
+	 * @return the children
+	 */
 	public List<ContentObject> getChildren() {
 		return children;
 	}
 
+	/**
+	 * Sets the children.
+	 *
+	 * @param children the new children
+	 */
 	public void setChildren(List<ContentObject> children) {
 		this.children = children;
 	}
 
+	/**
+	 * Instantiates a new content object.
+	 *
+	 * @param name the name
+	 * @param type the type
+	 * @param path the path
+	 * @param isFolder the is folder
+	 */
 	public ContentObject(String name, String type, String path, String isFolder) {
 		this.id = name;
 		this.name = name;
@@ -90,50 +179,99 @@ public class ContentObject implements Serializable, GenericDomain {
 
 	}
 
+	/**
+	 * Gets the path.
+	 *
+	 * @return the path
+	 */
 	public String getPath() {
 		return path;
 	}
 
+	/**
+	 * Sets the path.
+	 *
+	 * @param path the new path
+	 */
 	public void setPath(String path) {
 		this.path = path;
 	}
 
+	/**
+	 * Gets the type.
+	 *
+	 * @return the type
+	 */
 	public String getType() {
 		return type;
 	}
 
+	/**
+	 * Sets the type.
+	 *
+	 * @param type the new type
+	 */
 	public void setType(String type) {
 		this.type = type;
 	}
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public String getId() {
 		return id;
 	}
 
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.cs.data.core.GenericDomain#getObjectKey()
+	 */
 	@Override
 	public String getObjectKey() {
 		// TODO Auto-generated method stub
 		return "DIMENSION";
 	}
 
+	/* (non-Javadoc)
+	 * @see com.cs.data.core.GenericDomain#getKey()
+	 */
 	@Override
 	public String getKey() {
 		// TODO Auto-generated method stub
 		return getId();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "DimensionModel [id=" + id + ", type=" + type + ", path=" + path
@@ -141,10 +279,20 @@ public class ContentObject implements Serializable, GenericDomain {
 				+ groupIds + ", children=" + children + "]";
 	}
 
+	/**
+	 * Checks if is root.
+	 *
+	 * @return true, if is root
+	 */
 	public boolean isRoot() {
 		return path == "-1" ? true : false;
 	}
 
+	/**
+	 * Adds the to group id.
+	 *
+	 * @param groupId the group id
+	 */
 	public void addToGroupId(String groupId) {
 		if (groupIds == null) {
 			groupIds = new ArrayList<String>();
@@ -156,14 +304,29 @@ public class ContentObject implements Serializable, GenericDomain {
 
 	}
 
+	/**
+	 * Checks for children.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean hasChildren() {
 		return this.children == null ? false : true;
 	}
 
+	/**
+	 * Checks if is page.
+	 *
+	 * @return true, if is page
+	 */
 	public boolean isPage() {
 		return type == PAGE ? true : false;
 	}
 
+	/**
+	 * Addchild.
+	 *
+	 * @param contentObject the content object
+	 */
 	public void addchild(ContentObject contentObject) {
 		List<ContentObject> newChildren;
 		if (this.children == null) {
@@ -176,6 +339,11 @@ public class ContentObject implements Serializable, GenericDomain {
 		}
 	}
 
+	/**
+	 * Removes the child.
+	 *
+	 * @param contentObject the content object
+	 */
 	public void removeChild(ContentObject contentObject) {
 		if (children != null) {
 			this.children.remove(contentObject);
@@ -183,6 +351,9 @@ public class ContentObject implements Serializable, GenericDomain {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -202,6 +373,9 @@ public class ContentObject implements Serializable, GenericDomain {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

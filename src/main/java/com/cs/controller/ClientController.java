@@ -14,17 +14,34 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cs.model.CustomResponse;
 import com.cs.utils.FileUtils;
 
+
+/**
+ * The Class ClientController.
+ */
 @Controller
 public class ClientController {
 
+	/** The file utils. */
 	private FileUtils fileUtils;
 
+	/**
+	 * Instantiates a new client controller.
+	 *
+	 * @param fileUtils the file utils
+	 */
 	@Autowired
 	public ClientController(FileUtils fileUtils) {
 		// TODO Auto-generated constructor stub
 		this.fileUtils = fileUtils;
 	}
 
+	/**
+	 * Redirects to the Home page.
+	 *
+	 * @return the home
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws URISyntaxException the uRI syntax exception
+	 */
 	@RequestMapping(value = { "/ home" }, method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody
 	CustomResponse getHome() throws IOException, URISyntaxException {
@@ -40,6 +57,13 @@ public class ClientController {
 
 	}
 
+	/**
+	 * Redirects to the login page.
+	 *
+	 * @return the login
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws URISyntaxException the uRI syntax exception
+	 */
 	@RequestMapping(value = { "/login" })
 	public @ResponseBody
 	CustomResponse getLogin() throws IOException, URISyntaxException {
@@ -55,6 +79,11 @@ public class ClientController {
 
 	}
 
+	/**
+	 * Gets the test.
+	 *
+	 * @return the test
+	 */
 	@RequestMapping(value = { "/test" })
 	public String getTest() {
 		return "Test";

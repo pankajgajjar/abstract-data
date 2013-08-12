@@ -7,14 +7,30 @@ import com.cs.cache.ViewStructureCache;
 import com.cs.data.core.nosql.mongodb.MongoRepository;
 import com.cs.model.ContentObject;
 
+/**
+ * The Class ChapterRepository.
+ */
 @Component
 public class ChapterRepository {
 
+	/** The nosql template for mongo. */
 	private MongoRepository nosqlTemplateForMongo;
+	
+	/** The cache. */
 	private ViewStructureCache cache;
+	
+	/** The comma. */
 	private final String COMMA = ",";
+	
+	/** The hiphen. */
 	private final String HIPHEN = "-";
 
+	/**
+	 * Instantiates a new chapter repository.
+	 *
+	 * @param nosqlTemplateForMongo the nosql template for mongo
+	 * @param cache the cache
+	 */
 	@Autowired
 	public ChapterRepository(MongoRepository nosqlTemplateForMongo,
 			ViewStructureCache cache) {
@@ -23,6 +39,12 @@ public class ChapterRepository {
 
 	}
 
+	/**
+	 * Save given chapter.
+	 *
+	 * @param chapter the chapter
+	 * @return the string
+	 */
 	public String save(ContentObject chapter) {
 
 		ContentObject publication = getParentPublication(chapter.getPath());
@@ -31,6 +53,12 @@ public class ChapterRepository {
 		return nosqlTemplateForMongo.save(chapter);
 	}
 
+	/**
+	 * Adds the chapter to publication.
+	 *
+	 * @param publication the publication
+	 * @param chapter the chapter
+	 */
 	private void addChapterToPublication(ContentObject publication,
 			ContentObject chapter) {
 		System.out.println(getParentId(chapter.getPath()));
@@ -41,10 +69,22 @@ public class ChapterRepository {
 
 	}
 
+	/**
+	 * Save given publication to mongoDb database..
+	 *
+	 * @param publication the publication
+	 */
 	private void saveToMongo(ContentObject publication) {
 		nosqlTemplateForMongo.save(publication);
 	}
 
+	/**
+	 * Find given parent id in given publication..
+	 *
+	 * @param publication the publication
+	 * @param parentId the parent id
+	 * @return the content object
+	 */
 	protected ContentObject find(ContentObject publication, String parentId) {
 		ContentObject child = null;
 		if (publication.getId().equals(parentId)) {
@@ -69,6 +109,12 @@ public class ChapterRepository {
 		return child;
 	}
 
+	/**
+	 * Gets the publication id.
+	 *
+	 * @param path the path
+	 * @return the publication id
+	 */
 	protected String getPublicationId(String path) {
 
 		String currentViewStructure = cache.getCurrentViewStructure();
@@ -80,22 +126,47 @@ public class ChapterRepository {
 
 	}
 
+	/**
+	 * Gets the last index of current view structure.
+	 *
+	 * @param currentViewStructure the current view structure
+	 * @return the last index of
+	 */
 	protected int getLastIndexOf(String currentViewStructure) {
 		// TODO Auto-generated method stub
 		return currentViewStructure.split(HIPHEN).length - 1;
 
 	}
 
+	/**
+	 * Gets the parent id for given path.
+	 *
+	 * @param path the path
+	 * @return the parent id
+	 */
 	protected String getParentId(String path) {
 		String[] paths = path.split(COMMA);
 		return paths[paths.length - 1];
 	}
 
+	/**
+	 * Gets the parent publication.
+	 *
+	 * @param path the path
+	 * @return the parent publication
+	 */
 	protected ContentObject getParentPublication(String path) {
 		return nosqlTemplateForMongo.getObjectByKey(getPublicationId(path),
 				ContentObject.class);
 	}
 
+	/**
+	 * Deletes given chapter for given old path.
+	 *
+	 * @param chapter the chapter
+	 * @param oldPath the old path
+	 * @return the string
+	 */
 	public String delete(ContentObject chapter, String oldPath) {
 		ContentObject parentPublication = getParentPublication(oldPath);
 		ContentObject parent = find(parentPublication, getParentId(oldPath));

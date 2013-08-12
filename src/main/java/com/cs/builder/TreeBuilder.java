@@ -12,21 +12,46 @@ import com.cs.model.DimensionModelList;
 import com.cs.repository.DimensionRepository;
 import com.cs.utils.ArrayUtils;
 
+
+/**
+ * The Class TreeBuilder.
+ */
 @Component
 public class TreeBuilder {
 
+	/** The cache. */
 	private DimensionGroupCache cache;
+	
+	/** The repository. */
 	private DimensionRepository repository;
+	
+	/** The list of not connected trees. */
 	private DimensionModelList listOfNotConnectedTrees;
+	
+	/** The utils. */
 	private ArrayUtils utils;
+	
+	/** The delimeter. */
 	private final String DELIMETER = "-";
 
+	/**
+	 * Instantiates a new tree builder.
+	 *
+	 * @param cache the cache
+	 * @param repository the repository
+	 */
 	@Autowired
 	public TreeBuilder(DimensionGroupCache cache, DimensionRepository repository) {
 		this.cache = cache;
 		this.repository = repository;
 	}
 
+	/**
+	 * Builds the tree.
+	 *
+	 * @param structure the structure
+	 * @return the list
+	 */
 	public List<ContentObject> buildTree(String structure) {
 		String[] orderedTypes = getTypes(structure);
 		List<ContentObject> rootNodes = getAllSeparatedTrees(orderedTypes[0]);
@@ -38,16 +63,35 @@ public class TreeBuilder {
 		return rootNodes;
 	}
 
+	/**
+	 * Gets the types.
+	 *
+	 * @param structure the structure
+	 * @return the types
+	 */
 	protected String[] getTypes(String structure) {
 		// TODO Auto-generated method stub
 		return structure.split(DELIMETER);
 	}
 
+	/**
+	 * Gets the all separated trees.
+	 *
+	 * @param type the type
+	 * @return the all separated trees
+	 */
 	protected List<ContentObject> getAllSeparatedTrees(String type) {
 		return repository.getDimensionsOfType(type);
 
 	}
 
+	/**
+	 * Builds the tree for the given structure provided.
+	 *
+	 * @param root the root
+	 * @param orderTypes the order types
+	 * @param groupIdsRequiredForCurrentIteration the group ids required for current iteration
+	 */
 	protected void buildTreeForRootNode(ContentObject root,
 			String[] orderTypes,
 			List<String> groupIdsRequiredForCurrentIteration) {
@@ -75,17 +119,37 @@ public class TreeBuilder {
 
 	}
 
+	/**
+	 * Gets the all children of current root.
+	 *
+	 * @param groupIds the group ids
+	 * @param type the type
+	 * @return the all children of current root
+	 */
 	protected List<ContentObject> getAllChildrenOfCurrentRoot(
 			List<String> groupIds, String type) {
 		return repository.getDimensionsBy(type, groupIds);
 	}
 
+	/**
+	 * Skip first order type.
+	 *
+	 * @param orderTypes the order types
+	 * @return the string[]
+	 */
 	private String[] skipFirstOrderType(String[] orderTypes) {
 		utils = new ArrayUtils();
 		orderTypes = utils.skip(orderTypes, 1);
 		return orderTypes;
 	}
 
+	/**
+	 * Intersect group ids.
+	 *
+	 * @param groupIds the group ids
+	 * @param groupIdsRequiredForCurrentIteration the group ids required for current iteration
+	 * @return the list
+	 */
 	private List<String> intersectGroupIds(List<String> groupIds,
 			List<String> groupIdsRequiredForCurrentIteration) {
 		utils = new ArrayUtils();

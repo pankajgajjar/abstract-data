@@ -13,16 +13,35 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cs.utils.FileUtils;
 
+
+/**
+ * The Class TreeViewStructureController.
+ */
 @Controller
 public class TreeViewStructureController {
 
+	/** The utils. */
 	private FileUtils utils;
 
+	/**
+	 * Instantiates a new tree view structure controller.
+	 *
+	 * @param utils the utils
+	 */
 	@Autowired
 	public TreeViewStructureController(FileUtils utils) {
 		this.utils = utils;
 	}
 
+	/**
+	 * Gets the requested view structure.
+	 *
+	 * @param structureId the structure id
+	 * @return the object
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws URISyntaxException the uRI syntax exception
+	 * @throws ParseException the parse exception
+	 */
 	@RequestMapping("/{structureId}")
 	public @ResponseBody
 	Object get(@PathVariable String structureId) throws IOException,
@@ -34,6 +53,13 @@ public class TreeViewStructureController {
 
 	}
 
+	/**
+	 * Gets the default view structure.
+	 *
+	 * @return the default
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws URISyntaxException the uRI syntax exception
+	 */
 	@RequestMapping("/default")
 	public @ResponseBody
 	String getDefault() throws IOException, URISyntaxException {
@@ -42,6 +68,13 @@ public class TreeViewStructureController {
 
 	}
 
+	/**
+	 * Gets all the tree structure.
+	 *
+	 * @return the all
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws URISyntaxException the uRI syntax exception
+	 */
 	@RequestMapping("/all")
 	public @ResponseBody
 	String getAll() throws IOException, URISyntaxException {

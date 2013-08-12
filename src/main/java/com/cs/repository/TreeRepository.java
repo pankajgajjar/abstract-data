@@ -12,11 +12,20 @@ import com.cs.data.core.nosql.NoSqlOperations;
 import com.cs.data.core.nosql.redis.RedisRepository;
 import com.cs.model.Tree;
 
+/**
+ * The Class TreeRepository.
+ */
 @Component
 public class TreeRepository {
 
+	/** The no sql template for redis. */
 	private NoSqlOperations noSqlTemplateForRedis;
 
+	/**
+	 * Instantiates a new tree repository.
+	 *
+	 * @param noSqlTemplateForRedis the no sql template for redis
+	 */
 	@Autowired
 	public TreeRepository(NoSqlOperations noSqlTemplateForRedis) {
 		// TODO Auto-generated constructor stub
@@ -24,6 +33,12 @@ public class TreeRepository {
 
 	}
 
+	/**
+	 * Creates the tree.
+	 *
+	 * @param tree the tree
+	 * @return the string
+	 */
 	public String createTree(Tree tree) {
 
 		return persist(tree);
@@ -31,22 +46,46 @@ public class TreeRepository {
 
 	}
 
+	/**
+	 * Persist.
+	 *
+	 * @param tree the tree
+	 * @return the string
+	 */
 	private String persist(Tree tree) {
 		// TODO Auto-generated method stub
 		return noSqlTemplateForRedis.save(tree);
 
 	}
 
+	/**
+	 * Gets the random key.
+	 *
+	 * @return the random key
+	 */
 	public int getRandomKey() {
 		// TODO Auto-generated method stub
 		return new Random().nextInt(10000);
 	}
 
+	/**
+	 * Adds the node.
+	 *
+	 * @param nodeName the node name
+	 */
 	public void addNode(String nodeName) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Adds the child.
+	 *
+	 * @param objectToAdd the object to add
+	 * @param parentId the parent id
+	 * @param tree the tree
+	 * @return the string
+	 */
 	public String addChild(JSONObject objectToAdd, String parentId, Tree tree) {
 
 		JSONArray treeJson = tree.getTreeData();
@@ -56,6 +95,14 @@ public class TreeRepository {
 
 	}
 
+	/**
+	 * Update and modify.
+	 *
+	 * @param treeJson the tree json
+	 * @param parentId the parent id
+	 * @param objectToInsert the object to insert
+	 * @return the jSON array
+	 */
 	private JSONArray updateAndModify(JSONArray treeJson, String parentId,
 			JSONObject objectToInsert) {
 		JSONObject jsonObject = new JSONObject();
@@ -100,6 +147,13 @@ public class TreeRepository {
 
 	}
 
+	/**
+	 * Gets the tree.
+	 *
+	 * @param key the key
+	 * @param objectKey the object key
+	 * @return the tree
+	 */
 	public Tree getTree(String key, String objectKey) {
 		Tree tree = noSqlTemplateForRedis.getObjectByKey(key, objectKey,
 				Tree.class);

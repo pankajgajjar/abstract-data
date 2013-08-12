@@ -11,12 +11,24 @@ import com.cs.builder.TreeBuilder;
 import com.cs.model.ContentObject;
 import com.cs.repository.DimensionRepository;
 
+/**
+ * The Class DimensionService.
+ */
 @Component
 public class DimensionService implements IService {
 
+	/** The tree builder. */
 	private TreeBuilder treeBuilder;
+	
+	/** The dimension repository. */
 	private DimensionRepository dimensionRepository;
 
+	/**
+	 * Instantiates a new dimension service.
+	 *
+	 * @param dimensionRepository the dimension repository
+	 * @param treeBuilder the tree builder
+	 */
 	@Autowired
 	public DimensionService(DimensionRepository dimensionRepository,
 			TreeBuilder treeBuilder) {
@@ -27,7 +39,7 @@ public class DimensionService implements IService {
 	}
 
 	/*
-	 * (non-Javadoc)
+	 * Get all dimension.
 	 * 
 	 * @see com.cs.service.IService#getAll()
 	 */
@@ -39,7 +51,7 @@ public class DimensionService implements IService {
 	}
 
 	/*
-	 * (non-Javadoc)
+	 * Creates new dimension.
 	 * 
 	 * @see com.cs.service.IService#create(com.cs.model.DimensionModel)
 	 */
@@ -50,7 +62,7 @@ public class DimensionService implements IService {
 	}
 
 	/*
-	 * (non-Javadoc)
+	 * Get all chapters for given structure.
 	 * 
 	 * @see com.cs.service.IService#getAllBy(java.lang.String)
 	 */
@@ -62,12 +74,18 @@ public class DimensionService implements IService {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.cs.service.IService#move(com.cs.model.ContentObject, java.lang.String)
+	 */
 	@Override
 	public void move(ContentObject chapter, String path) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/* Deletes the dimension.
+	 * @see com.cs.service.IService#delete(com.cs.model.ContentObject, java.lang.String)
+	 */
 	@Override
 	public void delete(ContentObject chapter, String path) {
 		// TODO Auto-generated method stub

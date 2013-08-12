@@ -10,20 +10,46 @@ import com.cs.factory.DomainFactory;
 import com.cs.model.ContentObject;
 import com.cs.service.IService;
 
+
+/**
+ * The Class ChapterController.
+ */
 @Controller
 public class ChapterController {
 
+	/** The Constant CREATE. */
 	private static final String CREATE = "/chapter/create/{type}/name/{name}/path/{path}/folder/{folder}";
+	
+	/** The chapter service. */
 	private IService chapterService;
+	
+	/** The factory. */
 	private DomainFactory factory;
+	
+	/** The contentobject. */
 	private final String CONTENTOBJECT = "ContentObject";
 
+	/**
+	 * Instantiates a new chapter controller.
+	 *
+	 * @param chapterService the chapter service
+	 * @param factory the factory
+	 */
 	@Autowired
 	public ChapterController(IService chapterService, DomainFactory factory) {
 		this.chapterService = chapterService;
 		this.factory = factory;
 	}
 
+	/**
+	 * Creates the.
+	 *
+	 * @param type the type
+	 * @param name the name
+	 * @param path the path
+	 * @param isFolder the is folder
+	 * @return the string
+	 */
 	@RequestMapping(value = { CREATE })
 	public @ResponseBody
 	String create(@PathVariable("type") String type,
@@ -37,6 +63,15 @@ public class ChapterController {
 
 	}
 
+	/**
+	 * Sets the chapter atrributes.
+	 *
+	 * @param chapter the chapter
+	 * @param type the type
+	 * @param name the name
+	 * @param path the path
+	 * @param isFolder the is folder
+	 */
 	private void setChapterAtrributes(ContentObject chapter, String type,
 			String name, String path, String isFolder) {
 		chapter.setId(name);
@@ -48,6 +83,15 @@ public class ChapterController {
 
 	}
 
+	/**
+	 * Move.
+	 *
+	 * @param type the type
+	 * @param name the name
+	 * @param path the path
+	 * @param isFolder the is folder
+	 * @param newPath the new path
+	 */
 	public void move(String type, String name, String path, String isFolder,
 			String newPath) {
 
