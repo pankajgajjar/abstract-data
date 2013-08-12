@@ -19,7 +19,7 @@ import com.cs.data.core.nosql.mongodb.MongoRepository;
 import com.cs.model.DimensionGroup;
 import com.cs.model.ContentObject;
 import com.cs.repository.DimensionRepository;
-import com.cs.service.IService;
+import com.cs.service.Service;
 
 import static org.fest.assertions.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -36,7 +36,7 @@ public class DimensionIntegrationTests {
 	private DimensionGroupCache cache;
 	private DimensionRepository dimensionRepository;
 
-	private IService dimensionService;
+	private Service dimensionService;
 
 	@Autowired
 	private InMemoryNoSqlRepository inMemoryNosqlRepository;

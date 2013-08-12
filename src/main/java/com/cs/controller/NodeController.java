@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cs.cache.ViewStructureCache;
 import com.cs.factory.DomainFactory;
 import com.cs.model.ContentObject;
-import com.cs.service.IService;
+import com.cs.service.Service;
 
 /**
  * The Class NodeController.
@@ -26,7 +26,7 @@ public class NodeController {
 	private static final String CREATE = "/dimension/create/{type}/name/{name}/path/{path}/folder/{folder}";
 
 	/** The dimension service. */
-	private IService dimensionService;
+	private Service dimensionService;
 
 	/** The index. */
 	private final String INDEX = "redirect:/pages/index.html";
@@ -42,7 +42,7 @@ public class NodeController {
 	 *            the cache
 	 */
 	@Autowired
-	public NodeController(IService dimensionService) {
+	public NodeController(Service dimensionService) {
 		this.dimensionService = dimensionService;
 
 	}

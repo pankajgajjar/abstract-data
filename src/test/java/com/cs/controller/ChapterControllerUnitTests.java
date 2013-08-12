@@ -9,7 +9,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.cs.factory.DomainFactory;
 import com.cs.model.ContentObject;
 import com.cs.service.ChapterService;
-import com.cs.service.IService;
+import com.cs.service.Service;
 
 import static org.fest.assertions.Assertions.*;
 import static org.mockito.Mockito.*;

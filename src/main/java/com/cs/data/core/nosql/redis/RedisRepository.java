@@ -16,7 +16,9 @@ import com.cs.data.core.nosql.NoSqlOperations;
 import com.cs.model.Tree;
 
 /**
- * The Class RedisRepository.
+ * Class RedisRepository implements InMemoryNoSqlRepository.
+ * 
+ * @author Amar
  */
 public class RedisRepository implements InMemoryNoSqlRepository {
 

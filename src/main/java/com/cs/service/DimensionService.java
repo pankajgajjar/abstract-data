@@ -17,7 +17,7 @@ import com.cs.repository.DimensionRepository;
  * The Class DimensionService.
  */
 @Component
-public class DimensionService implements IService {
+public class DimensionService implements Service {
 
 	/** The tree builder. */
 	private TreeBuilder treeBuilder;

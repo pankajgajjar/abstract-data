@@ -15,7 +15,7 @@ import com.cs.repository.ChapterRepository;
  * The Class ChapterService.
  */
 @Component
-public class ChapterService implements IService {
+public class ChapterService implements Service {
 
 	/** The factory. */
 	private DomainFactory factory;

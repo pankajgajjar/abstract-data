@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cs.factory.DomainFactory;
 import com.cs.model.ContentObject;
-import com.cs.service.IService;
+import com.cs.service.Service;
 
 /**
  * The Class ChapterController.
@@ -20,7 +20,7 @@ public class ChapterController {
 	private static final String CREATE = "/chapter/create/{type}/name/{name}/path/{path}/folder/{folder}";
 
 	/** The chapter service. */
-	private IService chapterService;
+	private Service chapterService;
 
 	/**
 	 * Instantiates a new chapter controller.
@@ -31,7 +31,7 @@ public class ChapterController {
 	 *            the factory
 	 */
 	@Autowired
-	public ChapterController(IService chapterService) {
+	public ChapterController(Service chapterService) {
 		this.chapterService = chapterService;
 
 	}

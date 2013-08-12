@@ -8,12 +8,13 @@ import com.cs.data.core.GenericDomain;
 import com.cs.model.ContentObject;
 
 /**
- * The Interface IService.
+ * Interface that specifies basic set of service operations. Ideally all the
+ * services should extend this interface. Implemented by all service classes.
  */
-public interface IService {
+public interface Service {
 
 	/**
-	 * Gets the all.
+	 * Method for finding all entities present in the system
 	 * 
 	 * @return the all
 	 * @throws IOException
@@ -24,7 +25,7 @@ public interface IService {
 	public String getAll() throws IOException, URISyntaxException;
 
 	/**
-	 * Creates the.
+	 * Method for creating a new entity to the system
 	 * 
 	 * @param isFolder
 	 * @param path
@@ -35,7 +36,7 @@ public interface IService {
 	public String create(String type, String name, String path, String isFolder);
 
 	/**
-	 * Gets the all by.
+	 * Method for get all entities satisfies given criteria
 	 * 
 	 * @param structure
 	 *            the structure
@@ -44,7 +45,7 @@ public interface IService {
 	public List<ContentObject> getAllBy(String structure);
 
 	/**
-	 * Move.
+	 * Method for moving entity from one location to another.
 	 * 
 	 * @param chapter
 	 *            the chapter
@@ -55,7 +56,7 @@ public interface IService {
 			String newpath);
 
 	/**
-	 * Delete.
+	 * Method for deleting an entity from the system
 	 * 
 	 * @param chapter
 	 *            the chapter
