@@ -24,7 +24,7 @@
 
 	<!-- Spring Data MongoDB Configuration -->
 
-	<mongo:mongo host="192.168.135.234" port="27017" />
+	<mongo:mongo host="localhost" port="27017" />
 
 	<mongo:db-factory dbname="test" />
 
@@ -39,7 +39,7 @@
 	<!-- Spring Data Redis Configuration -->
 	<bean id="jedisConnectionFactory"
 		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-		p:host-name="192.168.135.234" p:port="6379" />
+		p:host-name="localhost" p:port="6379" />
 
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
 		p:connection-factory-ref="jedisConnectionFactory" />
