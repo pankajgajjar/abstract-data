@@ -5,11 +5,12 @@ import org.springframework.stereotype.Component;
 
 import com.cs.cache.ViewStructureCache;
 import com.cs.data.core.nosql.NoSqlRepository;
-import com.cs.data.core.nosql.mongodb.MongoRepository;
 import com.cs.model.ContentObject;
 
 /**
  * The Class ChapterRepository.
+ * TODO create separate Object for Chapter & Page, Dont use ContentObject(DimensionObject)
+ * TODO with separate interface****
  */
 @Component
 public class ChapterRepository {
@@ -67,7 +68,6 @@ public class ChapterRepository {
 	 */
 	private void addChapterToPublication(ContentObject publication,
 			ContentObject chapter) {
-		System.out.println(getParentId(chapter.getPath()));
 		ContentObject parent;
 		parent = find(publication, getParentId(chapter.getPath()));
 		parent.addchild(chapter);

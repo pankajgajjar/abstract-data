@@ -6,12 +6,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cs.factory.DomainFactory;
-import com.cs.model.ContentObject;
 import com.cs.service.Service;
 
 /**
  * The Class ChapterController.
+ * TODO. com.cs.business.ifacadeservices
+ * 					controller -> common facade ->>>(|) ->i***interface call
+ * 					ichapter ->Impl
+ * 					idimension ->Impl
  */
 @Controller
 public class ChapterController {

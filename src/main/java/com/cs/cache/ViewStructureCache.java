@@ -8,6 +8,7 @@ import com.cs.data.core.nosql.InMemoryNoSqlRepository;
 
 /**
  * The Class ViewStructureCache.
+ * TODO move this complete package to data package*** data.cache
  */
 @Component
 public class ViewStructureCache {

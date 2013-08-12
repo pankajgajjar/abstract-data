@@ -4,6 +4,11 @@ package com.cs.data.core;
 
 /**
  * The Interface IRepository.
+ * TODO
+ *Create Interface for each Data/Service/Business
+ *Create Common Interface with all above Interface 
+ *Inject those using IOC and it composition way create object 
+ *Create Common Facade that provide all the above impl base on interface. 
  */
 public interface IRepository {
 	

@@ -7,11 +7,13 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.cs.data.core.GenericDomain;
-import com.sun.org.apache.regexp.internal.recompile;
 
 
 /**
  * The Class ContentObject.
+ * TODO implement interface
+ * TODO remove all the annotation from class file
+ * TODO rename to dimensionObject
  */
 @Component
 public class ContentObject implements Serializable, GenericDomain {
@@ -25,8 +27,8 @@ public class ContentObject implements Serializable, GenericDomain {
 	/** The type. */
 	private String type;
 	
-	/** The path. */
-	private String path;
+	/** The path. TODO */
+	private transient String path;
 	
 	/** The name. */
 	private String name;
@@ -34,8 +36,8 @@ public class ContentObject implements Serializable, GenericDomain {
 	/** The title. */
 	private String title;
 	
-	/** The is folder. */
-	private String isFolder;
+	/** The is folder.TODO */
+	private transient String isFolder;
 
 	/**
 	 * Instantiates a new content object.
