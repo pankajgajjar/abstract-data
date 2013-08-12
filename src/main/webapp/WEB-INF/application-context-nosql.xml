@@ -46,16 +46,16 @@
 
 	<!-- Pub Abstract Data Layer Configuration -->
 
-	<bean id="noSqlTemplateForMongo" class="com.cs.data.core.nosql.mongodb.MongoRepository">
+	<bean id="noSqlRepository" class="com.cs.data.core.nosql.mongodb.MongoRepository">
 
 	</bean>
 
 
-	<bean id="noSqlTemplateForRedis" class="com.cs.data.core.nosql.redis.RedisRepository">
+	<bean id="inMemoryNoSqlRepository" class="com.cs.data.core.nosql.redis.RedisRepository">
 
 	</bean>
 
-	
+
 
 
 
