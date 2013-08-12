@@ -1,6 +1,5 @@
 package com.cs.builder;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 import com.cs.cache.DimensionGroupCache;
 import com.cs.model.ContentObject;
-import com.cs.model.DimensionModelList;
 import com.cs.repository.DimensionRepository;
 import com.cs.utils.ArrayUtils;
 
@@ -24,9 +22,6 @@ public class TreeBuilder {
 	
 	/** The repository. */
 	private DimensionRepository repository;
-	
-	/** The list of not connected trees. */
-	private DimensionModelList listOfNotConnectedTrees;
 	
 	/** The utils. */
 	private ArrayUtils utils;

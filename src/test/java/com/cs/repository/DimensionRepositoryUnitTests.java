@@ -1,6 +1,8 @@
 package com.cs.repository;
 
-import static org.junit.Assert.*;
+import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +13,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.fest.assertions.Assertions.*;
-import static org.mockito.Mockito.*;
-
 import com.cs.cache.DimensionGroupCache;
 import com.cs.data.core.nosql.mongodb.MongoRepository;
-import com.cs.model.DimensionGroup;
 import com.cs.model.ContentObject;
 import com.cs.utils.FileUtils;
 

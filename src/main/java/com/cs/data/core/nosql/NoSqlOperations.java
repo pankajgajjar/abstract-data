@@ -2,12 +2,8 @@ package com.cs.data.core.nosql;
 
 import java.util.List;
 
-import org.springframework.data.mongodb.core.MongoTemplate;
-
 import com.cs.data.core.GenericDomain;
 import com.cs.data.core.IRepository;
-import com.cs.model.DimensionGroup;
-import com.cs.model.Tree;
 
 /**
  * Interface that specifies a basic set of NoSql operations. Implemented by

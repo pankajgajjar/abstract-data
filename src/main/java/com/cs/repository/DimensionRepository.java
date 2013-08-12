@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import com.cs.cache.DimensionGroupCache;
 import com.cs.data.core.nosql.NoSqlRepository;
-import com.cs.model.DimensionGroup;
 import com.cs.model.ContentObject;
 import com.cs.utils.FileUtils;
 
@@ -102,18 +101,7 @@ public class DimensionRepository {
 
 	}
 
-	/**
-	 * Gets the dimension group.
-	 * 
-	 * @param groupId
-	 *            the group id
-	 * @return the dimension group
-	 */
-	private DimensionGroup getDimensionGroup(String groupId) {
-		// TODO Auto-generated method stub
-		return noSqlRepository.find(groupId, DimensionGroup.class);
-	}
-
+	
 	/**
 	 * Gets the dimension group id.
 	 * 

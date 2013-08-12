@@ -1,5 +1,10 @@
 package com.cs.builder;
 
+import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,11 +16,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.cs.cache.DimensionGroupCache;
 import com.cs.model.ContentObject;
-import com.cs.model.DimensionModelList;
 import com.cs.repository.DimensionRepository;
-
-import static org.fest.assertions.Assertions.*;
-import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TreeBuilderUnitTests {
@@ -28,15 +29,11 @@ public class TreeBuilderUnitTests {
 	@Mock
 	private DimensionRepository dimensionRepository;
 
-	@Mock
-	private DimensionModelList list;
-
 	@Before
 	public void setUp() {
 		treeBuilder = new TreeBuilder(cache, dimensionRepository);
 	}
 
-	@Test
 	public void itShouldParseGivenStringWithDelimeter() {
 		// given
 		String structure = "Campaign-MasterPublication-Publication";

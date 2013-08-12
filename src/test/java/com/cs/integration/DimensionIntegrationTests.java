@@ -1,6 +1,6 @@
 package com.cs.integration;
 
-import static org.junit.Assert.*;
+import static org.fest.assertions.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,16 +13,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.cs.cache.DimensionGroupCache;
-import com.cs.controller.NodeController;
 import com.cs.data.core.nosql.InMemoryNoSqlRepository;
 import com.cs.data.core.nosql.mongodb.MongoRepository;
-import com.cs.model.DimensionGroup;
 import com.cs.model.ContentObject;
 import com.cs.repository.DimensionRepository;
 import com.cs.service.Service;
-
-import static org.fest.assertions.Assertions.*;
-import static org.mockito.Mockito.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:application-context-test.xml")

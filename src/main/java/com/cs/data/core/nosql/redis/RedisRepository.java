@@ -5,15 +5,9 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisOperations;
-import org.springframework.stereotype.Component;
-
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 
 import com.cs.data.core.GenericDomain;
 import com.cs.data.core.nosql.InMemoryNoSqlRepository;
-import com.cs.data.core.nosql.NoSqlOperations;
-import com.cs.model.Tree;
 
 /**
  * Class RedisRepository implements InMemoryNoSqlRepository.

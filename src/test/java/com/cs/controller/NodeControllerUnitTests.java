@@ -1,5 +1,9 @@
 package com.cs.controller;
 
+import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -11,18 +15,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.cs.cache.ViewStructureCache;
-import com.cs.controller.NodeController;
-import com.cs.factory.DomainFactory;
-import com.cs.model.CustomResponse;
-import com.cs.model.DimensionGroup;
 import com.cs.model.ContentObject;
 import com.cs.service.DimensionService;
-
-import static org.fest.assertions.Assertions.*;
-import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class NodeControllerUnitTests {
