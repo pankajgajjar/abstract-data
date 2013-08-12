@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.cs.data.core.nosql.redis.RedisRepository;
+import com.cs.data.core.nosql.InMemoryNoSqlRepository;
 import com.cs.model.ContentObject;
 
 
@@ -16,7 +16,7 @@ import com.cs.model.ContentObject;
 public class DimensionGroupCache {
 
 	/** The no sql template for redis. */
-	private RedisRepository noSqlTemplateForRedis;
+	private InMemoryNoSqlRepository inMemoryNosqlRepository;
 
 	/**
 	 * Instantiates a new dimension group cache.
@@ -24,8 +24,8 @@ public class DimensionGroupCache {
 	 * @param noSqlTemplateForRedis the no sql template for redis
 	 */
 	@Autowired
-	public DimensionGroupCache(RedisRepository noSqlTemplateForRedis) {
-		this.noSqlTemplateForRedis = noSqlTemplateForRedis;
+	public DimensionGroupCache(InMemoryNoSqlRepository noSqlTemplateForRedis) {
+		this.inMemoryNosqlRepository = noSqlTemplateForRedis;
 
 	}
 
@@ -37,7 +37,7 @@ public class DimensionGroupCache {
 	 */
 	public String getDimensionGroupIdFor(String path) {
 		// TODO Auto-generated method stub
-		return noSqlTemplateForRedis.get(path);
+		return inMemoryNosqlRepository.get(path);
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class DimensionGroupCache {
 	public void updateCache(ContentObject dimension, String groupId) {
 
 		delete(dimension);
-		noSqlTemplateForRedis.set(
+		inMemoryNosqlRepository.set(
 				dimension.getPath().concat("," + dimension.getName()), groupId);
 	}
 
@@ -61,7 +61,7 @@ public class DimensionGroupCache {
 	private void delete(ContentObject dimension) {
 		// TODO Auto-generated method stub
 
-		noSqlTemplateForRedis.delete(dimension.getPath());
+		inMemoryNosqlRepository.delete(dimension.getPath());
 
 	}
 
@@ -74,9 +74,9 @@ public class DimensionGroupCache {
 	public void addNewGroup(ContentObject dimension, String groupId) {
 		// TODO Auto-generated method stub
 		if (dimension.isRoot()) {
-			noSqlTemplateForRedis.set(dimension.getName(), groupId);
+			inMemoryNosqlRepository.set(dimension.getName(), groupId);
 		} else {
-			noSqlTemplateForRedis.set(
+			inMemoryNosqlRepository.set(
 					dimension.getPath().concat("," + dimension.getName()),
 					groupId);
 		}

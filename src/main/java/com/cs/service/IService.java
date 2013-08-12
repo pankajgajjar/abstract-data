@@ -14,42 +14,53 @@ public interface IService {
 
 	/**
 	 * Gets the all.
-	 *
+	 * 
 	 * @return the all
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws URISyntaxException the uRI syntax exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws URISyntaxException
+	 *             the uRI syntax exception
 	 */
 	public String getAll() throws IOException, URISyntaxException;
 
 	/**
 	 * Creates the.
-	 *
-	 * @param domainObject the domain object
+	 * 
+	 * @param isFolder
+	 * @param path
+	 * @param name
+	 * @param type
 	 * @return the string
 	 */
-	public String create(ContentObject domainObject);
+	public String create(String type, String name, String path, String isFolder);
 
 	/**
 	 * Gets the all by.
-	 *
-	 * @param structure the structure
+	 * 
+	 * @param structure
+	 *            the structure
 	 * @return the all by
 	 */
 	public List<ContentObject> getAllBy(String structure);
 
 	/**
 	 * Move.
-	 *
-	 * @param chapter the chapter
-	 * @param path the path
+	 * 
+	 * @param chapter
+	 *            the chapter
+	 * @param path
+	 *            the path
 	 */
-	void move(ContentObject chapter, String path);
+	void move(String type, String name, String path, String isFolder,
+			String newpath);
 
 	/**
 	 * Delete.
-	 *
-	 * @param chapter the chapter
-	 * @param path the path
+	 * 
+	 * @param chapter
+	 *            the chapter
+	 * @param path
+	 *            the path
 	 */
 	void delete(ContentObject chapter, String path);
 

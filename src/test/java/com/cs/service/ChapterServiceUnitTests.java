@@ -31,10 +31,14 @@ public class ChapterServiceUnitTests {
 		// given
 
 		String result = "success";
+		String name = "test";
+		String path = "A,B";
+		String type = "spread";
+		String isFolder = "true";
 		// when
 		ContentObject object = new ContentObject();
 		when(chapterRepository.save(object)).thenReturn(result);
-		String actualResult = service.create(object);
+		String actualResult = service.create(type, name, path, isFolder);
 
 		// then
 		verify(chapterRepository).save(object);

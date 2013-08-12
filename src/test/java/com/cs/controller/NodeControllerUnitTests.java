@@ -32,18 +32,9 @@ public class NodeControllerUnitTests {
 	@Mock
 	private DimensionService dimensionService;
 
-	@Mock
-	private ContentObject dimensionModel;
-
-	@Mock
-	private DomainFactory domainFactory;
-	
-	@Mock
-	private ViewStructureCache cache;
-
 	@Before
 	public void setUp() {
-		treeController = new NodeController(dimensionService, domainFactory,cache);
+		treeController = new NodeController(dimensionService);
 	}
 
 	@Test
@@ -67,22 +58,20 @@ public class NodeControllerUnitTests {
 		// given
 		String type = "compaign";
 		String name = "co01";
-		String parentId = "-1";
+		String isFolder = "-1";
 		String path = "-1";
 
 		String expectedDimensionId = name;
 
 		// when
 
-		when(domainFactory.getDomainObject("ContentObject")).thenReturn(
-				dimensionModel);
-		when(dimensionService.create(dimensionModel)).thenReturn(
+		when(dimensionService.create(name, type, path, isFolder)).thenReturn(
 				expectedDimensionId);
 
-		String actualResponse = treeController.create(type, name, path,
-				parentId);
+		String actualResponse = treeController.create(name, type, path,
+				isFolder);
 		// then
-		verify(dimensionService).create(dimensionModel);
+		verify(dimensionService).create(name, type, path, isFolder);
 		assertThat(actualResponse).isEqualTo(expectedDimensionId);
 
 	}
@@ -115,22 +104,8 @@ public class NodeControllerUnitTests {
 
 		// then
 		verify(dimensionService).getAllBy(structure);
-		verify(cache).setCurrentViewStructure("view", structure);
 		assertThat(actualModels).isEqualTo(models);
 
 	}
 
-	@Test
-	public void itShouldSaveCurrentViewStructureToCache() {
-		// given
-		String currentViewStructure = "C-M-P-D";
-		// when
-
-		treeController.setCurrentViewStructure(currentViewStructure);
-
-		// then
-		verify(cache).setCurrentViewStructure("view", currentViewStructure);
-	}
-	
-	
 }

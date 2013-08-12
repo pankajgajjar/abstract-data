@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.cs.cache.ViewStructureCache;
+import com.cs.data.core.nosql.NoSqlRepository;
 import com.cs.data.core.nosql.mongodb.MongoRepository;
 import com.cs.model.ContentObject;
 
@@ -14,35 +15,38 @@ import com.cs.model.ContentObject;
 public class ChapterRepository {
 
 	/** The nosql template for mongo. */
-	private MongoRepository nosqlTemplateForMongo;
-	
+	private NoSqlRepository noSqlRepository;
+
 	/** The cache. */
 	private ViewStructureCache cache;
-	
+
 	/** The comma. */
 	private final String COMMA = ",";
-	
+
 	/** The hiphen. */
 	private final String HIPHEN = "-";
 
 	/**
 	 * Instantiates a new chapter repository.
-	 *
-	 * @param nosqlTemplateForMongo the nosql template for mongo
-	 * @param cache the cache
+	 * 
+	 * @param nosqlTemplateForMongo
+	 *            the nosql template for mongo
+	 * @param cache
+	 *            the cache
 	 */
 	@Autowired
-	public ChapterRepository(MongoRepository nosqlTemplateForMongo,
+	public ChapterRepository(NoSqlRepository noSqlRepository,
 			ViewStructureCache cache) {
-		this.nosqlTemplateForMongo = nosqlTemplateForMongo;
+		this.noSqlRepository = noSqlRepository;
 		this.cache = cache;
 
 	}
 
 	/**
 	 * Save given chapter.
-	 *
-	 * @param chapter the chapter
+	 * 
+	 * @param chapter
+	 *            the chapter
 	 * @return the string
 	 */
 	public String save(ContentObject chapter) {
@@ -50,14 +54,16 @@ public class ChapterRepository {
 		ContentObject publication = getParentPublication(chapter.getPath());
 		addChapterToPublication(publication, chapter);
 
-		return nosqlTemplateForMongo.save(chapter);
+		return noSqlRepository.save(chapter);
 	}
 
 	/**
 	 * Adds the chapter to publication.
-	 *
-	 * @param publication the publication
-	 * @param chapter the chapter
+	 * 
+	 * @param publication
+	 *            the publication
+	 * @param chapter
+	 *            the chapter
 	 */
 	private void addChapterToPublication(ContentObject publication,
 			ContentObject chapter) {
@@ -71,18 +77,21 @@ public class ChapterRepository {
 
 	/**
 	 * Save given publication to mongoDb database..
-	 *
-	 * @param publication the publication
+	 * 
+	 * @param publication
+	 *            the publication
 	 */
 	private void saveToMongo(ContentObject publication) {
-		nosqlTemplateForMongo.save(publication);
+		noSqlRepository.save(publication);
 	}
 
 	/**
 	 * Find given parent id in given publication..
-	 *
-	 * @param publication the publication
-	 * @param parentId the parent id
+	 * 
+	 * @param publication
+	 *            the publication
+	 * @param parentId
+	 *            the parent id
 	 * @return the content object
 	 */
 	protected ContentObject find(ContentObject publication, String parentId) {
@@ -111,8 +120,9 @@ public class ChapterRepository {
 
 	/**
 	 * Gets the publication id.
-	 *
-	 * @param path the path
+	 * 
+	 * @param path
+	 *            the path
 	 * @return the publication id
 	 */
 	protected String getPublicationId(String path) {
@@ -128,8 +138,9 @@ public class ChapterRepository {
 
 	/**
 	 * Gets the last index of current view structure.
-	 *
-	 * @param currentViewStructure the current view structure
+	 * 
+	 * @param currentViewStructure
+	 *            the current view structure
 	 * @return the last index of
 	 */
 	protected int getLastIndexOf(String currentViewStructure) {
@@ -140,8 +151,9 @@ public class ChapterRepository {
 
 	/**
 	 * Gets the parent id for given path.
-	 *
-	 * @param path the path
+	 * 
+	 * @param path
+	 *            the path
 	 * @return the parent id
 	 */
 	protected String getParentId(String path) {
@@ -151,20 +163,23 @@ public class ChapterRepository {
 
 	/**
 	 * Gets the parent publication.
-	 *
-	 * @param path the path
+	 * 
+	 * @param path
+	 *            the path
 	 * @return the parent publication
 	 */
 	protected ContentObject getParentPublication(String path) {
-		return nosqlTemplateForMongo.getObjectByKey(getPublicationId(path),
+		return noSqlRepository.getObjectByKey(getPublicationId(path),
 				ContentObject.class);
 	}
 
 	/**
 	 * Deletes given chapter for given old path.
-	 *
-	 * @param chapter the chapter
-	 * @param oldPath the old path
+	 * 
+	 * @param chapter
+	 *            the chapter
+	 * @param oldPath
+	 *            the old path
 	 * @return the string
 	 */
 	public String delete(ContentObject chapter, String oldPath) {

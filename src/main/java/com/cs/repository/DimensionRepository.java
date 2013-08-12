@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.cs.cache.DimensionGroupCache;
-import com.cs.data.core.nosql.mongodb.MongoRepository;
+import com.cs.data.core.nosql.NoSqlRepository;
 import com.cs.model.DimensionGroup;
 import com.cs.model.ContentObject;
 import com.cs.utils.FileUtils;
@@ -22,43 +22,46 @@ public class DimensionRepository {
 
 	/** The file utils. */
 	private FileUtils fileUtils;
-	
+
 	/** The group cache. */
 	private DimensionGroupCache groupCache;
-	
+
 	/** The no sql templatefor mongo. */
-	private MongoRepository noSqlTemplateforMongo;
-	
+	private NoSqlRepository noSqlRepository;
+
 	/** The fieldtoupdate. */
 	private final String FIELDTOUPDATE = "groupIds";
-	
+
 	/** The type. */
 	private final String TYPE = "type";
-	
+
 	/** The groupids. */
 	private final String GROUPIDS = "groupIds";
 
 	/**
 	 * Instantiates a new dimension repository.
-	 *
-	 * @param fileUtils the file utils
-	 * @param groupCache the group cache
-	 * @param noSqlTemplateforMongo the no sql templatefor mongo
+	 * 
+	 * @param fileUtils
+	 *            the file utils
+	 * @param groupCache
+	 *            the group cache
+	 * @param noSqlTemplateforMongo
+	 *            the no sql templatefor mongo
 	 */
 	@Autowired
 	public DimensionRepository(FileUtils fileUtils,
-			DimensionGroupCache groupCache,
-			MongoRepository noSqlTemplateforMongo) {
+			DimensionGroupCache groupCache, NoSqlRepository noSqlRepository) {
 
 		this.fileUtils = fileUtils;
 		this.groupCache = groupCache;
-		this.noSqlTemplateforMongo = noSqlTemplateforMongo;
+		this.noSqlRepository = noSqlRepository;
 	}
 
 	/**
 	 * Creates the dimension.
-	 *
-	 * @param dimension the dimension
+	 * 
+	 * @param dimension
+	 *            the dimension
 	 * @return the string
 	 */
 	public String createDimension(ContentObject dimension) {
@@ -66,7 +69,7 @@ public class DimensionRepository {
 		if (groupCache.ifGroupIdExistsFor(dimension.getPath())) {
 			dimension.addToGroupId(groupId);
 			dimension.setChildren(null);
-			noSqlTemplateforMongo.save(dimension);
+			noSqlRepository.save(dimension);
 			groupCache.updateCache(dimension, groupId);
 		} else {
 			groupId = UUID.randomUUID().toString();
@@ -75,7 +78,7 @@ public class DimensionRepository {
 			updateGroupIdForAllAncestor(dimension.getPath(), groupId);
 			dimension.addToGroupId(groupId);
 			dimension.setChildren(null);
-			noSqlTemplateforMongo.save(dimension);
+			noSqlRepository.save(dimension);
 		}
 
 		return dimension.getId();
@@ -83,35 +86,39 @@ public class DimensionRepository {
 
 	/**
 	 * Update group id for all ancestor.
-	 *
-	 * @param path the path
-	 * @param groupId the group id
+	 * 
+	 * @param path
+	 *            the path
+	 * @param groupId
+	 *            the group id
 	 */
 	private void updateGroupIdForAllAncestor(String path, String groupId) {
 		int count = 0;
 		String[] paths = path.split(",");
 		for (String singlePath : paths) {
-			noSqlTemplateforMongo.updateById(singlePath, FIELDTOUPDATE,
-					groupId, ContentObject.class);
+			noSqlRepository.updateById(singlePath, FIELDTOUPDATE, groupId,
+					ContentObject.class);
 		}
 
 	}
 
 	/**
 	 * Gets the dimension group.
-	 *
-	 * @param groupId the group id
+	 * 
+	 * @param groupId
+	 *            the group id
 	 * @return the dimension group
 	 */
 	private DimensionGroup getDimensionGroup(String groupId) {
 		// TODO Auto-generated method stub
-		return noSqlTemplateforMongo.find(groupId, DimensionGroup.class);
+		return noSqlRepository.find(groupId, DimensionGroup.class);
 	}
 
 	/**
 	 * Gets the dimension group id.
-	 *
-	 * @param path the path
+	 * 
+	 * @param path
+	 *            the path
 	 * @return the dimension group id
 	 */
 	private String getDimensionGroupId(String path) {
@@ -121,10 +128,12 @@ public class DimensionRepository {
 
 	/**
 	 * Gets the all dimensions.
-	 *
+	 * 
 	 * @return the all dimensions
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws URISyntaxException the uRI syntax exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws URISyntaxException
+	 *             the uRI syntax exception
 	 */
 	public String getAllDimensions() throws IOException, URISyntaxException {
 		// TODO Auto-generated method stub
@@ -133,37 +142,39 @@ public class DimensionRepository {
 
 	/**
 	 * Gets the dimensions.
-	 *
+	 * 
 	 * @return the dimensions
 	 */
 	public List<ContentObject> getDimensions() {
 
-		return noSqlTemplateforMongo.findAll(ContentObject.class);
+		return noSqlRepository.findAll(ContentObject.class);
 	}
 
 	/**
 	 * Gets the dimensions of type.
-	 *
-	 * @param type the type
+	 * 
+	 * @param type
+	 *            the type
 	 * @return the dimensions of type
 	 */
 	public List<ContentObject> getDimensionsOfType(String type) {
 		// TODO Auto-generated method stub
-		return noSqlTemplateforMongo.getObjectsBy(TYPE, type,
-				ContentObject.class);
+		return noSqlRepository.getObjectsBy(TYPE, type, ContentObject.class);
 	}
 
 	/**
 	 * Gets the dimensions by type.
-	 *
-	 * @param type2 the type2
-	 * @param groupIds the group ids
+	 * 
+	 * @param type2
+	 *            the type2
+	 * @param groupIds
+	 *            the group ids
 	 * @return the dimensions by
 	 */
 	public List<ContentObject> getDimensionsBy(String type2,
 			List<String> groupIds) {
-		return noSqlTemplateforMongo.getObjectForAndCriteria(TYPE, type2,
-				GROUPIDS, groupIds, ContentObject.class);
+		return noSqlRepository.getObjectForAndCriteria(TYPE, type2, GROUPIDS,
+				groupIds, ContentObject.class);
 
 	}
 

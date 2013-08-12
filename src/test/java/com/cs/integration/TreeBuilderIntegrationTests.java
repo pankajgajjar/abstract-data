@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.cs.builder.TreeBuilder;
 import com.cs.cache.DimensionGroupCache;
+import com.cs.data.core.nosql.InMemoryNoSqlRepository;
 import com.cs.data.core.nosql.mongodb.MongoRepository;
 import com.cs.data.core.nosql.redis.RedisRepository;
 import com.cs.model.ContentObject;
@@ -24,9 +25,9 @@ public class TreeBuilderIntegrationTests {
 
 	private TreeBuilder builder;
 
-	private RedisRepository noSqlTemplateforRedis;
+	private InMemoryNoSqlRepository inMemoryNoSqlRepository;
 
-	private MongoRepository noSqlTemplateforMongo;
+	private MongoRepository noSqlRepository;
 
 	@Autowired
 	private MongoOperations mongoTemplate;
@@ -39,12 +40,11 @@ public class TreeBuilderIntegrationTests {
 
 	@Test
 	public void itShouldReturnTheWholeTree() {
-		noSqlTemplateforMongo = new MongoRepository(mongoTemplate);
-		noSqlTemplateforRedis = new RedisRepository(redisTemplate);
+		noSqlRepository = new MongoRepository(mongoTemplate);
+		inMemoryNoSqlRepository = new RedisRepository(redisTemplate);
 		fileUtils = new FileUtils();
-		cache = new DimensionGroupCache(noSqlTemplateforRedis);
-		repository = new DimensionRepository(fileUtils, cache,
-				noSqlTemplateforMongo);
+		cache = new DimensionGroupCache(inMemoryNoSqlRepository);
+		repository = new DimensionRepository(fileUtils, cache, noSqlRepository);
 
 		builder = new TreeBuilder(cache, repository);
 

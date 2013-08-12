@@ -15,8 +15,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.cs.cache.DimensionGroupCache;
 import com.cs.cache.ViewStructureCache;
 import com.cs.controller.NodeController;
+import com.cs.data.core.nosql.InMemoryNoSqlRepository;
 import com.cs.data.core.nosql.mongodb.MongoRepository;
-import com.cs.data.core.nosql.redis.RedisRepository;
 import com.cs.model.DimensionGroup;
 import com.cs.model.ContentObject;
 import com.cs.repository.ChapterRepository;
@@ -31,7 +31,7 @@ import static org.mockito.Mockito.*;
 public class ChapterIntegrationTests {
 
 	@Autowired
-	private MongoRepository noSqlTemplateForMongo;
+	private MongoRepository noSqlRepository;
 
 	List<ContentObject> models = new ArrayList<ContentObject>();
 
@@ -39,7 +39,7 @@ public class ChapterIntegrationTests {
 	private ChapterRepository chapterRepository;
 
 	@Autowired
-	private RedisRepository noSqlTemplateForRedis;
+	private InMemoryNoSqlRepository inMemoryNosqlRepository;
 
 	ContentObject page01;
 
@@ -54,7 +54,7 @@ public class ChapterIntegrationTests {
 				"mp02,pg02,c02,p02,chapter01", "false");
 		ContentObject page02 = new ContentObject("page02", "page",
 				"mp02,pg02,c02,p02,chapter01,chapter02", "false");
-		cache = new ViewStructureCache(noSqlTemplateForRedis);
+		cache = new ViewStructureCache(inMemoryNosqlRepository);
 
 		models.add(page01);
 		models.add(chapter01);
@@ -66,14 +66,13 @@ public class ChapterIntegrationTests {
 	@Test
 	public void itShouldCreateMultipleDimensionGroupsForGivenModels() {
 
-		cache = new ViewStructureCache(noSqlTemplateForRedis);
+		cache = new ViewStructureCache(inMemoryNosqlRepository);
 		for (ContentObject dimension : models) {
-			chapterRepository = new ChapterRepository(noSqlTemplateForMongo,
-					cache);
+			chapterRepository = new ChapterRepository(noSqlRepository, cache);
 			String result = chapterRepository.save(dimension);
 
 			assertThat(result).isNotNull();
-			assertThat(result).isEqualTo(page01.getId());
+			assertThat(result).isEqualTo("inserted");
 
 		}
 
@@ -81,7 +80,7 @@ public class ChapterIntegrationTests {
 
 	@Test
 	public void itShouldRemoveAnObjectFromPublication() {
-		chapterRepository = new ChapterRepository(noSqlTemplateForMongo, cache);
+		chapterRepository = new ChapterRepository(noSqlRepository, cache);
 
 		String result = chapterRepository.delete(page01, "mp02,pg02,c02,p02");
 

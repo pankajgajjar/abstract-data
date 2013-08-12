@@ -14,8 +14,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.cs.cache.DimensionGroupCache;
 import com.cs.controller.NodeController;
+import com.cs.data.core.nosql.InMemoryNoSqlRepository;
 import com.cs.data.core.nosql.mongodb.MongoRepository;
-import com.cs.data.core.nosql.redis.RedisRepository;
 import com.cs.model.DimensionGroup;
 import com.cs.model.ContentObject;
 import com.cs.repository.DimensionRepository;
@@ -29,7 +29,7 @@ import static org.mockito.Mockito.*;
 public class DimensionIntegrationTests {
 
 	@Autowired
-	private MongoRepository noSqlTemplateForMongo;
+	private MongoRepository noSqlRepository;
 
 	List<ContentObject> models = new ArrayList<ContentObject>();
 
@@ -39,7 +39,7 @@ public class DimensionIntegrationTests {
 	private IService dimensionService;
 
 	@Autowired
-	private RedisRepository noSqlTemplateForRedis;
+	private InMemoryNoSqlRepository inMemoryNosqlRepository;
 
 	@Before
 	public void setUp() {
@@ -93,10 +93,10 @@ public class DimensionIntegrationTests {
 	@Test
 	public void itShouldCreateMultipleDimensionGroupsForGivenModels() {
 
-		cache = new DimensionGroupCache(noSqlTemplateForRedis);
+		cache = new DimensionGroupCache(inMemoryNosqlRepository);
 		for (ContentObject dimension : models) {
 			dimensionRepository = new DimensionRepository(null, cache,
-					noSqlTemplateForMongo);
+					noSqlRepository);
 			String test = dimensionRepository.createDimension(dimension);
 			assertThat(test).isNotNull();
 			assertThat(test).isEqualTo(dimension.getId());

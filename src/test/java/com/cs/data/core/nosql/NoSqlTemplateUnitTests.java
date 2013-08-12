@@ -16,10 +16,10 @@ import com.cs.data.core.nosql.NoSqlOperations;
 public class NoSqlTemplateUnitTests {
 
 	@Autowired
-	private NoSqlOperations noSqlTemplateForMongo;
+	private NoSqlRepository noSqlRepository;
 
 	@Autowired
-	private NoSqlOperations noSqlTemplateForRedis;
+	private InMemoryNoSqlRepository inMemoryNoSqlRepository;
 
 	@Before
 	public void setUp() {
@@ -35,8 +35,9 @@ public class NoSqlTemplateUnitTests {
 
 		// when
 
-		String id = noSqlTemplateForMongo.save(studentInserted);
-		Student studentRetrieved = noSqlTemplateForMongo.getObjectByKey(studentInserted, Student.class);
+		String id = noSqlRepository.save(studentInserted);
+		Student studentRetrieved = noSqlRepository.getObjectByKey(
+				studentInserted, Student.class);
 
 		// then
 
@@ -56,8 +57,8 @@ public class NoSqlTemplateUnitTests {
 
 		// when
 
-		String id = noSqlTemplateForRedis.save(studentInserted);
-		Student studentRetrieved = noSqlTemplateForRedis.getObjectByKey(
+		String id = inMemoryNoSqlRepository.save(studentInserted);
+		Student studentRetrieved = inMemoryNoSqlRepository.getObjectByKey(
 				studentInserted, Student.class);
 		// then
 
@@ -74,7 +75,7 @@ public class NoSqlTemplateUnitTests {
 		// given
 		Student student = new Student("8", "Amar", "First");
 		// when
-		Student actualStudent = noSqlTemplateForMongo.getObjectByKey(student,
+		Student actualStudent = noSqlRepository.getObjectByKey(student,
 				Student.class);
 		// then
 		Assert.assertEquals(student.getName(), actualStudent.getName());
@@ -85,9 +86,9 @@ public class NoSqlTemplateUnitTests {
 	public void itShouldGetAnObjectFromRedis() {
 		// given
 		Student student = new Student("9", "Katrina", "First");
-		noSqlTemplateForRedis.save(student);
+		inMemoryNoSqlRepository.save(student);
 		// when
-		Student actualStudent = noSqlTemplateForRedis.getObjectByKey(student,
+		Student actualStudent = inMemoryNoSqlRepository.getObjectByKey(student,
 				Student.class);
 		// then
 		Assert.assertEquals(student.getName(), actualStudent.getName());

@@ -3,7 +3,7 @@ package com.cs.cache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.cs.data.core.nosql.redis.RedisRepository;
+import com.cs.data.core.nosql.InMemoryNoSqlRepository;
 
 
 /**
@@ -13,7 +13,7 @@ import com.cs.data.core.nosql.redis.RedisRepository;
 public class ViewStructureCache {
 
 	/** The no sql template for redis. */
-	private RedisRepository noSqlTemplateForRedis;
+	private InMemoryNoSqlRepository noSqlTemplateForRedis;
 	
 	/** The key. */
 	private final String KEY = "view";
@@ -24,7 +24,7 @@ public class ViewStructureCache {
 	 * @param noSqlTemplateForRedis the no sql template for redis
 	 */
 	@Autowired
-	public ViewStructureCache(RedisRepository noSqlTemplateForRedis) {
+	public ViewStructureCache(InMemoryNoSqlRepository noSqlTemplateForRedis) {
 		this.noSqlTemplateForRedis = noSqlTemplateForRedis;
 
 	}

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.cs.builder.TreeBuilder;
+import com.cs.cache.ViewStructureCache;
+import com.cs.factory.DomainFactory;
 import com.cs.model.ContentObject;
 import com.cs.repository.DimensionRepository;
 
@@ -19,22 +21,39 @@ public class DimensionService implements IService {
 
 	/** The tree builder. */
 	private TreeBuilder treeBuilder;
-	
+
 	/** The dimension repository. */
 	private DimensionRepository dimensionRepository;
 
+	/** The Domain factory. */
+	private DomainFactory factory;
+
+	/** The ViewStructure cache. */
+	private ViewStructureCache cache;
+
+	/** The contentobject. */
+	private final String CONTENTOBJECT = "ContentObject";
+
+	/** The Constant KEY. */
+	private static final String KEY = "view";
+
 	/**
 	 * Instantiates a new dimension service.
-	 *
-	 * @param dimensionRepository the dimension repository
-	 * @param treeBuilder the tree builder
+	 * 
+	 * @param dimensionRepository
+	 *            the dimension repository
+	 * @param treeBuilder
+	 *            the tree builder
 	 */
 	@Autowired
 	public DimensionService(DimensionRepository dimensionRepository,
-			TreeBuilder treeBuilder) {
+			TreeBuilder treeBuilder, DomainFactory factory,
+			ViewStructureCache cache) {
 
 		this.dimensionRepository = dimensionRepository;
 		this.treeBuilder = treeBuilder;
+		this.factory = factory;
+		this.cache = cache;
 
 	}
 
@@ -55,11 +74,6 @@ public class DimensionService implements IService {
 	 * 
 	 * @see com.cs.service.IService#create(com.cs.model.DimensionModel)
 	 */
-	@Override
-	public String create(ContentObject dimension) {
-
-		return dimensionRepository.createDimension(dimension);
-	}
 
 	/*
 	 * Get all chapters for given structure.
@@ -69,25 +83,72 @@ public class DimensionService implements IService {
 	@Override
 	public List<ContentObject> getAllBy(String structure) {
 		// TODO Auto-generated method stub
-
+		setCurrentViewStructure(structure);
 		return treeBuilder.buildTree(structure);
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.cs.service.IService#move(com.cs.model.ContentObject, java.lang.String)
+	/*
+	 * Deletes the dimension.
+	 * 
+	 * @see com.cs.service.IService#delete(com.cs.model.ContentObject,
+	 * java.lang.String)
 	 */
 	@Override
-	public void move(ContentObject chapter, String path) {
+	public void delete(ContentObject chapter, String path) {
 		// TODO Auto-generated method stub
 
 	}
 
-	/* Deletes the dimension.
-	 * @see com.cs.service.IService#delete(com.cs.model.ContentObject, java.lang.String)
-	 */
 	@Override
-	public void delete(ContentObject chapter, String path) {
+	public String create(String type, String name, String path, String isFolder) {
+		ContentObject dimension = (ContentObject) factory
+				.getDomainObject(CONTENTOBJECT);
+
+		setDimensionAttributes(dimension, type, name, path, isFolder);
+		return dimensionRepository.createDimension(dimension);
+	}
+
+	/**
+	 * Sets the dimension attributes.
+	 * 
+	 * @param dimension
+	 *            the dimension
+	 * @param type
+	 *            the type
+	 * @param name
+	 *            the name
+	 * @param path
+	 *            the path
+	 * @param isFolder
+	 *            the is folder
+	 */
+
+	protected void setDimensionAttributes(ContentObject dimension, String type,
+			String name, String path, String isFolder) {
+		dimension.setId(name);
+		dimension.setTitle(name);
+		dimension.setIsFolder(isFolder);
+		dimension.setPath(path);
+		dimension.setName(name);
+		dimension.setType(type);
+
+	}
+
+	/**
+	 * Sets the current view structure.
+	 * 
+	 * @param currentViewStructure
+	 *            the new current view structure
+	 */
+	protected void setCurrentViewStructure(String currentViewStructure) {
+		cache.setCurrentViewStructure(KEY, currentViewStructure);
+
+	}
+
+	@Override
+	public void move(String type, String name, String path, String isFolder,
+			String newpath) {
 		// TODO Auto-generated method stub
 
 	}

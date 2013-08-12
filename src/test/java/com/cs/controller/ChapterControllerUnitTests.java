@@ -29,7 +29,7 @@ public class ChapterControllerUnitTests {
 
 	@Before
 	public void setUp() {
-		chapterController = new ChapterController(chapterService, factory);
+		chapterController = new ChapterController(chapterService);
 
 	}
 
@@ -45,12 +45,12 @@ public class ChapterControllerUnitTests {
 		ContentObject chapter = new ContentObject(name, type, path, isFolder);
 
 		// when
-		when(factory.getDomainObject("ContentObject")).thenReturn(chapter);
-		when(chapterService.create(chapter)).thenReturn(name);
+		when(chapterService.create(type, name, path, isFolder))
+				.thenReturn(name);
 		String actualName = chapterController
 				.create(type, name, path, isFolder);
 		// then
-		verify(chapterService).create(chapter);
+		verify(chapterService).create(type, name, path, isFolder);
 		assertThat(actualName).isEqualTo(name);
 
 	}
@@ -66,13 +66,12 @@ public class ChapterControllerUnitTests {
 		String type = "spread";
 		String isFolder = "true";
 
-		ContentObject chapter = new ContentObject(name, type, path, isFolder);
+		ContentObject chapter = new ContentObject();
 
 		// when
-		when(factory.getDomainObject("ContentObject")).thenReturn(chapter);
 		chapterController.move(type, name, path, isFolder, newPath);
 
 		// then
-		verify(chapterService).move(chapter, path);
+		verify(chapterService).move(type, name, path, isFolder, newPath);
 	}
 }
