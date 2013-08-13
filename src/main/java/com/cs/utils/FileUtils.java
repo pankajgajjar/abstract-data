@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 /**
  * The Class FileUtils.
  */
-@Component
+
 public class FileUtils {
 
 	/**

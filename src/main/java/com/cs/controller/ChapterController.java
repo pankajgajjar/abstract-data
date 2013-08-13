@@ -9,17 +9,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cs.service.Service;
 
 /**
- * The Class ChapterController.
- * TODO. com.cs.business.ifacadeservices
- * 					controller -> common facade ->>>(|) ->i***interface call
- * 					ichapter ->Impl
- * 					idimension ->Impl
+ * The Class ChapterController. TODO. com.cs.business.ifacadeservices controller
+ * -> common facade ->>>(|) ->i***interface call ichapter ->Impl idimension
+ * ->Impl
  */
 @Controller
 public class ChapterController {
 
 	/** The Constant CREATE. */
-	private static final String CREATE = "/chapter/create/{type}/name/{name}/path/{path}/folder/{folder}";
+	private static final String CREATECHAPTER = "/chapter/create/{type}/name/{name}/path/{path}/folder/{folder}";
+	private static final String CREATEPAGE = "/page/create/{type}/name/{name}/path/{path}/folder/{folder}";
+	private static final String MOVECHAPTER = "/chapter/create/{type}/name/{name}/path/{path}/folder/{folder}/newpath/{newPath}";
+	private static final String MOVEPAGE = "/page/create/{type}/name/{name}/path/{path}/folder/{folder}/newpath/{newPath}";
 
 	/** The chapter service. */
 	private Service chapterService;
@@ -51,7 +52,7 @@ public class ChapterController {
 	 *            the is folder
 	 * @return the string
 	 */
-	@RequestMapping(value = { CREATE })
+	@RequestMapping(value = { CREATECHAPTER, CREATEPAGE })
 	public @ResponseBody
 	String create(@PathVariable("type") String type,
 			@PathVariable("name") String name,
@@ -76,11 +77,16 @@ public class ChapterController {
 	 * @param newPath
 	 *            the new path
 	 */
-	public void move(String type, String name, String path, String isFolder,
-			String newPath) {
+	@RequestMapping(value = { MOVECHAPTER, MOVEPAGE })
+	public @ResponseBody
+	String move(@PathVariable("type") String type,
+			@PathVariable("name") String name,
+			@PathVariable("path") String path,
+			@PathVariable("isFolder") String isFolder,
+			@PathVariable("newPath") String newPath) {
 
-		
-		chapterService.move(type,name,path,isFolder,newPath);
+		chapterService.move(type, name, path, isFolder, newPath);
+		return name;
 
 	}
 }
