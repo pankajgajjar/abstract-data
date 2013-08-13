@@ -19,8 +19,8 @@ public class ChapterController {
 	/** The Constant CREATE. */
 	private static final String CREATECHAPTER = "/chapter/create/{type}/name/{name}/path/{path}/folder/{folder}";
 	private static final String CREATEPAGE = "/page/create/{type}/name/{name}/path/{path}/folder/{folder}";
-	private static final String MOVECHAPTER = "/chapter/create/{type}/name/{name}/path/{path}/folder/{folder}/newpath/{newPath}";
-	private static final String MOVEPAGE = "/page/create/{type}/name/{name}/path/{path}/folder/{folder}/newpath/{newPath}";
+	private static final String MOVECHAPTER = "/chapter/move/{type}/name/{name}/path/{path}/folder/{folder}/newpath/{newPath}";
+	private static final String MOVEPAGE = "/page/move/{type}/name/{name}/path/{path}/folder/{folder}/newpath/{newPath}";
 
 	/** The chapter service. */
 	private Service chapterService;
