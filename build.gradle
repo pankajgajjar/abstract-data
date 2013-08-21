@@ -1,28 +1,25 @@
 def langs = ['java']
-langs.each { apply plugin : it }
-apply plugin : 'war'
-apply plugin : 'idea'
-apply plugin : 'eclipse'
-apply plugin : 'jetty'
+subprojects {
+	apply plugin: 'java'
+	group = 'app.cs'
+	version = '1.0'
+	apply plugin : 'idea'
+	apply plugin : 'eclipse'
+	sourceCompatibility = 1.7
+	targetCompatibility = 1.7
 
-group = 'org.amar.web.real.time.with.websockets.web'
-version = '1.0.0'
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
-httpPort = 3000
-
-test{
+	def encoding = {it.encoding = 'UTF-8'}
+	test{
 	exclude 'com/cs/integration/**'
 }
-def encoding = {it.encoding = 'UTF-8'}
 
-repositories {
-	mavenCentral ()
-	maven { url "http://repo.springframework.org/milestone" }
-}
+	repositories {
+		mavenCentral ()
+		maven { url "http://repo.springframework.org/milestone" }
+	}
+	dependencies {
 
-dependencies {
-	def springVersion = "3.1.1.RELEASE"
+		def springVersion = "3.1.1.RELEASE"
 	def tomcat7Version = "7.0.6"
 
 	compile "org.springframework:spring-core:${springVersion}"
@@ -46,5 +43,38 @@ dependencies {
 	testCompile 'org.hamcrest:hamcrest-library:1.2.1'
 	testCompile 'org.mockito:mockito-all:1.9.5'
 	testCompile 'org.easytesting:fest-assert:1.4'
+	}
 }
+
+project(':persistence') {
+	configurations { csapi }
+	repositories {
+		mavenCentral ()
+		maven { url "http://repo.springframework.org/milestone" }
+	}
+	dependencies {
+	}
+	task csApiJar(type: Jar) {
+		baseName = 'cs-persistence-csapi'
+		dependsOn classes
+		from sourceSets.main.output
+		include('com/cs/data/**')
+	}
+	artifacts { csapi csApiJar }
+}
+project(':manager') {
+	configurations { spi }
+	dependencies {
+		compile project(path: ':persistence')
+	}
+	task spiJar(type: Jar) {
+		baseName = 'pub-repository-spi'
+		dependsOn classes
+		from sourceSets.main.output
+		include('app/cs/**')
+	}
+	artifacts { spi spiJar }
+}
+
+
 
