@@ -13,8 +13,8 @@
 
 	<mvc:annotation-driven />
 	<context:annotation-config />
-	<context:component-scan base-package="com.cs"></context:component-scan>
-	<mvc:resources mapping="/pages/**" location="/WEB-INF/pages/" />
+	<context:component-scan base-package="app.cs"></context:component-scan>
+	<mvc:resources mapping="/**" location="/WEB-INF/" />
 	<context:property-placeholder location="classpath:defaultschema.properties" />
 	<mvc:interceptors>
 		<bean id="webContentInterceptor"
@@ -27,7 +27,7 @@
 	</mvc:interceptors>
 	<bean
 		class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
-		<property name="basePackage" value="com.cs.controller" />
+		<property name="basePackage" value="app.cs.controller" />
 	</bean>
 
 	<bean

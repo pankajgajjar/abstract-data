@@ -1,0 +1,708 @@
+.darktabs{
+    border-bottom-color: #040404;
+}
+
+.menubar{
+    width:26px;
+    position: absolute;
+    left:0px;
+    top:0px;
+    min-height: 600px;
+    height:100%;
+    /*float: left;*/
+    background-color: #373737;
+    border-top: 1px solid #100E10;
+    border-left: 1px solid #100E10;
+    border-right: 1px solid #100E10;
+    border-bottom: 1px solid #100E10;
+
+
+}
+
+#leftTree{
+    padding-left: 15px;
+}
+
+.span3 {
+    width: 100%;
+    margin-left: 0px;
+    float: left;
+}
+
+.span9 {
+    width:98%;
+}
+
+.logo{
+    padding: 25px 0 0 0;
+    overflow: hidden;
+
+   background-image: url("/pub/graphics/screens/home/images/cs_logo.png");
+}
+
+.profileLogo {
+    margin: 0 0 0 0;
+    float: right;
+}
+.wrapper {
+    float: right;
+    height:50px;
+    width:50px;
+    border-radius:50px;
+    border:4px solid white;
+    overflow:hidden ;
+    margin:5px 35px 0 0;
+    visibility: visible;
+}
+
+.logobounce{
+    height:64px;
+    width:300px;
+    float: left;
+}
+
+
+.logoutdiv{
+    height:64px;
+    width:64px;
+    float: right;
+}
+
+#leftbar{
+    width:25px;
+    background-color: #262626 ;
+    float: left;
+    height:100%;
+}
+
+.logout{
+    border:#fbb450;
+    float: right;
+    margin: 15px 10px 0 0;
+    visibility: visible;
+    height: 40px;
+    width: 40px;
+}
+
+body {
+    margin:0;
+    padding:0;
+    border:0;
+    min-height: 600px;/* This removes the border around the viewport in old versions of IE */
+    width:100%;
+    height: 100%;
+    color: #333333;
+    background-color: #ececec;
+   /* Minimum width of layout - remove line if not required */
+    /* The min-width property does not work in old versions of Internet Explorer */
+    font-size:90%;
+}
+a {
+    color:#369;
+}
+a:hover {
+    color:#fff;
+    background:#369;
+    text-decoration:none;
+}
+h1, h2, h3 {
+    margin:.8em 0 .2em 0;
+    padding:0;
+}
+/*p {
+    margin:.4em 0 .8em 0;
+    padding:0;
+}*/
+img {
+    margin:10px 0 5px;
+}
+#ads img {
+    display:block;
+    padding-top:10px;
+}
+
+/* Header styles */
+.header {
+    position:relative;
+    top:0px;
+    clear:both;
+    float:left;
+    width:100%;
+    height: 65px;
+    border-bottom:2px solid #565656;
+    overflow: hidden;
+
+}
+
+.animatedbounce{
+    margin: 20px 0 0 10px  ;
+}
+
+/*#header p,
+#header h1,
+#header h2 {
+    padding:.4em 15px 0 15px;
+    margin:0;
+}
+#header ul {
+    clear:left;
+    float:left;
+    width:100%;
+    list-style:none;
+    margin:10px 0 0 0;
+    padding:0;
+}
+#header ul li {
+    display:inline;
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+#header ul li a {
+    display:block;
+    float:left;
+    margin:0 0 0 1px;
+    padding:3px 10px;
+    text-align:center;
+    background:#eee;
+    color:#000;
+    text-decoration:none;
+    position:relative;
+    left:15px;
+    line-height:1.3em;
+}
+#header ul li a:hover {
+    background:#369;
+    color:#fff;
+}
+#header ul li a.active,
+#header ul li a.active:hover {
+    color:#fff;
+    background:#000;
+    font-weight:bold;
+}
+#header ul li a span {
+    display:block;
+}*/
+/* 'widths' sub menu */
+#layoutdims {
+    clear:both;
+    background:#eee;
+    border-top:4px solid #000;
+    margin:0;
+    padding:6px 15px !important;
+    text-align:right;
+}
+/* column container */
+.colmask {
+    position:relative;	/* This fixes the IE7 overflow hidden bug */
+    /*clear:both;*/
+    float:left;
+    min-width: 500px;
+    width:100%;			/* width of whole page */
+    height: 100%;
+    /*overflow:hidden;		*//* This chops off any overhanging divs */
+}
+
+/* common column settings */
+.colleft {
+    float:left;
+    width:20%;
+    height: 100%;
+    min-height: 600px;
+    position:relative;
+    margin-left:0px;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    overflow: visible;
+    background-color: white;
+}
+
+.colmid{
+    float:left;
+    margin-left: 0px;
+    position:relative;
+    height:600px;
+    width: 3px;
+    background-color: #DDDDDD;
+    border-top: 1px solid #BBBBBB;
+    border-left: 1px solid #BBBBBB;
+    border-right: 1px solid #BBBBBB;
+    border-bottom: 1px solid #BBBBBB;
+
+}
+
+.colmenu{
+    float:left;
+    margin-left: 0px;
+    position:relative;
+    width:30px;
+    background-color: #000000;
+    height:100%;
+
+}
+
+.colright{
+    float:right;
+    position: relative;
+    width:80%;
+    height: 100%;
+}
+
+
+/* 2 Column (left menu) settings */
+.leftmenu {
+    background:#fff;		/* right column background colour */
+}
+.leftmenu {
+    right:75%;			/* right column width */
+    background:#f4f4f4;	/* left column background colour */
+}
+.leftmenu .col1 {
+    width:71%;			/* right column content width */
+    left:102%;			/* 100% plus left column left padding */
+}
+.leftmenu .col2 {
+    width:21%;			/* left column content width (column width minus left and right padding) */
+    left:6%;			/* (right column left and right padding) plus (left column left padding) */
+}
+
+.leftmenu .col3 {
+    display: inline-block;
+    vertical-align: bottom;
+    width:2%;
+    left:6%;
+    height: 550px;
+    /*margin-top: -99999px;*/
+    background: #888;   /* (right column left and right padding) plus (left column left padding) */
+}
+.separator {
+    display: inline-block;
+    vertical-align: bottom;
+    width:5%;
+    left:6%;
+    height: 99999px;
+    margin-top: -99999px;
+    background: #888;
+}
+/* Footer styles */
+/*
+#footer {
+    clear:both;
+    float:left;
+    width:100%;
+    border-top:1px solid #000;
+
+}
+*/
+/*
+.footer p {
+  */
+/*  padding:10px;
+    margin:0;*//*
+
+    font-size: 15px;
+}
+*/
+
+
+/*
+Top Bar Animation Section starts
+  */
+.selectLblCSS{
+    text-align: center;
+    background-image: url('/pub/graphics/screens/home/images/grad.png');
+    background-repeat: repeat-x;
+    font-family: sans-serif;
+    font-family: verdana;
+    font-size: 12px;
+    height:27px;
+    color: #505050;
+    font-weight: bolder;
+    padding-left: 5px;
+   /* padding-top: 5px;*/
+   /* background-color: #EEEEEE;*/
+    cursor: pointer;
+    margin-top: 0px;
+    border-bottom: 1px solid #BBBBBB;
+
+}
+.customSelectCSS{
+    position: relative;
+    width: 80%;
+}
+.mainAnimationContainerCSS{
+    text-align: center;
+    background-color: #EEEEEE;
+    left: -30px;
+    right: 0px;
+    height: 27px;
+    border-top: 1px solid #BBBBBB;
+    border-left: 1px solid #BBBBBB;
+    border-right: 1px solid #BBBBBB;
+    border-bottom: 1px solid #BBBBBB;
+}
+
+.formatTxt{
+    width: 100%;
+    height:27px;
+   /* background-color: #EEEEEE;*/
+    background-image: url('/pub/graphics/screens/home/images/grad.png');
+    background-repeat: repeat-x;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bolder;
+    font-family: verdana;
+    color:#505050;
+    border-top: 1px solid #BBBBBB;
+    border-left: 1px solid #BBBBBB;
+    border-right: 1px solid #BBBBBB;
+   /* border-bottom: 1px solid #BBBBBB;*/
+    margin:0 auto;
+    margin-top: 0px;
+}
+/*
+Top Bar Animation Section Ends
+  */
+
+/*
+    * CSS designed for index.html
+    * Created by Ravi Sharma.
+    * User: cs6
+    * Date: 25/07/13
+    * Time: 1:30 PM
+*/
+
+
+
+.holder{
+    min-height: 100%;
+    position:relative;
+}
+
+/*p{
+    font-family: arial;
+    font-size: 14pt;
+}*/
+
+.logo{
+    padding: 15px 20px 10px 10px;
+}
+
+.logoutBtnCSS{
+    border:#fbb450;
+    float: right;
+    margin: 15px 10px 0px 0px;
+}
+
+
+/*
+Top Bar Animation Section starts
+  */
+
+/* Top Bar Animation Section Ends  */
+
+
+
+
+
+
+/*
+.header{
+    height: 60px;
+    clear:both;
+    float:left;
+    width:100%;
+    border-bottom:1px solid #000;
+}*/
+
+.loginViewContainerCSS{
+    padding: 15px 20px 10px 10px;
+}
+
+.legendCSS{
+    padding: 0px 0px 0px 0px;
+}
+
+.mainContainer{
+    position: relative;
+    width: 100%;
+    min-height: 550px;
+    height:auto;
+    float: left;
+    top: 0px;
+    overflow: hidden;
+    /*position: relative;*/
+}
+
+.container{
+    width:100%;
+    padding-left: 100px;
+    background-color: white;
+    border-bottom: 2px solid #565656;
+}
+
+.UIContainer{
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position:absolute;
+    background-color: #999999;
+}
+
+#leftPanel{
+    width:90%;
+    height: 100%;
+    float:right;
+    background-color: white;
+   /* border-right: #0e0e0e solid thin;*/
+    margin-left: 0px;
+    margin-top: 0px;
+}
+#rightPanel{
+    height: 100%;
+    width: 98.5%;
+    margin-top: 0px;
+    float:left;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+}
+
+#lefttree{
+    padding-left: 5px;
+}
+
+#rightPanelView
+{
+    height: 100%;
+    width: 100%;
+    float:right;
+    position: relative;
+}
+
+.footer{
+    /*float: left;*/
+    position: relative;
+    background-image: url('/pub/graphics/screens/home/images/grad.png');
+    height: 27px;
+    width:100%;
+    border-top: 1px solid rgb(187, 187, 187);
+    border-left: 1px solid rgb(187, 187, 187);
+    border-right: 1px solid rgb(187, 187, 187);
+    border-bottom: 1px solid rgb(187, 187, 187);
+    float: left;
+    top:0px;
+}
+
+#footertxt{
+
+    margin-top: 5px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bolder;
+    font-family: calibri;
+}
+
+.notificationCSS{
+
+    font-family: "verdana";
+    font-size: 10px;
+    text-align: center;
+    height: 20px;
+
+    border: #0e0e0e solid thin;
+    /*
+    border-right: #0e0e0e solid thin;
+    border-bottom: #0e0e0e solid thin;
+      */
+    position: fixed;
+
+    left: 45%;
+    margin-left: -150px;
+    top: 40px;
+    background-color: #bfbfbf;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.notificationTxtCSS{
+    font-size: 12px;
+}
+
+/* Right hand side Panel viewHolderCSS */
+
+.viewHolderCSS{
+    position: relative;
+    float: right;
+    background-color:white;
+    width: 100%;
+    height: 555px;
+   /* bottom: 20px;*/
+    overflow-x:scroll;
+    overflow-y: scroll;
+}
+
+
+/* Tile, List and Detail View Item Renderer CSS Section Starts */
+.tileImgCSS{
+    position: absolute;
+    top:50px;
+    left:40px;
+    height:27px;
+    width: 60px;
+}
+
+.listImgCSS{
+    position: absolute;
+    top:5px;
+    left:5px;
+    height: 13px;
+    width: 30px;
+}
+
+.detailImgCSS{
+    position:relative;
+    top: 10px;
+    margin-left:5px;
+    float: left;
+    height:70px;
+    width: 70px;
+}
+
+.tileListViewImgTxtCSS{
+    position: absolute;
+    bottom:0px;
+    font-size: 16px;
+    text-align: center;
+    left:45px;
+}
+
+.tileViewImgTxtCSS{
+    position: absolute;
+
+    font-size: 12px;
+    text-align: center;
+    left: -1px;
+    bottom: -12px;
+    width: 100%;
+    border-top: 1px dotted #303030;
+    border-left: 1px solid #BBBBBB;
+    border-right: 1px solid #BBBBBB;
+    border-bottom: 1px solid #BBBBBB;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+}
+
+
+.detailTitleTxtCSS{
+    position: relative;
+    margin-top:5px;
+    margin-left:20px;
+    float: left;
+    height:auto;
+    width:auto;
+}
+
+.detailContentTxtCSS{
+    position: relative;
+    margin-top:10px;
+    margin-left:20px;
+    width:auto;
+    height:auto;
+    float: left;
+    height: auto;
+}
+
+.detailTitleContent{
+    position: relative;
+    margin-top:5px;
+    margin-left:20px;
+    float: left;
+    height:auto;
+    width: auto;
+
+
+}
+
+.tileDivCSS{
+    position: relative;
+    float: left;
+    height : 160px; width : 128px;
+    padding: 5px;
+    margin: 5px;
+    border:1px solid #BBBBBB;
+    border-radius:12px;
+    background-color: #DFDFDF;
+}
+
+.listDivCSS{
+    position: relative;
+    background-color:#DFDFDF;
+    float: left;
+    height : 35px;
+    width : 95%;
+    padding: 5px;
+    margin: 5px;
+    border:1px solid #BBBBBB;
+    border-radius:12px;
+}
+
+.detailDivCSS{
+    position: relative;
+    background-color:#DFDFDF;
+    border:1px solid #BBBBBB;
+    border-radius:12px;
+    float: left;
+    height : auto;
+    width : 95%;
+    padding: 5px;
+    margin: 5px;
+
+}
+
+.viewOptionCSS{
+    position: relative;
+    background-image: url('/pub/graphics/screens/home/images/grad.png');
+    background-repeat: repeat-x;
+
+   /* background-color:#777777;*/
+    float: left;
+    height : 22px;
+    width : 100%;
+    text-align: center;
+    border-top: 1px solid #BBBBBB;
+    border-left: 1px solid #BBBBBB;
+    border-right: 1px solid #BBBBBB;
+    border-bottom: 1px solid #BBBBBB;
+}
+
+.tileBtnCSS{
+    background:url(/pub/graphics/screens/home/images/icons/tile.png);
+    background-repeat: no-repeat;
+    border:0px;
+    width: 28px;
+    height: 22px;
+}
+
+.listBtnCSS{
+    background:url(/pub/graphics/screens/home/images/icons/list.png);
+    background-repeat: no-repeat;
+    border:0px;
+    width: 28px;
+    height: 22px;
+}
+
+.detailBtnCSS{
+    background:url(/pub/graphics/screens/home/images/icons/detail.png);
+    background-repeat: no-repeat;
+    border:0px;
+    width: 28px;
+    height: 22px;
+}
+/* Tile, List and Detail View Item Renderer CSS Section Ends */

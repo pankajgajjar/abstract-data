@@ -15,7 +15,7 @@ import com.cs.cache.DimensionGroupCache;
 import com.cs.data.core.nosql.InMemoryNoSqlRepository;
 import com.cs.data.core.nosql.mongodb.MongoRepository;
 import com.cs.data.core.nosql.redis.RedisRepository;
-import com.cs.model.ContentObject;
+import com.cs.model.MultiDimensionalObject;
 import com.cs.repository.DimensionRepository;
 import com.cs.utils.FileUtils;
 
@@ -48,7 +48,7 @@ public class TreeBuilderIntegrationTests {
 
 		builder = new TreeBuilder(cache, repository);
 
-		List<ContentObject> models = builder
+		List<MultiDimensionalObject> models = builder
 				.buildTree("Campaign-MasterPublication-PublicationGroup-Publication");
 		System.out.println(models);
 

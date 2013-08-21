@@ -1,8 +1,35 @@
 [
     {
-        "id": "2",
+        "id": "1",
         "default": "true",
-        "name": "MasterPublication-Campaign-PublicationGroup-Publication",
+        "name": "Campaign-MasterPublication-Publication",
+        "structure": [
+            {
+                "name": "Campaign",
+                "icon": "something",
+                "possibleChild": ["MasterPublication"]
+            },
+            {
+                "name": "MasterPublication",
+                "icon": "something",
+                "possibleChild": ["Publication"]
+            },
+             {
+                "name": "Publication",
+                "icon": "something",
+                "possibleChild": ["Chapter","Page"]
+            },
+            {
+                "name": "Chapter",
+                "icon": "something",
+                "possibleChild": ["Chapter","Page"]
+            }
+        ]
+    },
+    {
+        "id": "2",
+        "default": "false",
+        "name": "MasterPublication-Campaign-Publication",
         "structure": [
             {
                 "name": "MasterPublication",
@@ -11,11 +38,6 @@
             },
             {
                 "name": "Campaign",
-                "icon": "something",
-                "possibleChild": ["PublicationGroup"]
-            },
-            {
-                "name": "PublicationGroup",
                 "icon": "something",
                 "possibleChild": ["Publication"]
             },
@@ -32,15 +54,10 @@
         ]
     },
     {
-        "id": "1",
+        "id": "3",
         "default": "false",
-        "name": "PublicationGroup-Campaign-Publication-MasterPublication",
+        "name": "Campaign-Publication-MasterPublication",
         "structure": [
-            {
-                "name": "PublicationGroup",
-                "icon": "something",
-                "possibleChild": ["Campaign"]
-            },
             {
                 "name": "Campaign",
                 "icon": "something",

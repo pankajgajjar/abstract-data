@@ -13,7 +13,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.cs.cache.DimensionGroupCache;
 import com.cs.data.core.nosql.redis.RedisRepository;
-import com.cs.model.ContentObject;
+import com.cs.model.MultiDimensionalObject;
 
 import static org.fest.assertions.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class DimensionGroupCacheTests {
 
-	private ContentObject dimensionModel;
+	private MultiDimensionalObject dimensionModel;
 	private DimensionGroupCache groupCache;
 
 	@Mock
@@ -31,7 +31,7 @@ public class DimensionGroupCacheTests {
 	public void setUp() {
 
 		groupCache = new DimensionGroupCache(redisRepository);
-		dimensionModel = new ContentObject("test01", "campaign", "co01", "cp01","-1");
+		dimensionModel = new MultiDimensionalObject("test01", "campaign", "co01", "cp01","-1");
 	}
 
 	@Test

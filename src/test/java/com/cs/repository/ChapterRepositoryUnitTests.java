@@ -9,7 +9,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.cs.cache.DimensionGroupCache;
 import com.cs.cache.ViewStructureCache;
 import com.cs.data.core.nosql.mongodb.MongoRepository;
-import com.cs.model.ContentObject;
+import com.cs.model.MultiDimensionalObject;
 import com.cs.utils.ArrayUtils;
 
 import static org.fest.assertions.Assertions.*;
@@ -26,36 +26,39 @@ public class ChapterRepositoryUnitTests {
 	@Mock
 	private ViewStructureCache cache;
 
-	ContentObject publication;
+	MultiDimensionalObject publication;
 
 	@Before
 	public void setUp() {
 		repository = new ChapterRepository(noSqlTemplateForMongo, cache);
-		publication = new ContentObject("Test", "publication", "A,B,C,D,E",
-				"true");
-		ContentObject test = new ContentObject("test01", "chapter",
-				"A,B,C,D,E,publication", "false");
-		test.addchild(new ContentObject("test03", "test", "test", "test"));
+		publication = new MultiDimensionalObject("Test", "publication",
+				"A,B,C,D,E", true);
+		MultiDimensionalObject test = new MultiDimensionalObject("test01",
+				"chapter", "A,B,C,D,E,publication", true);
+		test.addchild(new MultiDimensionalObject("test03", "test", "test", true));
 		publication.addchild(test);
-		publication.addchild(new ContentObject("test02", "test", "A", "true"));
+		publication.addchild(new MultiDimensionalObject("test02", "test", "A",
+				true));
 
 	}
 
 	@Test
 	public void itShouldCreateAChapterInTheParentPublication() {
 		// given
-		ContentObject chapter = new ContentObject("test", "test",
-				"A,B,C,D,E,test03", "B");
+		MultiDimensionalObject chapter = new MultiDimensionalObject("test",
+				"test", "A,B,C,D,E,test03", true);
 		String result = "success";
 		// when
 		when(cache.getCurrentViewStructure()).thenReturn("C-M-P-D");
 		when(noSqlTemplateForMongo.save(chapter)).thenReturn(result);
-		when(noSqlTemplateForMongo.getObjectByKey("D", ContentObject.class))
-				.thenReturn(publication);
+		when(
+				noSqlTemplateForMongo.getObjectByKey("D",
+						MultiDimensionalObject.class)).thenReturn(publication);
 		String actualResult = repository.save(chapter);
 
 		// then
-		verify(noSqlTemplateForMongo).getObjectByKey("D", ContentObject.class);
+		verify(noSqlTemplateForMongo).getObjectByKey("D",
+				MultiDimensionalObject.class);
 		verify(noSqlTemplateForMongo).save(chapter);
 		System.out.println(publication);
 
@@ -98,7 +101,7 @@ public class ChapterRepositoryUnitTests {
 		String id = "test01";
 
 		// when
-		ContentObject object = repository.find(publication, id);
+		MultiDimensionalObject object = repository.find(publication, id);
 
 		// then
 		assertThat(object.getId()).isEqualTo(id);
@@ -111,18 +114,20 @@ public class ChapterRepositoryUnitTests {
 
 		String result = "result";
 		String oldPath = "A,B,C,D,E,test03";
-		ContentObject chapter = new ContentObject("test", "test", "A,B,C,D,E",
-				"B");
+		MultiDimensionalObject chapter = new MultiDimensionalObject("test",
+				"test", "A,B,C,D,E", true);
 		when(cache.getCurrentViewStructure()).thenReturn("C-M-P-D");
 		when(noSqlTemplateForMongo.save(chapter)).thenReturn(result);
-		when(noSqlTemplateForMongo.getObjectByKey("D", ContentObject.class))
-				.thenReturn(publication);
+		when(
+				noSqlTemplateForMongo.getObjectByKey("D",
+						MultiDimensionalObject.class)).thenReturn(publication);
 
 		// when
 		repository.delete(chapter, oldPath);
 
 		// then
-		verify(noSqlTemplateForMongo).getObjectByKey("D", ContentObject.class);
+		verify(noSqlTemplateForMongo).getObjectByKey("D",
+				MultiDimensionalObject.class);
 		verify(noSqlTemplateForMongo).save(publication);
 
 	}

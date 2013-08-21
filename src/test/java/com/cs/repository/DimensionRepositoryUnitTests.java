@@ -15,7 +15,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.cs.cache.DimensionGroupCache;
 import com.cs.data.core.nosql.mongodb.MongoRepository;
-import com.cs.model.ContentObject;
+import com.cs.model.MultiDimensionalObject;
 import com.cs.utils.FileUtils;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -23,7 +23,7 @@ public class DimensionRepositoryUnitTests {
 	private DimensionRepository dimensionRepository;
 
 	@Mock
-	private ContentObject dimensionModel;
+	private MultiDimensionalObject dimensionModel;
 
 	@Mock
 	private FileUtils fileUtils;
@@ -49,7 +49,7 @@ public class DimensionRepositoryUnitTests {
 		String dimensionId = "test";
 		String groupId = "group";
 		String path = "testPath";
-		ContentObject dimension = new ContentObject("c01", "campaign",
+		MultiDimensionalObject dimension = new MultiDimensionalObject("c01", "campaign",
 				"co01","co01", "testPath");
 		// when
 		when(cache.ifGroupIdExistsFor(dimension.getPath())).thenReturn(true);
@@ -68,14 +68,14 @@ public class DimensionRepositoryUnitTests {
 	public void itShouldGetAllDimensionInstances() {
 
 		// given
-		List<ContentObject> expectedModels = new ArrayList<ContentObject>();
-		expectedModels.add(new ContentObject());
+		List<MultiDimensionalObject> expectedModels = new ArrayList<MultiDimensionalObject>();
+		expectedModels.add(new MultiDimensionalObject());
 		// when
-		when(repository.findAll(ContentObject.class)).thenReturn(
+		when(repository.findAll(MultiDimensionalObject.class)).thenReturn(
 				expectedModels);
-		List<ContentObject> dimensions = dimensionRepository.getDimensions();
+		List<MultiDimensionalObject> dimensions = dimensionRepository.getDimensions();
 		// then
-		verify(repository).findAll(ContentObject.class);
+		verify(repository).findAll(MultiDimensionalObject.class);
 		assertThat(dimensions).isNotEmpty();
 		assertThat(dimensions).isEqualTo(expectedModels);
 
@@ -90,7 +90,7 @@ public class DimensionRepositoryUnitTests {
 		dimensionRepository.getDimensionsOfType(type);
 		// then
 
-		verify(repository).getObjectsBy("type", type, ContentObject.class);
+		verify(repository).getObjectsBy("type", type, MultiDimensionalObject.class);
 	}
 
 	@Test
@@ -103,7 +103,7 @@ public class DimensionRepositoryUnitTests {
 		dimensionRepository.getDimensionsBy(type2, groupIds);
 		// then
 		verify(repository).getObjectForAndCriteria("type", type2, "groupIds",
-				groupIds, ContentObject.class);
+				groupIds, MultiDimensionalObject.class);
 	}
 
 }

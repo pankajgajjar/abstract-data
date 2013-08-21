@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.cs.cache.ViewStructureCache;
 import com.cs.data.core.nosql.NoSqlRepository;
-import com.cs.model.ContentObject;
+import com.cs.model.MultiDimensionalObject;
 
 /**
  * The Class ChapterRepository.
@@ -50,9 +50,9 @@ public class ChapterRepository {
 	 *            the chapter
 	 * @return the string
 	 */
-	public String save(ContentObject chapter) {
+	public String save(MultiDimensionalObject chapter) {
 
-		ContentObject publication = getParentPublication(chapter.getPath());
+		MultiDimensionalObject publication = getParentPublication(chapter.getPath());
 		addChapterToPublication(publication, chapter);
 
 		return noSqlRepository.save(chapter);
@@ -66,14 +66,16 @@ public class ChapterRepository {
 	 * @param chapter
 	 *            the chapter
 	 */
-	private void addChapterToPublication(ContentObject publication,
-			ContentObject chapter) {
-		ContentObject parent;
+	private void addChapterToPublication(MultiDimensionalObject publication,
+			MultiDimensionalObject chapter) {
+		MultiDimensionalObject parent;
 		parent = find(publication, getParentId(chapter.getPath()));
 		parent.addchild(chapter);
 		saveToMongo(publication);
 
 	}
+	
+	
 
 	/**
 	 * Save given publication to mongoDb database..
@@ -81,7 +83,7 @@ public class ChapterRepository {
 	 * @param publication
 	 *            the publication
 	 */
-	private void saveToMongo(ContentObject publication) {
+	private void saveToMongo(MultiDimensionalObject publication) {
 		noSqlRepository.save(publication);
 	}
 
@@ -94,15 +96,15 @@ public class ChapterRepository {
 	 *            the parent id
 	 * @return the content object
 	 */
-	protected ContentObject find(ContentObject publication, String parentId) {
-		ContentObject child = null;
+	protected MultiDimensionalObject find(MultiDimensionalObject publication, String parentId) {
+		MultiDimensionalObject child = null;
 		if (publication.getId().equals(parentId)) {
 			return publication;
 
 		}
 
 		if (publication.hasChildren()) {
-			for (ContentObject chapter : publication.getChildren()) {
+			for (MultiDimensionalObject chapter : publication.getChildren()) {
 				if (child != null)
 					break;
 				if (chapter.getId().equals(parentId)) {
@@ -168,9 +170,9 @@ public class ChapterRepository {
 	 *            the path
 	 * @return the parent publication
 	 */
-	protected ContentObject getParentPublication(String path) {
+	protected MultiDimensionalObject getParentPublication(String path) {
 		return noSqlRepository.getObjectByKey(getPublicationId(path),
-				ContentObject.class);
+				MultiDimensionalObject.class);
 	}
 
 	/**
@@ -182,9 +184,9 @@ public class ChapterRepository {
 	 *            the old path
 	 * @return the string
 	 */
-	public String delete(ContentObject chapter, String oldPath) {
-		ContentObject parentPublication = getParentPublication(oldPath);
-		ContentObject parent = find(parentPublication, getParentId(oldPath));
+	public String delete(MultiDimensionalObject chapter, String oldPath) {
+		MultiDimensionalObject parentPublication = getParentPublication(oldPath);
+		MultiDimensionalObject parent = find(parentPublication, getParentId(oldPath));
 		chapter.setPath(oldPath);
 		parent.removeChild(chapter);
 		saveToMongo(parentPublication);

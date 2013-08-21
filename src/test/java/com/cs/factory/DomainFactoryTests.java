@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.cs.data.core.GenericDomain;
-import com.cs.model.ContentObject;
+import com.cs.model.MultiDimensionalObject;
 import static org.fest.assertions.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -21,10 +21,10 @@ public class DomainFactoryTests {
 	@Test
 	public void itShouldCreateInstanceOfContentObject() {
 		// when
-		GenericDomain testObject = factory.getDomainObject("ContentObject");
+		GenericDomain testObject = factory.getDomainObject("MultiDimensionalObject");
 
 		// then
-		assertThat(testObject).isInstanceOf(ContentObject.class);
+		assertThat(testObject).isInstanceOf(MultiDimensionalObject.class);
 
 	}
 }

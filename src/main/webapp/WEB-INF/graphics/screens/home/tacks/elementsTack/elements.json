@@ -1,0 +1,2 @@
+[{"id":"leftTree","type":"tree","scriptName":"TreeSelector","screenName":"home"},
+    {"id":"schemaDropDown","scriptName":"DropDownSelector","screenName":"home","type":"dropdown"}]

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.cs.data.core.nosql.InMemoryNoSqlRepository;
-import com.cs.model.ContentObject;
+import com.cs.model.MultiDimensionalObject;
 
 
 /**
@@ -46,7 +46,7 @@ public class DimensionGroupCache {
 	 * @param dimension the dimension
 	 * @param groupId the group id
 	 */
-	public void updateCache(ContentObject dimension, String groupId) {
+	public void updateCache(MultiDimensionalObject dimension, String groupId) {
 
 		delete(dimension);
 		inMemoryNosqlRepository.set(
@@ -58,7 +58,7 @@ public class DimensionGroupCache {
 	 *
 	 * @param dimension the dimension
 	 */
-	private void delete(ContentObject dimension) {
+	private void delete(MultiDimensionalObject dimension) {
 		// TODO Auto-generated method stub
 
 		inMemoryNosqlRepository.delete(dimension.getPath());
@@ -71,7 +71,7 @@ public class DimensionGroupCache {
 	 * @param dimension the dimension
 	 * @param groupId the group id
 	 */
-	public void addNewGroup(ContentObject dimension, String groupId) {
+	public void addNewGroup(MultiDimensionalObject dimension, String groupId) {
 		// TODO Auto-generated method stub
 		if (dimension.isRoot()) {
 			inMemoryNosqlRepository.set(dimension.getName(), groupId);

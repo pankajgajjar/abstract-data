@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.cs.cache.ViewStructureCache;
 import com.cs.data.core.nosql.InMemoryNoSqlRepository;
 import com.cs.data.core.nosql.mongodb.MongoRepository;
-import com.cs.model.ContentObject;
+import com.cs.model.MultiDimensionalObject;
 import com.cs.repository.ChapterRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,7 +25,7 @@ public class ChapterIntegrationTests {
 	@Autowired
 	private MongoRepository noSqlRepository;
 
-	List<ContentObject> models = new ArrayList<ContentObject>();
+	List<MultiDimensionalObject> models = new ArrayList<MultiDimensionalObject>();
 
 	private ViewStructureCache cache;
 	private ChapterRepository chapterRepository;
@@ -33,19 +33,19 @@ public class ChapterIntegrationTests {
 	@Autowired
 	private InMemoryNoSqlRepository inMemoryNosqlRepository;
 
-	ContentObject page01;
+	MultiDimensionalObject page01;
 
 	@Before
 	public void setUp() {
 
-		page01 = new ContentObject("page01", "page", "mp02,pg02,c02,p02",
-				"false");
-		ContentObject chapter01 = new ContentObject("chapter01", "page",
-				"mp02,pg02,c02,p02", "false");
-		ContentObject chapter02 = new ContentObject("chapter02", "page",
-				"mp02,pg02,c02,p02,chapter01", "false");
-		ContentObject page02 = new ContentObject("page02", "page",
-				"mp02,pg02,c02,p02,chapter01,chapter02", "false");
+		page01 = new MultiDimensionalObject("page01", "page", "mp02,pg02,c02,p02",
+				false);
+		MultiDimensionalObject chapter01 = new MultiDimensionalObject("chapter01", "page",
+				"mp02,pg02,c02,p02", false);
+		MultiDimensionalObject chapter02 = new MultiDimensionalObject("chapter02", "page",
+				"mp02,pg02,c02,p02,chapter01", false);
+		MultiDimensionalObject page02 = new MultiDimensionalObject("page02", "page",
+				"mp02,pg02,c02,p02,chapter01,chapter02", false);
 		cache = new ViewStructureCache(inMemoryNosqlRepository);
 
 		models.add(page01);
@@ -59,7 +59,7 @@ public class ChapterIntegrationTests {
 	public void itShouldCreateMultipleDimensionGroupsForGivenModels() {
 
 		cache = new ViewStructureCache(inMemoryNosqlRepository);
-		for (ContentObject dimension : models) {
+		for (MultiDimensionalObject dimension : models) {
 			chapterRepository = new ChapterRepository(noSqlRepository, cache);
 			String result = chapterRepository.save(dimension);
 

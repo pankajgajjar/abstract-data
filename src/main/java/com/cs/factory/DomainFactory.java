@@ -3,8 +3,7 @@ package com.cs.factory;
 import org.springframework.stereotype.Component;
 
 import com.cs.data.core.GenericDomain;
-import com.cs.model.ContentObject;
-
+import com.cs.model.MultiDimensionalObject;
 
 /**
  * A factory for creating Domain objects.
@@ -14,15 +13,19 @@ public class DomainFactory {
 
 	/**
 	 * Gets the domain object.
-	 *
-	 * @param type the type
+	 * 
+	 * @param type
+	 *            the type
 	 * @return the domain object
 	 */
 	public GenericDomain getDomainObject(String type) {
-		if (type.equals("ContentObject"))
-			return new ContentObject();
+		if (type.equals("MultiDimensionalObject")) {
 
-		return null;
+			return new MultiDimensionalObject();
+		}
+
+		else
+			return null;
 	}
 
 }

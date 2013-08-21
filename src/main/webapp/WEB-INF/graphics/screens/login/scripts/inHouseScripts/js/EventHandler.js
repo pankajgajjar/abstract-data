@@ -1,0 +1,3 @@
+function getLogin(){
+    LoginService.getLogin();
+}

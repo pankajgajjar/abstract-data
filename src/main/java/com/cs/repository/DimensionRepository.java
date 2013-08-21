@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.cs.cache.DimensionGroupCache;
 import com.cs.data.core.nosql.NoSqlRepository;
-import com.cs.model.ContentObject;
+import com.cs.model.MultiDimensionalObject;
 import com.cs.utils.FileUtils;
 
 /**
@@ -64,7 +64,7 @@ public class DimensionRepository {
 	 *            the dimension
 	 * @return the string
 	 */
-	public String createDimension(ContentObject dimension) {
+	public String createDimension(MultiDimensionalObject dimension) {
 		String groupId = getDimensionGroupId(dimension.getPath());
 		if (groupCache.ifGroupIdExistsFor(dimension.getPath())) {
 			dimension.addToGroupId(groupId);
@@ -97,10 +97,11 @@ public class DimensionRepository {
 		String[] paths = path.split(",");
 		for (String singlePath : paths) {
 			noSqlRepository.updateById(singlePath, FIELDTOUPDATE, groupId,
-					ContentObject.class);
+					MultiDimensionalObject.class);
 		}
 
 	}
+	
 
 	
 	/**
@@ -134,9 +135,9 @@ public class DimensionRepository {
 	 * 
 	 * @return the dimensions
 	 */
-	public List<ContentObject> getDimensions() {
+	public List<MultiDimensionalObject> getDimensions() {
 
-		return noSqlRepository.findAll(ContentObject.class);
+		return noSqlRepository.findAll(MultiDimensionalObject.class);
 	}
 
 	/**
@@ -146,9 +147,9 @@ public class DimensionRepository {
 	 *            the type
 	 * @return the dimensions of type
 	 */
-	public List<ContentObject> getDimensionsOfType(String type) {
+	public List<MultiDimensionalObject> getDimensionsOfType(String type) {
 		// TODO Auto-generated method stub
-		return noSqlRepository.getObjectsBy(TYPE, type, ContentObject.class);
+		return noSqlRepository.getObjectsBy(TYPE, type, MultiDimensionalObject.class);
 	}
 
 	/**
@@ -160,10 +161,10 @@ public class DimensionRepository {
 	 *            the group ids
 	 * @return the dimensions by
 	 */
-	public List<ContentObject> getDimensionsBy(String type2,
+	public List<MultiDimensionalObject> getDimensionsBy(String type2,
 			List<String> groupIds) {
 		return noSqlRepository.getObjectForAndCriteria(TYPE, type2, GROUPIDS,
-				groupIds, ContentObject.class);
+				groupIds, MultiDimensionalObject.class);
 
 	}
 

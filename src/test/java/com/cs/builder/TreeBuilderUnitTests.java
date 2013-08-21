@@ -15,7 +15,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.cs.cache.DimensionGroupCache;
-import com.cs.model.ContentObject;
+import com.cs.model.MultiDimensionalObject;
 import com.cs.repository.DimensionRepository;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -50,12 +50,13 @@ public class TreeBuilderUnitTests {
 
 		// given
 		String type = "Campaign";
-		List<ContentObject> result = new ArrayList<ContentObject>();
+		List<MultiDimensionalObject> result = new ArrayList<MultiDimensionalObject>();
 
 		// when
 
 		when(dimensionRepository.getDimensionsOfType(type)).thenReturn(result);
-		List<ContentObject> models = treeBuilder.getAllSeparatedTrees(type);
+		List<MultiDimensionalObject> models = treeBuilder
+				.getAllSeparatedTrees(type);
 		// then
 		verify(dimensionRepository).getDimensionsOfType(type);
 		assertThat(models).isEqualTo(result);
@@ -64,8 +65,8 @@ public class TreeBuilderUnitTests {
 	@Test
 	public void itShouldBuildTreeForGivenRoot() {
 		// given
-		ContentObject dimensionModel = new ContentObject("cp01", "Campaign",
-				"cp01", "cp01", "-1");
+		MultiDimensionalObject dimensionModel = new MultiDimensionalObject(
+				"cp01", "Campaign", "cp01", "cp01", "-1");
 		ArrayList<String> groupIds = new ArrayList<String>();
 		dimensionModel.setGroupId(groupIds);
 		String[] rules = { "Campaign", "MasterPublication", "PublicationGroup",
@@ -89,6 +90,46 @@ public class TreeBuilderUnitTests {
 		treeBuilder.getAllChildrenOfCurrentRoot(groupIds, type);
 		// then
 		verify(dimensionRepository, times(1)).getDimensionsBy(type, groupIds);
+	}
+
+	@Test
+	public void itShouldRemoveMinusOneFromGivenPath() {
+		// given
+		String path = "-1,A,B,C,D";
+
+		// when
+		String processedPath = treeBuilder.removeMinusOne(path);
+
+		// then
+		assertThat(processedPath).isEqualTo("A,B,C,D");
+	}
+
+	@Test
+	public void itShouldNotRemoveIfPathDoesntStartWithMinusOne() {
+
+		// given
+
+		String path = "A,B,C,D,E";
+		// when
+
+		String processedPath = treeBuilder.removeMinusOne(path);
+
+		// then
+		assertThat(processedPath).isEqualTo(path);
+	}
+
+	@Test
+	public void itShouldNotRemoveIfPathStartWithMinusOneAndPathOnlyContainsMinusOne() {
+
+		// given
+
+		String path = "-1";
+		// when
+
+		String processedPath = treeBuilder.removeMinusOne(path);
+
+		// then
+		assertThat(processedPath).isEqualTo(path);
 	}
 
 }

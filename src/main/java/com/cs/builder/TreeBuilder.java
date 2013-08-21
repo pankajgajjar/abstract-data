@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.cs.cache.DimensionGroupCache;
-import com.cs.model.ContentObject;
+import com.cs.model.MultiDimensionalObject;
 import com.cs.repository.DimensionRepository;
 import com.cs.utils.ArrayUtils;
-
 
 /**
  * The Class TreeBuilder.
@@ -19,21 +18,23 @@ public class TreeBuilder {
 
 	/** The cache. */
 	private DimensionGroupCache cache;
-	
+
 	/** The repository. */
 	private DimensionRepository repository;
-	
+
 	/** The utils. */
 	private ArrayUtils utils;
-	
+
 	/** The delimeter. */
 	private final String DELIMETER = "-";
 
 	/**
 	 * Instantiates a new tree builder.
-	 *
-	 * @param cache the cache
-	 * @param repository the repository
+	 * 
+	 * @param cache
+	 *            the cache
+	 * @param repository
+	 *            the repository
 	 */
 	@Autowired
 	public TreeBuilder(DimensionGroupCache cache, DimensionRepository repository) {
@@ -43,15 +44,17 @@ public class TreeBuilder {
 
 	/**
 	 * Builds the tree.
-	 *
-	 * @param structure the structure
+	 * 
+	 * @param structure
+	 *            the structure
 	 * @return the list
 	 */
-	public List<ContentObject> buildTree(String structure) {
+	public List<MultiDimensionalObject> buildTree(String structure) {
 		String[] orderedTypes = getTypes(structure);
-		List<ContentObject> rootNodes = getAllSeparatedTrees(orderedTypes[0]);
-		for (ContentObject dimension : rootNodes) {
+		List<MultiDimensionalObject> rootNodes = getAllSeparatedTrees(orderedTypes[0]);
+		for (MultiDimensionalObject dimension : rootNodes) {
 
+			dimension.setPath("-1");
 			buildTreeForRootNode(dimension, orderedTypes, null);
 		}
 
@@ -60,8 +63,9 @@ public class TreeBuilder {
 
 	/**
 	 * Gets the types.
-	 *
-	 * @param structure the structure
+	 * 
+	 * @param structure
+	 *            the structure
 	 * @return the types
 	 */
 	protected String[] getTypes(String structure) {
@@ -71,27 +75,31 @@ public class TreeBuilder {
 
 	/**
 	 * Gets the all separated trees.
-	 *
-	 * @param type the type
+	 * 
+	 * @param type
+	 *            the type
 	 * @return the all separated trees
 	 */
-	protected List<ContentObject> getAllSeparatedTrees(String type) {
+	protected List<MultiDimensionalObject> getAllSeparatedTrees(String type) {
 		return repository.getDimensionsOfType(type);
 
 	}
 
 	/**
 	 * Builds the tree for the given structure provided.
-	 *
-	 * @param root the root
-	 * @param orderTypes the order types
-	 * @param groupIdsRequiredForCurrentIteration the group ids required for current iteration
+	 * 
+	 * @param root
+	 *            the root
+	 * @param orderTypes
+	 *            the order types
+	 * @param groupIdsRequiredForCurrentIteration
+	 *            the group ids required for current iteration
 	 */
-	protected void buildTreeForRootNode(ContentObject root,
+	protected void buildTreeForRootNode(MultiDimensionalObject root,
 			String[] orderTypes,
 			List<String> groupIdsRequiredForCurrentIteration) {
 		List<String> groupIds = null;
-		ContentObject currentRoot = root;
+		MultiDimensionalObject currentRoot = root;
 		if (groupIdsRequiredForCurrentIteration == null) {
 			groupIds = currentRoot.getGroupId();
 		} else {
@@ -102,11 +110,13 @@ public class TreeBuilder {
 		String[] typesOfDimensions = skipFirstOrderType(orderTypes);
 		if (typesOfDimensions.length <= 0)
 			return;
-		List<ContentObject> childrenOfCurrentLevel = getAllChildrenOfCurrentRoot(
+		List<MultiDimensionalObject> childrenOfCurrentLevel = getAllChildrenOfCurrentRoot(
 				groupIds, typesOfDimensions[0]);
 
 		currentRoot.setChildren(childrenOfCurrentLevel);
-		for (ContentObject child : childrenOfCurrentLevel) {
+		for (MultiDimensionalObject child : childrenOfCurrentLevel) {
+			child.setPath(removeMinusOne(currentRoot.getPath()) + ","
+					+ currentRoot.getName());
 
 			buildTreeForRootNode(child, typesOfDimensions, groupIds);
 
@@ -116,20 +126,23 @@ public class TreeBuilder {
 
 	/**
 	 * Gets the all children of current root.
-	 *
-	 * @param groupIds the group ids
-	 * @param type the type
+	 * 
+	 * @param groupIds
+	 *            the group ids
+	 * @param type
+	 *            the type
 	 * @return the all children of current root
 	 */
-	protected List<ContentObject> getAllChildrenOfCurrentRoot(
+	protected List<MultiDimensionalObject> getAllChildrenOfCurrentRoot(
 			List<String> groupIds, String type) {
 		return repository.getDimensionsBy(type, groupIds);
 	}
 
 	/**
 	 * Skip first order type.
-	 *
-	 * @param orderTypes the order types
+	 * 
+	 * @param orderTypes
+	 *            the order types
 	 * @return the string[]
 	 */
 	private String[] skipFirstOrderType(String[] orderTypes) {
@@ -138,11 +151,20 @@ public class TreeBuilder {
 		return orderTypes;
 	}
 
+	protected String removeMinusOne(String path) {
+		path = path.startsWith("-1") && path.length() > 2 ? path.substring(3)
+				: path;
+
+		return path;
+	}
+
 	/**
 	 * Intersect group ids.
-	 *
-	 * @param groupIds the group ids
-	 * @param groupIdsRequiredForCurrentIteration the group ids required for current iteration
+	 * 
+	 * @param groupIds
+	 *            the group ids
+	 * @param groupIdsRequiredForCurrentIteration
+	 *            the group ids required for current iteration
 	 * @return the list
 	 */
 	private List<String> intersectGroupIds(List<String> groupIds,

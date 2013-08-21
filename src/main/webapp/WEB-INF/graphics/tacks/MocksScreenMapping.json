@@ -1,0 +1,7 @@
+{
+    "landingScreen":{"url":"start.html","containerId":"","loadOnStartup":"false"},
+    "headerScreen":{"url":"/pub-controller/graphics/screens/header/html/Header.html","containerId":"headerContainer","loadOnStartup":"false"},
+    "footerScreen":{"url":"/pub-controller/graphics/screens/footer/html/Footer.html","containerId":"footerContainer","loadOnStartup":"false"},
+    "loginScreen":{"url":"/pub-controller/mocks/login.json","containerId":"mainContainer","loadOnStartup":"true"},
+    "homeScreen":{"url":"/pub-controller/mocks/home.json","containerId":"mainContainer","loadOnStartup":"false"}
+}

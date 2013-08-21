@@ -1,0 +1,7 @@
+{
+    "getDefaultSchema":"/pub-controller/default",
+    "getTree":"/pub-controller/dimension/get/",
+    "getAllSchema":"/pub-controller/all",
+    "getSchema":"/pub-controller/treeviewstructure/",
+    "dragNDrop":"/pub-controller/"
+}

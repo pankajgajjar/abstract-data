@@ -15,9 +15,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.cs.cache.DimensionGroupCache;
 import com.cs.data.core.nosql.InMemoryNoSqlRepository;
 import com.cs.data.core.nosql.mongodb.MongoRepository;
-import com.cs.model.ContentObject;
+import com.cs.interactions.Service;
+import com.cs.model.MultiDimensionalObject;
 import com.cs.repository.DimensionRepository;
-import com.cs.service.Service;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:application-context-test.xml")
@@ -26,7 +26,7 @@ public class DimensionIntegrationTests {
 	@Autowired
 	private MongoRepository noSqlRepository;
 
-	List<ContentObject> models = new ArrayList<ContentObject>();
+	List<MultiDimensionalObject> models = new ArrayList<MultiDimensionalObject>();
 
 	private DimensionGroupCache cache;
 	private DimensionRepository dimensionRepository;
@@ -39,32 +39,32 @@ public class DimensionIntegrationTests {
 	@Before
 	public void setUp() {
 
-		ContentObject mp01 = new ContentObject("mp01", "MasterPublication",
+		MultiDimensionalObject mp01 = new MultiDimensionalObject("mp01", "MasterPublication",
 				"mp01", "mp01", "-1");
-		ContentObject mp012 = new ContentObject("mp012", "MasterPublication",
+		MultiDimensionalObject mp012 = new MultiDimensionalObject("mp012", "MasterPublication",
 				"mp012", "mp012", "-1");
-		ContentObject cp01 = new ContentObject("cp01", "Campaign", "cp01",
+		MultiDimensionalObject cp01 = new MultiDimensionalObject("cp01", "Campaign", "cp01",
 				"cp01", "mp01");
-		ContentObject cp02 = new ContentObject("cp02", "Campaign", "cp02",
+		MultiDimensionalObject cp02 = new MultiDimensionalObject("cp02", "Campaign", "cp02",
 				"cp02", "-1");
 
-		ContentObject mp02 = new ContentObject("mp02", "MasterPublication",
+		MultiDimensionalObject mp02 = new MultiDimensionalObject("mp02", "MasterPublication",
 				"mp02", "mp02", "cp02");
-		ContentObject pg02 = new ContentObject("pg02", "PublicationGroup",
+		MultiDimensionalObject pg02 = new MultiDimensionalObject("pg02", "PublicationGroup",
 				"pg02", "pg02", "cp02,mp02");
-		ContentObject p02 = new ContentObject("p02", "Publication", "p02",
+		MultiDimensionalObject p02 = new MultiDimensionalObject("p02", "Publication", "p02",
 				"p02", "cp02,mp02,pg02");
-		ContentObject cp03 = new ContentObject("cp03", "Campaign", "cp03",
+		MultiDimensionalObject cp03 = new MultiDimensionalObject("cp03", "Campaign", "cp03",
 				"cp03", "-1");
-		ContentObject mp03 = new ContentObject("mp03", "MasterPublication",
+		MultiDimensionalObject mp03 = new MultiDimensionalObject("mp03", "MasterPublication",
 				"mp03", "mp03", "cp03");
-		ContentObject pg03 = new ContentObject("pg03", "PublicationGroup",
+		MultiDimensionalObject pg03 = new MultiDimensionalObject("pg03", "PublicationGroup",
 				"pg03", "pg03", "cp03,mp03");
-		ContentObject p03 = new ContentObject("p03", "Publication", "p03",
+		MultiDimensionalObject p03 = new MultiDimensionalObject("p03", "Publication", "p03",
 				"p03", "cp03,mp03,pg03");
-		ContentObject cp04 = new ContentObject("cp04", "Campaign", "cp04",
+		MultiDimensionalObject cp04 = new MultiDimensionalObject("cp04", "Campaign", "cp04",
 				"cp04", "-1");
-		ContentObject mp04 = new ContentObject("mp04", "MasterPublication",
+		MultiDimensionalObject mp04 = new MultiDimensionalObject("mp04", "MasterPublication",
 				"mp04", "mp04", "cp04");
 
 		models.add(mp01);
@@ -89,7 +89,7 @@ public class DimensionIntegrationTests {
 	public void itShouldCreateMultipleDimensionGroupsForGivenModels() {
 
 		cache = new DimensionGroupCache(inMemoryNosqlRepository);
-		for (ContentObject dimension : models) {
+		for (MultiDimensionalObject dimension : models) {
 			dimensionRepository = new DimensionRepository(null, cache,
 					noSqlRepository);
 			String test = dimensionRepository.createDimension(dimension);
