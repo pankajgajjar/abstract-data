@@ -6,8 +6,8 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisOperations;
 
-import com.cs.data.core.GenericDomain;
-import com.cs.data.core.nosql.InMemoryNoSqlRepository;
+import com.cs.data.api.core.GenericDomain;
+import com.cs.data.api.core.nosql.redis.InMemoryNoSqlRepository;
 
 /**
  * Class RedisRepository implements InMemoryNoSqlRepository.

@@ -3,7 +3,7 @@ package com.cs.data.core.jpa.entities;
 import java.io.Serializable;
 import java.util.List;
 
-import com.cs.data.core.GenericDomain;
+import com.cs.data.api.core.GenericDomain;
 
 public class Teacher implements Serializable, GenericDomain {
 

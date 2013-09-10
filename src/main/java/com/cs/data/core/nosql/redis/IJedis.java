@@ -1,6 +1,5 @@
 package com.cs.data.core.nosql.redis;
 
-import redis.clients.jedis.Jedis;
 
 /**
  * Interface to provide pure java drive for Redis. Not implemented yet but a

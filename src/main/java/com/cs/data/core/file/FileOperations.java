@@ -2,8 +2,8 @@ package com.cs.data.core.file;
 
 import java.util.List;
 
-import com.cs.data.core.GenericDomain;
-import com.cs.data.core.IRepository;
+import com.cs.data.api.core.GenericDomain;
+import com.cs.data.api.core.IRepository;
 
 
 /**

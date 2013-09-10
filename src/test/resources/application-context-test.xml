@@ -55,6 +55,7 @@
 
 	</bean>
 
+<bean id="update" class="org.springframework.data.mongodb.core.query.Update"></bean>
 
 
 

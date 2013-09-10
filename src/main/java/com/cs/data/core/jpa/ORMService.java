@@ -3,14 +3,15 @@ package com.cs.data.core.jpa;
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+
+import com.cs.data.api.core.jpa.IORMService;
 
 
 
 /**
  * The Class ORMService.
  */
-public class ORMService {
+public class ORMService implements IORMService {
 
 	/** The entity manager. */
 	private EntityManager entityManager;
@@ -44,25 +45,20 @@ public class ORMService {
 				.getEntityManagerForPersistence("hibernate");
 	}
 
-	/**
-	 * Insert.
-	 *
-	 * @param objectToSave the object to save
+	/* (non-Javadoc)
+	 * @see com.cs.data.core.jpa.IORMService#insert(java.lang.Object)
 	 */
+	@Override
 	public void insert(Object objectToSave) {
 		// TODO Auto-generated method stub
 		entityManager.persist(objectToSave);
 
 	}
 
-	/**
-	 * Find by.
-	 *
-	 * @param <T> the generic type
-	 * @param type the type
-	 * @param id the id
-	 * @return the object
+	/* (non-Javadoc)
+	 * @see com.cs.data.core.jpa.IORMService#findBy(java.lang.Class, java.lang.Object)
 	 */
+	@Override
 	public <T> Object findBy(Class<T> type, Object id) {
 		// TODO Auto-generated method stub
 		return entityManager.find(type, id);

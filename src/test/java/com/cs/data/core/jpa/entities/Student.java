@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.cs.data.core.GenericDomain;
+import com.cs.data.api.core.GenericDomain;
 
 @Entity
 @Table(name = "Student")

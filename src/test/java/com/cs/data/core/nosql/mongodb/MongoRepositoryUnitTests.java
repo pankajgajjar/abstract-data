@@ -1,95 +1,100 @@
 package com.cs.data.core.nosql.mongodb;
 
+import static org.mockito.Mockito.verify;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
-import com.cs.data.core.IRepository;
 import com.cs.data.core.jpa.entities.Student;
 import com.cs.data.core.jpa.entities.Teacher;
-import com.cs.data.core.nosql.NoSqlOperations;
-import com.cs.data.core.nosql.mongodb.MongoRepository;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:application-context-test.xml")
+@RunWith(MockitoJUnitRunner.class)
 public class MongoRepositoryUnitTests {
 
-	private MongoRepository crudRepository;
-	@Autowired
-	private MongoOperations mongoTemplate;
+	private MongoRepository mongoRepository;
+	@Mock
+	private Student student;
+
+	@Mock
+	private MongoTemplate mongoTemplate;
+
+	@Mock
+	private Update update;
 
 	@Before
 	public void setUp() {
 
-		crudRepository = new MongoRepository(mongoTemplate);
+		mongoRepository = new MongoRepository(mongoTemplate, update);
+
 	}
 
 	@Test
 	public void itShouldInsertAnObjectToMongoDB() {
 
-		// given
-		Student amar = new Student("2", "Amar", "First");
 		// when
-		crudRepository.save(amar);
-		Student id = mongoTemplate.findById("2", Student.class);
+		mongoRepository.save(student);
 
 		// then
-		Assert.assertNotNull(id);
-		Assert.assertEquals(amar.getId(), id.getId());
+
+		verify(mongoTemplate).save(student);
+
 	}
 
 	@Test
 	public void itShouldGetObjectByKey() {
-		// given
-		String id = "1";
-		Class<Student> type = Student.class;
-		Student expectedAmar = new Student("1", "Amar", "First");
-		// when
 
-		crudRepository.save(expectedAmar);
-		Student actualAmar = crudRepository.getObjectByKey(expectedAmar, type);
-		// then
-		Assert.assertEquals(expectedAmar.getId(), actualAmar.getId());
+		// when
+		Student actualStudent = mongoRepository.getObjectByKey(student,
+				student.getClass());
+
+		// verify
+		verify(mongoTemplate).findById(student.getKey(), student.getClass());
 
 	}
 
 	@Test
 	public void itShouldAppendAListInADocument() {
+
 		// given
 		Student esha = new Student("0099", "esha", "First");
 		Teacher teacher = new Teacher("01", null);
 
 		// when
-		crudRepository.updateById("01", "students", esha, Teacher.class);
+		mongoRepository.updateById("01", "students", esha, Teacher.class);
+
 		// then
+		verify(mongoTemplate).updateFirst(
+				Query.query(Criteria.where("id").is("01")),
+				update.push("students", esha), teacher.getClass());
+
 	}
 
 	@Test
 	public void itShouldGetObjectsByAndCriteria() {
-		// when
+		// given
 		String id = "01";
 		String name = "esha";
 		List<Student> students = new ArrayList<Student>();
 		students.add(new Student("0099", "esha", "First"));
-		List<Teacher> teacherWithGivenStudent = crudRepository
-				.getObjectForAndCriteria("id", id, "students", students,
-						Teacher.class);
-		// then
-		Assert.assertEquals(teacherWithGivenStudent.size(), 1);
+		// when
 
+		List<Teacher> teachers = mongoRepository.getObjectForAndCriteria("id",
+				id, "students", students, Teacher.class);
+
+		// verify
+		verify(mongoTemplate).find(
+				Query.query(Criteria.where("students").in(students).and("id")
+						.is(id)), Teacher.class);
 	}
 
 	@Test
@@ -99,11 +104,10 @@ public class MongoRepositoryUnitTests {
 		String id = "1";
 		// when
 
-		Student student = crudRepository.getObjectByKey(id, Student.class);
+		Student student = mongoRepository.getObjectByKey(id, Student.class);
 
 		// then
-		Assert.assertEquals("Amar", student.getName());
-		Assert.assertNotNull(student);
+		verify(mongoTemplate).findById(id,  Student.class);
 
 	}
 }
