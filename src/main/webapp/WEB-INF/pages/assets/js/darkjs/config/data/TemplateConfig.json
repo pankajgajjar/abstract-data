@@ -1,0 +1,6 @@
+[{"templateUrl":"/home","containerId":""},
+    {"templateUrl":"/login","containerId":""},
+    {"templateUrl":"/directory","containerId":""},
+    {"templateUrl":"/file","containerId":""},
+    {"templateUrl":"/directorySingleDepth","containerId":""},
+    {"templateUrl":"/file/delete","containerId":""}]
